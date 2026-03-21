@@ -1,0 +1,256 @@
+/* ---------- RESET ---------- */
+/* Ensure padding and borders are included in element total width/height */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ---------- VARIABLES ---------- */
+:root {
+  /* Store header height to easily offset content and calculate scroll positions */
+  --header-h: 70px;
+}
+
+/* ---------- BASE ---------- */
+body {
+  font-family: 'Open Sans', sans-serif;
+  background: #f0f7f4;
+  scroll-behavior: smooth; /* Fallback for native smooth scrolling */
+}
+
+/* ---------- FIXED HEADER ---------- */
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: var(--header-h);
+  background: linear-gradient(100deg, #55C595 0%, #359D9E 100%);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 36px 0 22px;
+  z-index: 1000; /* Keep header above page content */
+  box-shadow: 0 4px 20px rgba(14, 46, 36, 0.18);
+}
+
+/* Subtle semi-transparent border at the bottom of the header */
+header::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.25);
+}
+
+/* ---------- BRAND ---------- */
+/* Wrapper for the logo and site title */
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  text-decoration: none;
+  flex-shrink: 0;
+}
+
+.logo {
+  width: 62px;
+  height: 62px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  overflow: hidden;
+  flex-shrink: 0;
+  object-fit: cover;
+  display: block;
+}
+
+.brand-name {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 1rem;
+  color: #fff;
+  letter-spacing: 0.2px;
+  white-space: nowrap;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+}
+
+/* ---------- HAMBURGER BUTTON (mobile only) ---------- */
+/* Hidden by default on desktop screens */
+.hamburger {
+  display: none; 
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.15);
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  border-radius: 8px;
+  cursor: pointer;
+  padding: 7px;
+  z-index: 1100;
+  flex-shrink: 0;
+}
+
+/* The three horizontal lines of the hamburger menu */
+.hamburger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Animate hamburger lines into an 'X' shape when the '.open' class is applied */
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; } /* Hide middle line */
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ---------- NAV — DESKTOP ---------- */
+nav {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  position: relative;
+}
+
+/* Desktop navigation link styling */
+nav a {
+  position: relative;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 600;
+  font-size: 0.68rem;
+  letter-spacing: 0.9px;
+  text-transform: uppercase;
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.78);
+  padding: 7px 14px;
+  border-radius: 7px;
+  text-align: center;
+  line-height: 1.35;
+  white-space: nowrap;
+  transition: color 0.18s;
+  z-index: 1; /* Keep text above the sliding pill */
+}
+
+nav a:hover  { color: #fff; }
+nav a.active { color: #fff; }
+
+/* ---------- SLIDING PILL INDICATOR ---------- */
+/* The background shape that slides behind active nav links */
+#nav-pill {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 36px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.2);
+  border: 1.5px solid rgba(255, 255, 255, 0.45);
+  pointer-events: none; /* Let clicks pass through to the links below */
+  z-index: 0;
+  /* Animate width and left position for the sliding effect */
+  transition: left  0.32s cubic-bezier(0.4, 0, 0.2, 1),
+              width 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Small bright accent line at the bottom center of the pill */
+#nav-pill::after {
+  content: '';
+  position: absolute;
+  bottom: -1px;
+  left: 20%;
+  width: 60%;
+  height: 3px;
+  background: #fff;
+  border-radius: 3px 3px 0 0;
+}
+
+/* ---------- NAV — MOBILE ---------- */
+@media (max-width: 768px) {
+
+  header {
+    padding: 0 18px;
+  }
+
+  /* Disable sliding pill logic on mobile */
+  #nav-pill { display: none; }
+
+  /* Reveal hamburger button */
+  .hamburger { display: flex; }
+
+  /* Convert navigation row into a vertical dropdown panel */
+  nav {
+    position: fixed;
+    top: var(--header-h);
+    left: 0;
+    right: 0;
+    background: linear-gradient(160deg, #55C595 0%, #359D9E 100%);
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0;
+    padding: 10px 0 16px;
+    box-shadow: 0 8px 24px rgba(14, 46, 36, 0.2);
+    
+    /* Hidden by default using max-height for smooth accordion animation */
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                opacity    0.25s ease;
+  }
+
+  /* Reveal menu when toggled via JS */
+  nav.open {
+    max-height: 400px;
+    opacity: 1;
+  }
+
+  /* Adjust mobile link styling for larger touch targets */
+  nav a {
+    font-size: 0.78rem;
+    letter-spacing: 1px;
+    padding: 14px 24px;
+    border-radius: 0;
+    text-align: left;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+    white-space: normal;
+  }
+
+  nav a:last-child {
+    border-bottom: none;
+  }
+
+  nav a:hover,
+  nav a.active {
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+  }
+}
+
+/* ---------- SPACER ---------- */
+/* Utility class to push content down so it isn't hidden behind the fixed header */
+.spacer {
+  height: var(--header-h);
+}
+
+/* ---------- DEMO SECTIONS ---------- */
+/* Full-height sections to test the JS scroll-spy functionality */
+section {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  font-size: 2rem;
+  color: #1a6050;
+  border-bottom: 1px solid #c8e4dc;
+}
+
+section:nth-child(odd)  { background: #e8f5f0; }
+section:nth-child(even) { background: #d4ece3; }
