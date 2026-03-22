@@ -1,3 +1,439 @@
+/* ==========================================================================
+   GLOBAL & BODY STYLES
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #e0f2f1;
+    color: #333;
+    line-height: 1.6;
+    padding: 40px 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+/* ==========================================================================
+   ABOUT US HEADER
+
+header h1 {
+    font-family: 'Inter', sans-serif;
+    font-weight: 900;
+    font-size: 3.4rem;
+    text-transform: uppercase;
+    letter-spacing: 5px;
+    margin-bottom: 40px;
+
+    background: linear-gradient(90deg, #4ad4d6 35%, #133838 78%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+
+    -webkit-text-stroke: 0.6px rgba(0,0,0,0.12);
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.25);
+}
+
+header h2 {
+    color: #2d5a5a;
+    font-size: 2.5rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: 0 auto 60px;
+}
+
+.logo-placeholder {
+    width: 190px;
+    height: 190px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: drop-shadow(0 10px 24px rgba(0,105,92,0.28));
+}
+
+.logo-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+.vertical-divider {
+    display: inline-block;
+    width: 4px;
+    height: 200px;
+    background-color: #000;
+    margin: 0 15px;
+}
+
+.short-description {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    width: 420px;
+}
+
+.short-description p {
+    font-size: 1rem;
+    color: #2d5a5a;
+    font-weight: 500;
+    margin: 0;
+    text-align: left;
+}
+
+/* ==========================================================================
+   VISION / MISSION / GOALS GRID (STAIRCASE LAYOUT)
+
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(250px, 1fr));
+    gap: 30px;
+    justify-content: center;
+    align-items: end;
+    justify-items: center;
+}
+
+.content-grid .card-wrapper:nth-child(1) { margin-top: 80px; }   /* left - lowest */
+.content-grid .card-wrapper:nth-child(2) { margin-top: 40px; }   /* middle */
+.content-grid .card-wrapper:nth-child(3) { margin-top: 0; }      /* right - highest */
+
+.card-wrapper .card {
+    width: auto;
+    max-width: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.icon-wrapper {
+    width: 80px;
+    height: 80px;
+    border-radius: 20%;
+    overflow: hidden;
+}
+
+.icon-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.card h3 {
+    color: #4caf50;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 10px;
+}
+
+.card h4 {
+    color: #226324;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 10px;
+}
+
+.card h5 {
+    color: #409c79;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1.2;
+    margin: 0 0 10px;
+}
+
+.card-body {
+    background-color: #3a7e7e;
+    color: #fff;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: left;
+    font-size: 0.95rem;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+}
+
+.vision-card  .card-body { min-height: 200px; }
+.mission-card .card-body { min-height: 300px; }
+.goals-card   .card-body { min-height: 400px; }
+
+/* ==========================================================================
+   VMG SECTION BACKGROUND
+
+.vmg-section {
+    position: relative;
+    padding: 80px 20px 120px;
+    background-color: #e0f2f1;
+    background-image: url('../images/icons/background.png');
+    background-repeat: no-repeat;
+    background-size: 600px 720px;
+    background-position: center left;
+}
+
+.vmg-section::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background-color: rgba(224, 242, 241, 0.2);
+    z-index: 0;
+}
+
+.vmg-section > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* ==========================================================================
+   ORGANIZATIONAL CHART – GENERAL
+
+.org-section {
+    margin: 80px 0;
+    text-align: center;
+}
+
+.org-title {
+    color: #3a7e6d;
+    font-size: 2.5rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.org-chart {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.org-level {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    flex-wrap: wrap;
+    margin: 30px 0;
+    position: relative;
+    width: 100%;
+}
+
+.node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 160px;
+    text-align: center;
+}
+
+.photo-box {
+    width: 150px;
+    height: 150px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    background: #ddd;
+}
+
+.photo-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.name {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: #2d5a5a;
+    line-height: 1.3;
+}
+
+.role {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #3a7e7e;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-align: center;
+}
+
+/* ==========================================================================
+   CONNECTORS – LINE STYLES (CENTRAL VARIABLES)
+
+:root {
+    --line-color:    #4a9d9a;
+    --line-thickness: 4px;
+    --line-radius:   2px;
+}
+
+.connector {
+    background-color: var(--line-color);
+    border-radius: var(--line-radius);
+    z-index: -1;
+}
+
+.vertical {
+    width: var(--line-thickness);
+}
+
+.horizontal {
+    height: var(--line-thickness);
+}
+
+/* ==========================================================================
+   OWNERS LEVEL
+
+.owners-level {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 0px;
+}
+
+.pathologist-level {
+    margin-top: 30px; 
+}
+
+.owners-photos {
+    display: flex;
+    justify-content: center;
+    gap: 120px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.owners-label {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #3a7e7e;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-align: center;
+    margin-top: -50px;
+    margin-bottom: -50px;
+}
+
+/* ==========================================================================
+   CONNECTORS – SPECIFIC POSITIONS & LENGTHS
+
+.owners-to-pathologist {
+    height: 80px;
+}
+
+.path-to-techs {
+    height: 60px;
+}
+
+.techs-to-bottom {
+    height: 70px;
+}
+
+/* medtech level horizontal bar */
+.medtech-bar {
+    position: absolute;
+    top: 65px;
+    width: 70%;
+    max-width: 480px;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+/* medtech vertical stubs */
+.medtech-left-stub,
+.medtech-center-stub,
+.medtech-right-stub {
+    position: absolute;
+    width: var(--line-thickness);
+    top: 50px;
+    height: 65px;
+}
+
+.medtech-left-stub   { left: 16%; }
+.medtech-center-stub { left: 50%; transform: translateX(-50%); }
+.medtech-right-stub  { right: 16%; }
+
+.medtech-level {
+    gap: 150px;
+    position: relative;
+    min-height: 230px;
+    margin: 50px 0;
+}
+
+/* bottom level horizontal bar */
+.bottom-level {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    gap: 150px;
+    padding-top: 0;
+    margin: 50px auto 60px;
+    margin-top:10px;
+    max-width: 720px;
+}
+
+.bottom-bar {
+    position: absolute;
+    top: 60px; /* move the line down closer to the middle of the photos */
+    left: 50%;
+    transform: translateX(-50%);
+    width: 55%;
+    max-width: 360px;
+    height: var(--line-thickness); /* ensures thickness is consistent */
+    background-color: var(--line-color);
+    border-radius: var(--line-radius);
+    z-index: -1;
+}
+
+/* ==========================================================================
+   RESPONSIVE STYLES
+
+@media (max-width: 992px) {
+    .content-grid {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        align-items: stretch;
+    }
+
+    .content-grid .card-wrapper {
+        margin-top: 0 !important;
+    }
+
+    .card-wrapper .card {
+        max-width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .org-level {
+        gap: 30px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .connector.vertical {
+        height: 50px !important;
+        margin: 20px 0;
+    }
+
+    .bottom-level {
+        flex-direction: column;
+        gap: 40px;
 /* ---------- RESET ---------- */
 /* Ensure padding and borders are included in element total width/height */
 *, *::before, *::after {
@@ -550,6 +986,16 @@ section {
 }
 
 @media (max-width: 600px) {
+    .bottom-level {
+        flex-direction: column;
+        gap: 70px;
+        padding-top: 30px;
+    }
+
+    .bottom-bar,
+    .bottom-left-drop,
+    .bottom-right-drop {
+        display: none;
 
     /* Single column on mobile */
     .offers-page {
