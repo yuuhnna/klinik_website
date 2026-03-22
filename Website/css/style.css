@@ -1,6 +1,5 @@
 /* ==========================================================================
    GLOBAL & BODY STYLES
-========================================================================== */
 
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -17,7 +16,6 @@ body {
 
 /* ==========================================================================
    ABOUT US HEADER
-========================================================================== */
 
 header h1 {
     font-family: 'Inter', sans-serif;
@@ -99,7 +97,6 @@ header h2 {
 
 /* ==========================================================================
    VISION / MISSION / GOALS GRID (STAIRCASE LAYOUT)
-========================================================================== */
 
 .content-grid {
     display: grid;
@@ -178,7 +175,6 @@ header h2 {
 
 /* ==========================================================================
    VMG SECTION BACKGROUND
-========================================================================== */
 
 .vmg-section {
     position: relative;
@@ -205,7 +201,6 @@ header h2 {
 
 /* ==========================================================================
    ORGANIZATIONAL CHART – GENERAL
-========================================================================== */
 
 .org-section {
     margin: 80px 0;
@@ -280,7 +275,6 @@ header h2 {
 
 /* ==========================================================================
    CONNECTORS – LINE STYLES (CENTRAL VARIABLES)
-========================================================================== */
 
 :root {
     --line-color:    #4a9d9a;
@@ -304,7 +298,6 @@ header h2 {
 
 /* ==========================================================================
    OWNERS LEVEL
-========================================================================== */
 
 .owners-level {
     display: flex;
@@ -338,7 +331,6 @@ header h2 {
 
 /* ==========================================================================
    CONNECTORS – SPECIFIC POSITIONS & LENGTHS
-========================================================================== */
 
 .owners-to-pathologist {
     height: 80px;
@@ -410,7 +402,6 @@ header h2 {
 
 /* ==========================================================================
    RESPONSIVE STYLES
-========================================================================== */
 
 @media (max-width: 992px) {
     .content-grid {
@@ -443,6 +434,554 @@ header h2 {
     .bottom-level {
         flex-direction: column;
         gap: 40px;
+/* ---------- RESET ---------- */
+/* Ensure padding and borders are included in element total width/height */
+*, *::before, *::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* ---------- VARIABLES ---------- */
+:root {
+    /* Store header height to easily offset content and calculate scroll positions */
+    --header-h: 70px;
+}
+
+/* ---------- BASE ---------- */
+body {
+    font-family: 'Open Sans', sans-serif;
+    background: #f0f7f4;
+    scroll-behavior: smooth;
+}
+
+/* ---------- HEADER ---------- */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: var(--header-h);
+    background: linear-gradient(100deg, #55C595 0%, #359D9E 100%);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 36px 0 22px;
+    z-index: 1000; /* Keep header above all page content */
+    box-shadow: 0 4px 20px rgba(14, 46, 36, 0.18);
+}
+
+/* Subtle bottom border on the header */
+header::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: rgba(255, 255, 255, 0.25);
+}
+
+/* ---------- BRAND ---------- */
+/* Logo image and company name grouped together */
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 13px;
+    text-decoration: none;
+    flex-shrink: 0;
+}
+
+/* Logo image */
+.logo {
+    width: 62px;
+    height: 62px;
+    border-radius: 50%;
+    background: transparent;
+    border: none;
+    overflow: hidden;
+    flex-shrink: 0;
+    object-fit: cover;
+    display: block;
+}
+
+/* Company name text */
+.brand-name {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    color: #fff;
+    letter-spacing: 0.2px;
+    white-space: nowrap;
+    text-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+}
+
+/* ---------- HAMBURGER BUTTON (mobile only) ---------- */
+/* Hidden on desktop, shown on screens 768px and below */
+.hamburger {
+    display: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 5px;
+    width: 36px;
+    height: 36px;
+    background: rgba(255, 255, 255, 0.15);
+    border: 1.5px solid rgba(255, 255, 255, 0.4);
+    border-radius: 8px;
+    cursor: pointer;
+    padding: 7px;
+    z-index: 1100;
+    flex-shrink: 0;
+}
+
+/* The three horizontal bar lines inside the hamburger button */
+.hamburger span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: #fff;
+    border-radius: 2px;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Animate hamburger into an X when menu is open */
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* ---------- NAV — DESKTOP ---------- */
+nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    position: relative;
+}
+
+/* Individual nav link */
+nav a {
+    position: relative;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 0.68rem;
+    letter-spacing: 0.9px;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.78);
+    padding: 7px 14px;
+    border-radius: 7px;
+    text-align: center;
+    line-height: 1.35;
+    white-space: nowrap;
+    transition: color 0.18s;
+    z-index: 1; /* Stay above sliding pill */
+}
+
+nav a:hover  { color: #fff; }
+nav a.active { color: #fff; }
+
+/* ---------- SLIDING PILL INDICATOR ---------- */
+/* Frosted pill that slides behind the active nav link */
+#nav-pill {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    height: 36px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 1.5px solid rgba(255, 255, 255, 0.45);
+    pointer-events: none; /* Clicks pass through to links below */
+    z-index: 0;
+    transition: left  0.32s cubic-bezier(0.4, 0, 0.2, 1),
+                width 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* White accent bar at the bottom of the pill */
+#nav-pill::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 20%;
+    width: 60%;
+    height: 3px;
+    background: #fff;
+    border-radius: 3px 3px 0 0;
+}
+
+/* ---------- NAV — MOBILE ---------- */
+@media (max-width: 768px) {
+
+    header {
+        padding: 0 18px;
+    }
+
+    /* Hide pill on mobile */
+    #nav-pill { display: none; }
+
+    /* Show hamburger button */
+    .hamburger { display: flex; }
+
+    /* Nav becomes a full-width dropdown below the header */
+    nav {
+        position: fixed;
+        top: var(--header-h);
+        left: 0;
+        right: 0;
+        background: linear-gradient(160deg, #55C595 0%, #359D9E 100%);
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 10px 0 16px;
+        box-shadow: 0 8px 24px rgba(14, 46, 36, 0.2);
+        /* Collapsed by default — animates open with max-height */
+        max-height: 0;
+        overflow: hidden;
+        opacity: 0;
+        transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+                    opacity    0.25s ease;
+    }
+
+    /* Expanded state when hamburger is clicked */
+    nav.open {
+        max-height: 400px;
+        opacity: 1;
+    }
+
+    /* Mobile link styling */
+    nav a {
+        font-size: 0.78rem;
+        letter-spacing: 1px;
+        padding: 14px 24px;
+        border-radius: 0;
+        text-align: left;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        white-space: normal;
+    }
+
+    nav a:last-child {
+        border-bottom: none;
+    }
+
+    nav a:hover,
+    nav a.active {
+        background: rgba(255, 255, 255, 0.15);
+        color: #fff;
+    }
+}
+
+/* ---------- SPACER ---------- */
+/* Pushes page content below the fixed header */
+.spacer {
+    height: var(--header-h);
+}
+
+/* ---------- PAGE SECTIONS ---------- */
+/* Default styling for all full-page sections */
+section {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+    color: #1a6050;
+    border-bottom: 1px solid #c8e4dc;
+}
+
+
+/* ============================
+    OFFERS AND SCHEDULES PAGE
+   ============================ */
+
+/* ---------- OFFERS SECTION WRAPPER ---------- */
+/* Overrides default section styles so it doesn't look like other sections */
+#offers {
+    background: #f0f7f4;
+    display: block;      
+    min-height: unset;   
+    padding: 50px 40px 40px;
+    border-bottom: none;
+}
+
+/* ---------- PAGE GRID ---------- */
+/* 3-column layout: discount | card bank | logos */
+.offers-page {
+    font-family: 'Montserrat', sans-serif;
+    background: transparent;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1.4fr; 
+    gap: 30px;
+    align-items: stretch; 
+    max-width: 1100px;
+    margin: 0 auto;
+}
+
+/* ---------- PAGE TITLE ---------- */
+.offers-page #title {
+    grid-column: 1 / -1; /* Spans all 3 columns */
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+/* Gradient text effect using the brand color stops */
+.offers-page #title h1 {
+    font-size: 2.2rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+    background: linear-gradient(100deg, #359D9E 0%, #2F8A8B 30%, #133838 78%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* "OFFERS AND" — dark teal */
+.offers-page #title h1 .text-dark {
+    color: #133838;
+}
+
+/* "SCHEDULE" — bright teal */
+.offers-page #title h1 span {
+    color: #359D9E;
+}
+
+/* ---------- DISCOUNT BOX ---------- */
+#discount {
+    background: linear-gradient(135deg, #0E4246 0%, #1C7D84 100%);
+    color: white;
+    border-radius: 16px;
+    padding: 24px 20px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Stack content from top */
+    width: 100%;
+    height: 100%; /* Stretch to match card bank height */
+}
+
+/* "20%" — largest text on the card */
+#discount .pct {
+    font-size: 5rem;
+    font-weight: 900;
+    line-height: 0.9;
+    margin-top: 8px;
+    margin-bottom: 0;
+}
+
+/* "DISCOUNT" — sits right below 20% with a divider line underneath */
+#discount .word-discount {
+    font-size: 2.4rem;
+    font-weight: 900;
+    line-height: 1;
+    margin-top: 6px;
+    padding-bottom: 20px; 
+    border-bottom: 2px solid rgba(255, 255, 255, 0.35);
+    margin-bottom: 20px;   
+    display: block;
+}
+
+/* "OFFERED HERE" — sits between the two divider lines */
+#discount h1:nth-of-type(2) {
+    font-size: 2.4rem;
+    font-weight: 900;
+    line-height: 1.15;
+    padding-bottom: 20px;  
+    border-bottom: 2px solid rgba(255, 255, 255, 0.35);
+    margin-bottom: 20px;  
+}
+
+/* ---------- DISCOUNT TAGS (PWD / Senior Citizen) ---------- */
+.discount-tags {
+    display: flex;
+    gap: 24px;
+    justify-content: center;
+    align-items: flex-end;
+    margin-top: 10px;
+    padding-top: 0;
+}
+
+.discount-tags h3 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+    font-weight: 700;
+    color: white;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 1rem;
+    letter-spacing: 0.5px;
+}
+
+/* PWD and Senior Citizen icons */
+.discount-tags h3 img {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    object-position: center;
+    margin-bottom: 4px; 
+    background: transparent;
+}
+
+.discount-tags h3.senior img {
+    width: 100px;
+    height: 100px;
+}
+
+/* ---------- CARD BANK BOX ---------- */
+#cardbank {
+    background: linear-gradient(180deg, #1D572F 52%, #3FBD66 100%);
+    color: white;
+    border-radius: 16px;
+    padding: 24px 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+/* Card Bank section heading */
+#cardbank h2 {
+    text-align: center;
+    font-size: 1.6rem;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    margin-bottom: 12px;
+    margin-top: 4px;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.25);
+    padding-bottom: 12px;
+}
+
+/* "Requirements For Discount" subheading */
+#cardbank h3.req {
+    font-size: 0.9rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* Requirements list container */
+#cardbank .inside {
+    font-size: 0.75rem;
+    line-height: 1.6;
+    font-weight: normal;
+    color: #d1fae5;
+    padding-left: 8px;
+    font-family: 'Open Sans', sans-serif;
+    overflow-y: auto;
+    flex: 1;
+}
+
+#cardbank .inside p {
+    margin: 3px 0;
+}
+
+#cardbank .inside ul {
+    margin: 3px 0 8px 16px;
+    padding: 0;
+    list-style-type: disc;
+}
+
+/* Highlighted text (e.g. ECG NO DISCOUNT) */
+#cardbank .inside .bold {
+    font-weight: bold;
+    color: #ffffff;
+}
+
+/* Effective date at the bottom right */
+#cardbank h4 {
+    text-align: right;
+    font-size: 0.72rem;
+    margin-top: 8px;
+    font-style: italic;
+    font-weight: normal;
+    opacity: 0.85;
+    font-family: 'Open Sans', sans-serif;
+    flex-shrink: 0;
+}
+
+/* ---------- LOGOS COLUMN ---------- */
+/* Right column with company logos and schedules */
+#logos-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly; 
+    gap: 28px;
+    height: 100%;
+    padding-left: 24px; 
+}
+
+/* Each logo + text row */
+#logoLabaratory,
+#logoMedicalSevices,
+#logoPharmacy {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+}
+
+/* Circular logo images */
+#logoLabaratory img,
+#logoMedicalSevices img,
+#logoPharmacy img {
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    object-fit: cover;
+    flex-shrink: 0;
+    background: transparent;
+    padding: 0;
+}
+
+/* Company name */
+#logoLabaratory h3,
+#logoMedicalSevices h3,
+#logoPharmacy h3 {
+    color: #133838;
+    font-size: 1.15rem;
+    font-weight: 700;
+    font-family: 'Montserrat', sans-serif;
+    margin-bottom: 5px;
+}
+
+/* Operating schedule text */
+#logoLabaratory h2,
+#logoMedicalSevices h2,
+#logoPharmacy h2 {
+    color: #2F8A8B;
+    font-size: 0.92rem;
+    font-weight: normal;
+    font-family: 'Open Sans', sans-serif;
+    line-height: 1.5;
+}
+
+/* ---------- RESPONSIVE — OFFERS PAGE ---------- */
+@media (max-width: 900px) {
+
+    /* Switch to 2-column layout on tablets */
+    .offers-page {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    /* Logos span full width below the two cards */
+    #logos-container {
+        grid-column: 1 / -1;
+        height: auto;
+        gap: 20px;
+        padding-left: 0;
+    }
+
+    /* Cards use auto height on smaller screens */
+    #discount,
+    #cardbank {
+        height: auto;
+        min-height: 420px;
     }
 }
 
@@ -457,5 +996,14 @@ header h2 {
     .bottom-left-drop,
     .bottom-right-drop {
         display: none;
+
+    /* Single column on mobile */
+    .offers-page {
+        grid-template-columns: 1fr;
+    }
+
+    /* Smaller title on mobile */
+    .offers-page #title h1 {
+        font-size: 1.6rem;
     }
 }
