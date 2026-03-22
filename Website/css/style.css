@@ -1,439 +1,3 @@
-/* ==========================================================================
-   GLOBAL & BODY STYLES
-
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #e0f2f1;
-    color: #333;
-    line-height: 1.6;
-    padding: 40px 20px;
-}
-
-.container {
-    max-width: 1200px;
-    margin: 0 auto;
-}
-
-/* ==========================================================================
-   ABOUT US HEADER
-
-header h1 {
-    font-family: 'Inter', sans-serif;
-    font-weight: 900;
-    font-size: 3.4rem;
-    text-transform: uppercase;
-    letter-spacing: 5px;
-    margin-bottom: 40px;
-
-    background: linear-gradient(90deg, #4ad4d6 35%, #133838 78%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    text-align: center;
-
-    -webkit-text-stroke: 0.6px rgba(0,0,0,0.12);
-    text-shadow: 2px 2px 4px rgba(0,0,0,0.25);
-}
-
-header h2 {
-    color: #2d5a5a;
-    font-size: 2.5rem;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-align: center;
-    margin-bottom: 40px;
-}
-
-.header-content {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 40px;
-    flex-wrap: wrap;
-    max-width: 1000px;
-    margin: 0 auto 60px;
-}
-
-.logo-placeholder {
-    width: 190px;
-    height: 190px;
-    border-radius: 50%;
-    overflow: hidden;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    filter: drop-shadow(0 10px 24px rgba(0,105,92,0.28));
-}
-
-.logo-placeholder img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-}
-
-.vertical-divider {
-    display: inline-block;
-    width: 4px;
-    height: 200px;
-    background-color: #000;
-    margin: 0 15px;
-}
-
-.short-description {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 8px;
-    width: 420px;
-}
-
-.short-description p {
-    font-size: 1rem;
-    color: #2d5a5a;
-    font-weight: 500;
-    margin: 0;
-    text-align: left;
-}
-
-/* ==========================================================================
-   VISION / MISSION / GOALS GRID (STAIRCASE LAYOUT)
-
-.content-grid {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(250px, 1fr));
-    gap: 30px;
-    justify-content: center;
-    align-items: end;
-    justify-items: center;
-}
-
-.content-grid .card-wrapper:nth-child(1) { margin-top: 80px; }   /* left - lowest */
-.content-grid .card-wrapper:nth-child(2) { margin-top: 40px; }   /* middle */
-.content-grid .card-wrapper:nth-child(3) { margin-top: 0; }      /* right - highest */
-
-.card-wrapper .card {
-    width: auto;
-    max-width: 350px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    text-align: center;
-}
-
-.icon-wrapper {
-    width: 80px;
-    height: 80px;
-    border-radius: 20%;
-    overflow: hidden;
-}
-
-.icon-wrapper img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    margin-bottom: 4px;
-}
-
-.card h3 {
-    color: #4caf50;
-    font-size: 1.5rem;
-    font-weight: 700;
-    line-height: 1.2;
-    margin: 0 0 10px;
-}
-
-.card h4 {
-    color: #226324;
-    font-size: 1.5rem;
-    font-weight: 700;
-    line-height: 1.2;
-    margin: 0 0 10px;
-}
-
-.card h5 {
-    color: #409c79;
-    font-size: 1.5rem;
-    font-weight: 700;
-    line-height: 1.2;
-    margin: 0 0 10px;
-}
-
-.card-body {
-    background-color: #3a7e7e;
-    color: #fff;
-    padding: 25px;
-    border-radius: 15px;
-    text-align: left;
-    font-size: 0.95rem;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
-}
-
-.vision-card  .card-body { min-height: 200px; }
-.mission-card .card-body { min-height: 300px; }
-.goals-card   .card-body { min-height: 400px; }
-
-/* ==========================================================================
-   VMG SECTION BACKGROUND
-
-.vmg-section {
-    position: relative;
-    padding: 80px 20px 120px;
-    background-color: #e0f2f1;
-    background-image: url('../images/icons/background.png');
-    background-repeat: no-repeat;
-    background-size: 600px 720px;
-    background-position: center left;
-}
-
-.vmg-section::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-color: rgba(224, 242, 241, 0.2);
-    z-index: 0;
-}
-
-.vmg-section > * {
-    position: relative;
-    z-index: 1;
-}
-
-/* ==========================================================================
-   ORGANIZATIONAL CHART – GENERAL
-
-.org-section {
-    margin: 80px 0;
-    text-align: center;
-}
-
-.org-title {
-    color: #3a7e6d;
-    font-size: 2.5rem;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-}
-
-.org-chart {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.org-level {
-    display: flex;
-    justify-content: center;
-    gap: 60px;
-    flex-wrap: wrap;
-    margin: 30px 0;
-    position: relative;
-    width: 100%;
-}
-
-.node {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 160px;
-    text-align: center;
-}
-
-.photo-box {
-    width: 150px;
-    height: 150px;
-    border-radius: 12px;
-    overflow: hidden;
-    margin-bottom: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    background: #ddd;
-}
-
-.photo-box img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-}
-
-.name {
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: #2d5a5a;
-    line-height: 1.3;
-}
-
-.role {
-    font-size: 1rem;
-    font-weight: 800;
-    color: #3a7e7e;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    text-align: center;
-}
-
-/* ==========================================================================
-   CONNECTORS – LINE STYLES (CENTRAL VARIABLES)
-
-:root {
-    --line-color:    #4a9d9a;
-    --line-thickness: 4px;
-    --line-radius:   2px;
-}
-
-.connector {
-    background-color: var(--line-color);
-    border-radius: var(--line-radius);
-    z-index: -1;
-}
-
-.vertical {
-    width: var(--line-thickness);
-}
-
-.horizontal {
-    height: var(--line-thickness);
-}
-
-/* ==========================================================================
-   OWNERS LEVEL
-
-.owners-level {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-bottom: 0px;
-}
-
-.pathologist-level {
-    margin-top: 30px; 
-}
-
-.owners-photos {
-    display: flex;
-    justify-content: center;
-    gap: 120px;
-    flex-wrap: wrap;
-    margin-bottom: 20px;
-}
-
-.owners-label {
-    font-size: 1.2rem;
-    font-weight: 800;
-    color: #3a7e7e;
-    text-transform: uppercase;
-    letter-spacing: 1.5px;
-    text-align: center;
-    margin-top: -50px;
-    margin-bottom: -50px;
-}
-
-/* ==========================================================================
-   CONNECTORS – SPECIFIC POSITIONS & LENGTHS
-
-.owners-to-pathologist {
-    height: 80px;
-}
-
-.path-to-techs {
-    height: 60px;
-}
-
-.techs-to-bottom {
-    height: 70px;
-}
-
-/* medtech level horizontal bar */
-.medtech-bar {
-    position: absolute;
-    top: 65px;
-    width: 70%;
-    max-width: 480px;
-    left: 50%;
-    transform: translateX(-50%);
-}
-
-/* medtech vertical stubs */
-.medtech-left-stub,
-.medtech-center-stub,
-.medtech-right-stub {
-    position: absolute;
-    width: var(--line-thickness);
-    top: 50px;
-    height: 65px;
-}
-
-.medtech-left-stub   { left: 16%; }
-.medtech-center-stub { left: 50%; transform: translateX(-50%); }
-.medtech-right-stub  { right: 16%; }
-
-.medtech-level {
-    gap: 150px;
-    position: relative;
-    min-height: 230px;
-    margin: 50px 0;
-}
-
-/* bottom level horizontal bar */
-.bottom-level {
-    position: relative;
-    display: flex;
-    justify-content: center;
-    gap: 150px;
-    padding-top: 0;
-    margin: 50px auto 60px;
-    margin-top:10px;
-    max-width: 720px;
-}
-
-.bottom-bar {
-    position: absolute;
-    top: 60px; /* move the line down closer to the middle of the photos */
-    left: 50%;
-    transform: translateX(-50%);
-    width: 55%;
-    max-width: 360px;
-    height: var(--line-thickness); /* ensures thickness is consistent */
-    background-color: var(--line-color);
-    border-radius: var(--line-radius);
-    z-index: -1;
-}
-
-/* ==========================================================================
-   RESPONSIVE STYLES
-
-@media (max-width: 992px) {
-    .content-grid {
-        grid-template-columns: 1fr;
-        justify-items: center;
-        align-items: stretch;
-    }
-
-    .content-grid .card-wrapper {
-        margin-top: 0 !important;
-    }
-
-    .card-wrapper .card {
-        max-width: 100%;
-    }
-}
-
-@media (max-width: 768px) {
-    .org-level {
-        gap: 30px;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .connector.vertical {
-        height: 50px !important;
-        margin: 20px 0;
-    }
-
-    .bottom-level {
-        flex-direction: column;
-        gap: 40px;
 /* ---------- RESET ---------- */
 /* Ensure padding and borders are included in element total width/height */
 *, *::before, *::after {
@@ -444,7 +8,6 @@ header h2 {
 
 /* ---------- VARIABLES ---------- */
 :root {
-    /* Store header height to easily offset content and calculate scroll positions */
     --header-h: 70px;
 }
 
@@ -467,11 +30,10 @@ header {
     align-items: center;
     justify-content: space-between;
     padding: 0 36px 0 22px;
-    z-index: 1000; /* Keep header above all page content */
+    z-index: 1000;
     box-shadow: 0 4px 20px rgba(14, 46, 36, 0.18);
 }
 
-/* Subtle bottom border on the header */
 header::after {
     content: '';
     position: absolute;
@@ -483,7 +45,6 @@ header::after {
 }
 
 /* ---------- BRAND ---------- */
-/* Logo image and company name grouped together */
 .brand {
     display: flex;
     align-items: center;
@@ -492,7 +53,6 @@ header::after {
     flex-shrink: 0;
 }
 
-/* Logo image */
 .logo {
     width: 62px;
     height: 62px;
@@ -505,7 +65,6 @@ header::after {
     display: block;
 }
 
-/* Company name text */
 .brand-name {
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
@@ -517,7 +76,6 @@ header::after {
 }
 
 /* ---------- HAMBURGER BUTTON (mobile only) ---------- */
-/* Hidden on desktop, shown on screens 768px and below */
 .hamburger {
     display: none;
     flex-direction: column;
@@ -534,7 +92,6 @@ header::after {
     flex-shrink: 0;
 }
 
-/* The three horizontal bar lines inside the hamburger button */
 .hamburger span {
     display: block;
     width: 100%;
@@ -544,7 +101,6 @@ header::after {
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-/* Animate hamburger into an X when menu is open */
 .hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
 .hamburger.open span:nth-child(2) { opacity: 0; }
 .hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
@@ -557,7 +113,6 @@ nav {
     position: relative;
 }
 
-/* Individual nav link */
 nav a {
     position: relative;
     font-family: 'Montserrat', sans-serif;
@@ -573,14 +128,13 @@ nav a {
     line-height: 1.35;
     white-space: nowrap;
     transition: color 0.18s;
-    z-index: 1; /* Stay above sliding pill */
+    z-index: 1;
 }
 
 nav a:hover  { color: #fff; }
 nav a.active { color: #fff; }
 
 /* ---------- SLIDING PILL INDICATOR ---------- */
-/* Frosted pill that slides behind the active nav link */
 #nav-pill {
     position: absolute;
     top: 50%;
@@ -589,13 +143,12 @@ nav a.active { color: #fff; }
     border-radius: 8px;
     background: rgba(255, 255, 255, 0.2);
     border: 1.5px solid rgba(255, 255, 255, 0.45);
-    pointer-events: none; /* Clicks pass through to links below */
+    pointer-events: none;
     z-index: 0;
     transition: left  0.32s cubic-bezier(0.4, 0, 0.2, 1),
                 width 0.32s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* White accent bar at the bottom of the pill */
 #nav-pill::after {
     content: '';
     position: absolute;
@@ -610,17 +163,10 @@ nav a.active { color: #fff; }
 /* ---------- NAV — MOBILE ---------- */
 @media (max-width: 768px) {
 
-    header {
-        padding: 0 18px;
-    }
-
-    /* Hide pill on mobile */
+    header { padding: 0 18px; }
     #nav-pill { display: none; }
-
-    /* Show hamburger button */
     .hamburger { display: flex; }
 
-    /* Nav becomes a full-width dropdown below the header */
     nav {
         position: fixed;
         top: var(--header-h);
@@ -632,7 +178,6 @@ nav a.active { color: #fff; }
         gap: 0;
         padding: 10px 0 16px;
         box-shadow: 0 8px 24px rgba(14, 46, 36, 0.2);
-        /* Collapsed by default — animates open with max-height */
         max-height: 0;
         overflow: hidden;
         opacity: 0;
@@ -640,13 +185,8 @@ nav a.active { color: #fff; }
                     opacity    0.25s ease;
     }
 
-    /* Expanded state when hamburger is clicked */
-    nav.open {
-        max-height: 400px;
-        opacity: 1;
-    }
+    nav.open { max-height: 400px; opacity: 1; }
 
-    /* Mobile link styling */
     nav a {
         font-size: 0.78rem;
         letter-spacing: 1px;
@@ -657,9 +197,7 @@ nav a.active { color: #fff; }
         white-space: normal;
     }
 
-    nav a:last-child {
-        border-bottom: none;
-    }
+    nav a:last-child { border-bottom: none; }
 
     nav a:hover,
     nav a.active {
@@ -669,13 +207,9 @@ nav a.active { color: #fff; }
 }
 
 /* ---------- SPACER ---------- */
-/* Pushes page content below the fixed header */
-.spacer {
-    height: var(--header-h);
-}
+.spacer { height: var(--header-h); }
 
 /* ---------- PAGE SECTIONS ---------- */
-/* Default styling for all full-page sections */
 section {
     min-height: 100vh;
     display: flex;
@@ -689,16 +223,16 @@ section {
 }
 
 
-/* ============================
+/* ===========================
     OFFERS AND SCHEDULES PAGE
-   ============================ */
+   =========================== */
 
 /* ---------- OFFERS SECTION WRAPPER ---------- */
 /* Overrides default section styles so it doesn't look like other sections */
 #offers {
     background: #f0f7f4;
-    display: block;      
-    min-height: unset;   
+    display: block;
+    min-height: unset;
     padding: 50px 40px 40px;
     border-bottom: none;
 }
@@ -710,16 +244,16 @@ section {
     background: transparent;
     padding: 0;
     display: grid;
-    grid-template-columns: 1fr 1fr 1.4fr; 
+    grid-template-columns: 1fr 1fr 1.4fr;
     gap: 30px;
-    align-items: stretch; 
+    align-items: stretch;
     max-width: 1100px;
     margin: 0 auto;
 }
 
 /* ---------- PAGE TITLE ---------- */
 .offers-page #title {
-    grid-column: 1 / -1; /* Spans all 3 columns */
+    grid-column: 1 / -1;
     text-align: center;
     margin-bottom: 16px;
 }
@@ -735,15 +269,8 @@ section {
     background-clip: text;
 }
 
-/* "OFFERS AND" — dark teal */
-.offers-page #title h1 .text-dark {
-    color: #133838;
-}
-
-/* "SCHEDULE" — bright teal */
-.offers-page #title h1 span {
-    color: #359D9E;
-}
+.offers-page #title h1 .text-dark { color: #133838; }
+.offers-page #title h1 span       { color: #359D9E; }
 
 /* ---------- DISCOUNT BOX ---------- */
 #discount {
@@ -755,9 +282,9 @@ section {
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     display: flex;
     flex-direction: column;
-    justify-content: flex-start; /* Stack content from top */
+    justify-content: flex-start;
     width: 100%;
-    height: 100%; /* Stretch to match card bank height */
+    height: 100%;
 }
 
 /* "20%" — largest text on the card */
@@ -769,15 +296,14 @@ section {
     margin-bottom: 0;
 }
 
-/* "DISCOUNT" — sits right below 20% with a divider line underneath */
 #discount .word-discount {
     font-size: 2.4rem;
     font-weight: 900;
     line-height: 1;
     margin-top: 6px;
-    padding-bottom: 20px; 
+    padding-bottom: 20px;
     border-bottom: 2px solid rgba(255, 255, 255, 0.35);
-    margin-bottom: 20px;   
+    margin-bottom: 20px;
     display: block;
 }
 
@@ -786,9 +312,9 @@ section {
     font-size: 2.4rem;
     font-weight: 900;
     line-height: 1.15;
-    padding-bottom: 20px;  
+    padding-bottom: 20px;
     border-bottom: 2px solid rgba(255, 255, 255, 0.35);
-    margin-bottom: 20px;  
+    margin-bottom: 20px;
 }
 
 /* ---------- DISCOUNT TAGS (PWD / Senior Citizen) ---------- */
@@ -820,7 +346,7 @@ section {
     height: 100px;
     object-fit: contain;
     object-position: center;
-    margin-bottom: 4px; 
+    margin-bottom: 4px;
     background: transparent;
 }
 
@@ -877,9 +403,7 @@ section {
     flex: 1;
 }
 
-#cardbank .inside p {
-    margin: 3px 0;
-}
+#cardbank .inside p  { margin: 3px 0; }
 
 #cardbank .inside ul {
     margin: 3px 0 8px 16px;
@@ -887,11 +411,7 @@ section {
     list-style-type: disc;
 }
 
-/* Highlighted text (e.g. ECG NO DISCOUNT) */
-#cardbank .inside .bold {
-    font-weight: bold;
-    color: #ffffff;
-}
+#cardbank .inside .bold { font-weight: bold; color: #ffffff; }
 
 /* Effective date at the bottom right */
 #cardbank h4 {
@@ -910,10 +430,10 @@ section {
 #logos-container {
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly; 
+    justify-content: space-evenly;
     gap: 28px;
     height: 100%;
-    padding-left: 24px; 
+    padding-left: 24px;
 }
 
 /* Each logo + text row */
@@ -962,48 +482,459 @@ section {
 
 /* ---------- RESPONSIVE — OFFERS PAGE ---------- */
 @media (max-width: 900px) {
-
-    /* Switch to 2-column layout on tablets */
-    .offers-page {
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-    }
-
-    /* Logos span full width below the two cards */
-    #logos-container {
-        grid-column: 1 / -1;
-        height: auto;
-        gap: 20px;
-        padding-left: 0;
-    }
-
-    /* Cards use auto height on smaller screens */
-    #discount,
-    #cardbank {
-        height: auto;
-        min-height: 420px;
-    }
+    .offers-page { grid-template-columns: 1fr 1fr; gap: 20px; }
+    #logos-container { grid-column: 1 / -1; height: auto; gap: 20px; padding-left: 0; }
+    #discount, #cardbank { height: auto; min-height: 420px; }
 }
 
 @media (max-width: 600px) {
-    .bottom-level {
-        flex-direction: column;
-        gap: 70px;
-        padding-top: 30px;
-    }
+    .offers-page { grid-template-columns: 1fr; }
+    .offers-page #title h1 { font-size: 1.6rem; }
+}
 
-    .bottom-bar,
-    .bottom-left-drop,
-    .bottom-right-drop {
-        display: none;
 
-    /* Single column on mobile */
-    .offers-page {
-        grid-template-columns: 1fr;
-    }
+/* ===============
+    ABOUT US PAGE
+   =============== */
 
-    /* Smaller title on mobile */
-    .offers-page #title h1 {
-        font-size: 1.6rem;
-    }
+/* ---------- ABOUT SECTION WRAPPER ---------- */
+#about {
+    background: #f0f7f4;
+    display: block;
+    min-height: unset;
+    padding: 0;
+    border-bottom: none;
+}
+
+/* ---------- CONTAINER ---------- */
+#about .container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 50px 40px 60px;
+}
+
+/* ---------- ABOUT US HEADER ---------- */
+.about-header {
+    position: static;
+    height: auto;
+    background: transparent;
+    display: block;
+    padding: 0;
+    box-shadow: none;
+}
+
+.about-header::after { display: none; }
+
+/* "ABOUT US" title */
+.about-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 2.2rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 40px;
+    background: linear-gradient(100deg, #359D9E 0%, #2F8A8B 30%, #133838 78%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-align: center;
+}
+
+/* Logo + divider + description row */
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    max-width: 1000px;
+    margin: 0 auto 60px;
+}
+
+/* Circular logo */
+.logo-placeholder {
+    width: 260px;
+    height: 260px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    filter: drop-shadow(0 10px 24px rgba(0,105,92,0.28));
+    flex-shrink: 0;
+    background: transparent;
+    padding: 0;
+}
+
+.logo-placeholder img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Vertical dividing line */
+.vertical-divider {
+    width: 4px;
+    height: 200px;
+    background-color: #2d5a5a;
+    border-radius: 2px;
+    flex-shrink: 0;
+}
+
+/* Description text */
+.short-description { max-width: 420px; }
+
+.short-description p {
+    font-size: 1rem;
+    color: #2d5a5a;
+    font-weight: 500;
+    line-height: 1.7;
+    text-align: left;
+    font-family: 'Open Sans', sans-serif;
+}
+
+/* ---------- VMG TITLE ---------- */
+.vmg-title {
+    color: #3a7e6d;
+    font-size: 1.5rem;
+    font-weight:700;
+    letter-spacing: 2px;
+    text-align: center;
+    margin-bottom: 0;
+    padding: 20px 0 30px;
+    font-family: 'Montserrat', sans-serif;
+    position: relative;
+    z-index: 2;
+}
+
+/* ---------- VMG SECTION ---------- */
+.vmg-section {
+    position: relative;
+    padding: 40px 0 100px;
+    overflow: visible;
+    margin: 0 -10px;
+    border-bottom: none;  
+}
+
+/* Background image pinned to left edge of screen */
+.vmg-section::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: calc(-50vw + 50%);
+    width: 42vw;
+    height: 100%;
+    background-image: url('../images/icons/background.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: top left;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0.5;
+}
+
+/* All vmg children sit above the background image */
+.vmg-section > * {
+    position: relative;
+    z-index: 1;
+}
+
+/* ---------- VMG CARDS GRID ---------- */
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+    align-items: end;
+}
+
+/* Staircase offsets */
+.content-grid .card-wrapper:nth-child(1) { margin-top: 80px; }
+.content-grid .card-wrapper:nth-child(2) { margin-top: 40px; }
+.content-grid .card-wrapper:nth-child(3) { margin-top: 0; }
+
+.card-wrapper {
+    padding: 0 20px;
+    position: relative; 
+}
+
+/* Vision & Mission divider */
+.content-grid .card-wrapper:nth-child(2)::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;   
+    height: 30%; 
+    width: 5px;
+    background: #3D6D1E;
+    border-radius: 2px;
+}
+
+/* Mission & Goals divider  */
+.content-grid .card-wrapper:nth-child(3)::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 20%;   
+    height: 30%; 
+    width: 5px;
+    background: #3D6D1E;
+    border-radius: 2px;
+}
+
+.card-wrapper .card {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+/* Icon above each card */
+.icon-wrapper {
+    width: 90px;
+    height: 90px;
+    overflow: visible;
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-wrapper img {
+    width: 90px;
+    height: 90px;
+    object-fit: contain;
+    display: block;
+}
+
+/* Card headings */
+.card h3 { color: #4caf50; font-size: 1.2rem; font-weight: 600; margin: 0 0 10px; font-family: 'Montserrat', sans-serif; }
+.card h4 { color: #226324; font-size: 1.2rem; font-weight: 600; margin: 0 0 10px; font-family: 'Montserrat', sans-serif; }
+.card h5 { color: #409c79; font-size: 1.2rem; font-weight: 600; margin: 0 0 10px; font-family: 'Montserrat', sans-serif; }
+
+/* Card body */
+.card-body {
+    background-color: #3a7e7e;
+    color: #fff;
+    padding: 25px;
+    border-radius: 15px;
+    text-align: left;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    font-family: 'Open Sans', sans-serif;
+    width: 100%;
+}
+
+.card-body ol,
+.card-body ul { padding-left: 18px; margin-top: 8px; }
+.card-body li  { margin-bottom: 6px; }
+
+.vision-card  .card-body { min-height: 200px; text-align: center; }
+.mission-card .card-body { min-height: 300px; }
+.goals-card   .card-body { min-height: 400px; }
+
+/* ---------- ORG CHART SECTION ---------- */
+.org-section {
+    margin: 20px 0;         
+    text-align: center;
+    display: block;
+    min-height: unset;
+    border-bottom: none;
+    border-top: none;
+}
+
+.org-title {
+    color: #3a7e6d;
+    font-size: 1.5rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    -family: 'Montserrat', sans-serif;
+}
+
+.org-chart {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.org-level {
+    display: flex;
+    justify-content: center;
+    gap: 60px;
+    flex-wrap: wrap;
+    margin: 10px 0;        
+    position: relative;
+    width: 100%;
+}
+
+.node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 160px;
+    text-align: center;
+    position: relative;
+}
+
+.photo-box {
+    width: 150px;
+    height: 150px;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    background: #ddd;
+}
+
+.photo-box img { width: 100%; height: 100%; object-fit: cover; }
+
+.name {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #2d5a5a;
+    line-height: 1.3;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.role {
+    font-size: 0.75rem;
+    font-weight: 800;
+    color: #3a7e7e;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-align: center;
+    margin-top: 4px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* ---------- CONNECTOR LINES ---------- */
+:root {
+    --line-color: #4a9d9a;
+    --line-thickness: 4px;
+    --line-radius: 2px;
+}
+
+.connector {
+    background-color: var(--line-color);
+    border-radius: var(--line-radius);
+    z-index: 1;
+}
+
+.vertical   { width: var(--line-thickness); }
+.horizontal { height: var(--line-thickness); }
+
+/* ---------- OWNERS LEVEL ---------- */
+.owners-level {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 0;
+}
+
+.owners-photos {
+    display: flex;
+    justify-content: center;
+    gap: 120px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+.owners-label {
+    font-size: 1.2rem;
+    font-weight: 800;
+    color: #3a7e7e;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    text-align: center;
+    margin-top: -65px;
+    margin-bottom: -50px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.pathologist-level {
+    margin-top: 10px;       
+}
+
+/* ---------- CONNECTOR LENGTHS ---------- */
+.owners-to-pathologist { height: 50px; }   
+.path-to-techs         { height: 40px; }   
+.techs-to-bottom       { height: 40px; }   
+
+/* Horizontal bar connecting the three medtech nodes */
+/* node-wrapper: stacks stub line above node */
+.node-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+/* No stubs needed — bar is now at photo midpoint, remove stub lines */
+.medtech-stub,
+.bottom-stub {
+    display: none;
+}
+
+/* Horizontal bar with gaps before photos */
+.medtech-bar {
+    position: absolute;
+    top: 75px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(65% - 60px); 
+    z-index: 0;
+}
+
+.medtech-level {
+    gap: 80px;
+    position: relative;
+    align-items: flex-start;
+    padding-top: 0;
+}
+
+.bottom-level {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    gap: 80px;
+    align-items: flex-start;
+    margin: 10px auto 60px;
+    max-width: 500px;
+    padding-top: 0;
+    transform: translateX(120px);
+}
+
+.bottom-bar {
+    position: absolute;
+    top: 75px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: var(--line-thickness);
+    background-color: var(--line-color);
+    border-radius: var(--line-radius);
+    z-index: 0;
+}
+
+/* ---------- RESPONSIVE — ABOUT PAGE ---------- */
+@media (max-width: 992px) {
+    .content-grid { grid-template-columns: 1fr; }
+    .content-grid .card-wrapper { margin-top: 0 !important; }
+    .vmg-section::before { display: none; }
+}
+
+@media (max-width: 768px) {
+    .about-title { font-size: 1.6rem; }
+    .header-content { flex-direction: column; gap: 20px; }
+    .vertical-divider { width: 80%; height: 4px; }
+    .org-level { gap: 30px; flex-direction: column; align-items: center; }
+    .connector.vertical { height: 50px !important; margin: 20px 0; }
+    .bottom-level { flex-direction: column; gap: 40px; }
+    .bottom-bar { display: none; }
 }
