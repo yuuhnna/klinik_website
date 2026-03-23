@@ -1,6 +1,8 @@
 /* ---------- RESET ---------- */
 /* Ensure padding and borders are included in element total width/height */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
@@ -101,9 +103,17 @@ header::after {
     transition: transform 0.3s ease, opacity 0.3s ease;
 }
 
-.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
-.hamburger.open span:nth-child(2) { opacity: 0; }
-.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+.hamburger.open span:nth-child(1) {
+    transform: translateY(7px) rotate(45deg);
+}
+
+.hamburger.open span:nth-child(2) {
+    opacity: 0;
+}
+
+.hamburger.open span:nth-child(3) {
+    transform: translateY(-7px) rotate(-45deg);
+}
 
 /* ---------- NAV — DESKTOP ---------- */
 nav {
@@ -131,8 +141,13 @@ nav a {
     z-index: 1;
 }
 
-nav a:hover  { color: #fff; }
-nav a.active { color: #fff; }
+nav a:hover {
+    color: #fff;
+}
+
+nav a.active {
+    color: #fff;
+}
 
 /* ---------- SLIDING PILL INDICATOR ---------- */
 #nav-pill {
@@ -145,8 +160,8 @@ nav a.active { color: #fff; }
     border: 1.5px solid rgba(255, 255, 255, 0.45);
     pointer-events: none;
     z-index: 0;
-    transition: left  0.32s cubic-bezier(0.4, 0, 0.2, 1),
-                width 0.32s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: left 0.32s cubic-bezier(0.4, 0, 0.2, 1),
+        width 0.32s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 #nav-pill::after {
@@ -163,9 +178,17 @@ nav a.active { color: #fff; }
 /* ---------- NAV — MOBILE ---------- */
 @media (max-width: 768px) {
 
-    header { padding: 0 18px; }
-    #nav-pill { display: none; }
-    .hamburger { display: flex; }
+    header {
+        padding: 0 18px;
+    }
+
+    #nav-pill {
+        display: none;
+    }
+
+    .hamburger {
+        display: flex;
+    }
 
     nav {
         position: fixed;
@@ -182,10 +205,13 @@ nav a.active { color: #fff; }
         overflow: hidden;
         opacity: 0;
         transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-                    opacity    0.25s ease;
+            opacity 0.25s ease;
     }
 
-    nav.open { max-height: 400px; opacity: 1; }
+    nav.open {
+        max-height: 400px;
+        opacity: 1;
+    }
 
     nav a {
         font-size: 0.78rem;
@@ -197,7 +223,9 @@ nav a.active { color: #fff; }
         white-space: normal;
     }
 
-    nav a:last-child { border-bottom: none; }
+    nav a:last-child {
+        border-bottom: none;
+    }
 
     nav a:hover,
     nav a.active {
@@ -207,7 +235,9 @@ nav a.active { color: #fff; }
 }
 
 /* ---------- SPACER ---------- */
-.spacer { height: var(--header-h); }
+.spacer {
+    height: var(--header-h);
+}
 
 /* ---------- PAGE SECTIONS ---------- */
 section {
@@ -222,6 +252,237 @@ section {
     border-bottom: 1px solid #c8e4dc;
 }
 
+/* ===============
+    SERVICES PAGE 
+   ===============*/
+
+#services {
+    background: #f0f7f4;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 50px 0 150px;
+    border-bottom: none;
+    font-size: initial;
+    font-weight: initial;
+    color: initial;
+    scroll-margin-top: 70px;
+}
+
+.services-wrapper {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.services-main-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 2.2rem;
+    letter-spacing: 2px;
+    text-align: center;
+    margin-bottom: 70px;
+    color: #359D9E;
+}
+
+.services-main-title span {
+    background: linear-gradient(100deg, #2F8A8B 30%, #133838 78%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ---------- CAROUSEL OUTER ---------- */
+.carousel-container {
+    width: 100%;
+    position: relative;
+    overflow: hidden;
+    padding: 20px 0 10px;
+}
+
+/* ---------- TRACK ---------- */
+.carousel-track {
+    display: flex;
+    align-items: center;
+    will-change: transform;
+    /* transition applied by JS only */
+}
+
+/* ---------- CARD ---------- */
+.service-card {
+    flex-shrink: 0;
+    width: 560px;
+    height: 350px;
+    margin: 0 20px;
+    border-radius: 18px;
+    background: linear-gradient(160deg, #2a9090 0%, #1a6060 55%, #0d3a3a 100%);
+    box-shadow: 0 8px 32px rgba(14, 66, 70, 0.22);
+    padding: 22px 26px 20px;
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    transform: scale(0.80);
+    opacity: 0.42;
+    transition: transform 0.5s ease, opacity 0.5s ease;
+}
+
+.service-card.active {
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* ---------- TITLE BUTTON ---------- */
+.card-title-btn {
+    all: unset;
+    display: inline-block;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 900;
+    font-size: 2rem;
+    letter-spacing: 1.5px;
+    color: #fff;
+    text-align: center;
+    width: max-content;
+    margin: 0 auto 20px auto;
+    padding-bottom: 0px;
+    border-bottom: none;
+    cursor: default;
+    pointer-events: none;
+    flex-shrink: 0;
+    box-sizing: border-box;
+}
+
+/* ---------- INNER CARD ---------- */
+.inner-card {
+    background: #e6fdf2;
+    border-radius: 12px;
+    padding: 20px 16px;
+    margin: 0 20px 10px 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    flex-grow: 1;
+}
+
+.inner-card::-webkit-scrollbar {
+    width: 4px;
+}
+
+.inner-card::-webkit-scrollbar-thumb {
+    background: rgba(53, 157, 158, 0.45);
+    border-radius: 2px;
+}
+
+/* ---------- HIDDEN OLD PILL LAYOUT ---------- */
+.tests-collapsed {
+    display: none;
+}
+
+/* ---------- PRICE LIST (ALWAYS VISIBLE NOW) ---------- */
+.tests-expanded {
+    display: block;
+    width: 100%;
+}
+
+.tests-expanded ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 100%;
+}
+
+.tests-expanded ul li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(14, 64, 64, 0.12);
+    font-family: 'Open Sans', sans-serif;
+    color: #0e4040;
+    font-size: 0.9rem;
+}
+
+.tests-expanded ul li:last-child {
+    border-bottom: none;
+}
+
+.tests-expanded ul li span:last-child {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+    color: #0a5a5a;
+    font-size: 0.95rem;
+    flex-shrink: 0;
+    margin-left: 14px;
+}
+
+/* ---------- ARROWS ---------- */
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 60px;
+    height: 100px;
+    border: none;
+    background: transparent;
+    color: #256b6b;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    transition: transform 0.2s cubic-bezier(0.4, 0, 0.2, 1), color 0.2s;
+    filter: drop-shadow(4px 4px 5px rgba(0, 0, 0, 0.45));
+}
+
+.carousel-arrow:hover {
+    color: #133838;
+    transform: translateY(-50%) scale(1.15);
+}
+
+.carousel-arrow:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+.arrow-left {
+    left: 15px;
+}
+
+.arrow-right {
+    right: 15px;
+}
+
+.carousel-arrow svg {
+    width: 45px;
+    height: 45px;
+    stroke-width: 4px;
+}
+
+/* ---------- DOTS ---------- */
+.carousel-dots {
+    display: flex;
+    gap: 10px;
+    margin-top: 50px;
+    justify-content: center;
+    width: 100%;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    border: none;
+    background: rgba(53, 157, 158, 0.28);
+    cursor: pointer;
+    transition: background 0.25s, transform 0.2s;
+    padding: 0;
+}
+
+.dot.active {
+    background: #359D9E;
+    transform: scale(1.3);
+}
 
 /* ===========================
     OFFERS AND SCHEDULES PAGE
@@ -269,8 +530,13 @@ section {
     background-clip: text;
 }
 
-.offers-page #title h1 .text-dark { color: #133838; }
-.offers-page #title h1 span       { color: #359D9E; }
+.offers-page #title h1 .text-dark {
+    color: #133838;
+}
+
+.offers-page #title h1 span {
+    color: #359D9E;
+}
 
 /* ---------- DISCOUNT BOX ---------- */
 #discount {
@@ -403,7 +669,9 @@ section {
     flex: 1;
 }
 
-#cardbank .inside p  { margin: 3px 0; }
+#cardbank .inside p {
+    margin: 3px 0;
+}
 
 #cardbank .inside ul {
     margin: 3px 0 8px 16px;
@@ -411,7 +679,10 @@ section {
     list-style-type: disc;
 }
 
-#cardbank .inside .bold { font-weight: bold; color: #ffffff; }
+#cardbank .inside .bold {
+    font-weight: bold;
+    color: #ffffff;
+}
 
 /* Effective date at the bottom right */
 #cardbank h4 {
@@ -482,14 +753,50 @@ section {
 
 /* ---------- RESPONSIVE — OFFERS PAGE ---------- */
 @media (max-width: 900px) {
-    .offers-page { grid-template-columns: 1fr 1fr; gap: 20px; }
-    #logos-container { grid-column: 1 / -1; height: auto; gap: 20px; padding-left: 0; }
-    #discount, #cardbank { height: auto; min-height: 420px; }
+    .offers-page {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    #logos-container {
+        grid-column: 1 / -1;
+        height: auto;
+        gap: 20px;
+        padding-left: 0;
+    }
+
+    #discount,
+    #cardbank {
+        height: auto;
+        min-height: 420px;
+    }
 }
 
 @media (max-width: 600px) {
-    .offers-page { grid-template-columns: 1fr; }
-    .offers-page #title h1 { font-size: 1.6rem; }
+    .offers-page {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
+    }
+
+    .offers-page #title h1 {
+        font-size: 1.6rem;
+    }
+    
+    #discount, #cardbank {
+        padding: 15px 10px;
+        min-height: 380px;
+        border-radius: 12px;
+    }
+    
+    #discount .pct { font-size: 2.8rem; }
+    #discount .word-discount, #discount h1:nth-of-type(2) { font-size: 1.15rem; margin-bottom: 12px; padding-bottom: 12px; }
+    .discount-tags { gap: 8px; }
+    .discount-tags h3 { font-size: 0.75rem; }
+    .discount-tags h3 img, .discount-tags h3.senior img { width: 45px; height: 45px; margin-bottom: 2px; }
+    
+    #cardbank h2 { font-size: 1.15rem; }
+    #cardbank h3.req { font-size: 0.75rem; }
+    #cardbank .inside { font-size: 0.65rem; padding-left: 2px; }
 }
 
 
@@ -523,7 +830,9 @@ section {
     box-shadow: none;
 }
 
-.about-header::after { display: none; }
+.about-header::after {
+    display: none;
+}
 
 /* "ABOUT US" title */
 .about-title {
@@ -560,7 +869,7 @@ section {
     display: flex;
     align-items: center;
     justify-content: center;
-    filter: drop-shadow(0 10px 24px rgba(0,105,92,0.28));
+    filter: drop-shadow(0 10px 24px rgba(0, 105, 92, 0.28));
     flex-shrink: 0;
     background: transparent;
     padding: 0;
@@ -582,7 +891,9 @@ section {
 }
 
 /* Description text */
-.short-description { max-width: 420px; }
+.short-description {
+    max-width: 420px;
+}
 
 .short-description p {
     font-size: 1rem;
@@ -597,7 +908,7 @@ section {
 .vmg-title {
     color: #3a7e6d;
     font-size: 1.5rem;
-    font-weight:700;
+    font-weight: 700;
     letter-spacing: 2px;
     text-align: center;
     margin-bottom: 0;
@@ -613,7 +924,7 @@ section {
     padding: 40px 0 100px;
     overflow: visible;
     margin: 0 -10px;
-    border-bottom: none;  
+    border-bottom: none;
 }
 
 /* Background image pinned to left edge of screen */
@@ -634,7 +945,7 @@ section {
 }
 
 /* All vmg children sit above the background image */
-.vmg-section > * {
+.vmg-section>* {
     position: relative;
     z-index: 1;
 }
@@ -648,13 +959,21 @@ section {
 }
 
 /* Staircase offsets */
-.content-grid .card-wrapper:nth-child(1) { margin-top: 80px; }
-.content-grid .card-wrapper:nth-child(2) { margin-top: 40px; }
-.content-grid .card-wrapper:nth-child(3) { margin-top: 0; }
+.content-grid .card-wrapper:nth-child(1) {
+    margin-top: 80px;
+}
+
+.content-grid .card-wrapper:nth-child(2) {
+    margin-top: 40px;
+}
+
+.content-grid .card-wrapper:nth-child(3) {
+    margin-top: 0;
+}
 
 .card-wrapper {
     padding: 0 20px;
-    position: relative; 
+    position: relative;
 }
 
 /* Vision & Mission divider */
@@ -662,8 +981,8 @@ section {
     content: '';
     position: absolute;
     left: 0;
-    top: 50%;   
-    height: 30%; 
+    top: 50%;
+    height: 30%;
     width: 5px;
     background: #3D6D1E;
     border-radius: 2px;
@@ -674,8 +993,8 @@ section {
     content: '';
     position: absolute;
     left: 0;
-    top: 20%;   
-    height: 30%; 
+    top: 20%;
+    height: 30%;
     width: 5px;
     background: #3D6D1E;
     border-radius: 2px;
@@ -708,9 +1027,29 @@ section {
 }
 
 /* Card headings */
-.card h3 { color: #4caf50; font-size: 1.2rem; font-weight: 600; margin: 0 0 10px; font-family: 'Montserrat', sans-serif; }
-.card h4 { color: #226324; font-size: 1.2rem; font-weight: 600; margin: 0 0 10px; font-family: 'Montserrat', sans-serif; }
-.card h5 { color: #409c79; font-size: 1.2rem; font-weight: 600; margin: 0 0 10px; font-family: 'Montserrat', sans-serif; }
+.card h3 {
+    color: #4caf50;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0 0 10px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.card h4 {
+    color: #226324;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0 0 10px;
+    font-family: 'Montserrat', sans-serif;
+}
+
+.card h5 {
+    color: #409c79;
+    font-size: 1.2rem;
+    font-weight: 600;
+    margin: 0 0 10px;
+    font-family: 'Montserrat', sans-serif;
+}
 
 /* Card body */
 .card-body {
@@ -721,22 +1060,37 @@ section {
     text-align: left;
     font-size: 0.9rem;
     line-height: 1.6;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.15);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
     font-family: 'Open Sans', sans-serif;
     width: 100%;
 }
 
 .card-body ol,
-.card-body ul { padding-left: 18px; margin-top: 8px; }
-.card-body li  { margin-bottom: 6px; }
+.card-body ul {
+    padding-left: 18px;
+    margin-top: 8px;
+}
 
-.vision-card  .card-body { min-height: 200px; text-align: center; }
-.mission-card .card-body { min-height: 300px; }
-.goals-card   .card-body { min-height: 400px; }
+.card-body li {
+    margin-bottom: 6px;
+}
+
+.vision-card .card-body {
+    min-height: 200px;
+    text-align: center;
+}
+
+.mission-card .card-body {
+    min-height: 300px;
+}
+
+.goals-card .card-body {
+    min-height: 400px;
+}
 
 /* ---------- ORG CHART SECTION ---------- */
 .org-section {
-    margin: 20px 0;         
+    margin: 20px 0;
     text-align: center;
     display: block;
     min-height: unset;
@@ -768,7 +1122,7 @@ section {
     justify-content: center;
     gap: 60px;
     flex-wrap: wrap;
-    margin: 10px 0;        
+    margin: 10px 0;
     position: relative;
     width: 100%;
 }
@@ -788,11 +1142,15 @@ section {
     border-radius: 12px;
     overflow: hidden;
     margin-bottom: 10px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
     background: #ddd;
 }
 
-.photo-box img { width: 100%; height: 100%; object-fit: cover; }
+.photo-box img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
 
 .name {
     font-size: 0.85rem;
@@ -826,8 +1184,13 @@ section {
     z-index: 1;
 }
 
-.vertical   { width: var(--line-thickness); }
-.horizontal { height: var(--line-thickness); }
+.vertical {
+    width: var(--line-thickness);
+}
+
+.horizontal {
+    height: var(--line-thickness);
+}
 
 /* ---------- OWNERS LEVEL ---------- */
 .owners-level {
@@ -858,13 +1221,21 @@ section {
 }
 
 .pathologist-level {
-    margin-top: 10px;       
+    margin-top: 10px;
 }
 
 /* ---------- CONNECTOR LENGTHS ---------- */
-.owners-to-pathologist { height: 50px; }   
-.path-to-techs         { height: 40px; }   
-.techs-to-bottom       { height: 40px; }   
+.owners-to-pathologist {
+    height: 50px;
+}
+
+.path-to-techs {
+    height: 40px;
+}
+
+.techs-to-bottom {
+    height: 40px;
+}
 
 /* Horizontal bar connecting the three medtech nodes */
 /* node-wrapper: stacks stub line above node */
@@ -875,7 +1246,6 @@ section {
     position: relative;
 }
 
-/* No stubs needed — bar is now at photo midpoint, remove stub lines */
 .medtech-stub,
 .bottom-stub {
     display: none;
@@ -887,7 +1257,7 @@ section {
     top: 75px;
     left: 50%;
     transform: translateX(-50%);
-    width: calc(65% - 60px); 
+    width: calc(65% - 60px);
     z-index: 0;
 }
 
@@ -924,17 +1294,159 @@ section {
 
 /* ---------- RESPONSIVE — ABOUT PAGE ---------- */
 @media (max-width: 992px) {
-    .content-grid { grid-template-columns: 1fr; }
-    .content-grid .card-wrapper { margin-top: 0 !important; }
-    .vmg-section::before { display: none; }
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .content-grid .card-wrapper {
+        margin-top: 0 !important;
+    }
+
+    .vmg-section::before {
+        display: none;
+    }
 }
 
 @media (max-width: 768px) {
-    .about-title { font-size: 1.6rem; }
-    .header-content { flex-direction: column; gap: 20px; }
-    .vertical-divider { width: 80%; height: 4px; }
-    .org-level { gap: 30px; flex-direction: column; align-items: center; }
-    .connector.vertical { height: 50px !important; margin: 20px 0; }
-    .bottom-level { flex-direction: column; gap: 40px; }
-    .bottom-bar { display: none; }
+    .about-title {
+        font-size: 1.6rem;
+    }
+
+    .header-content {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .vertical-divider {
+        width: 80%;
+        height: 4px;
+    }
+
+    .org-level {
+        gap: 30px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .connector.vertical {
+        height: 50px !important;
+        margin: 20px 0;
+    }
+
+    .bottom-level {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .bottom-bar {
+        display: none;
+    }
+}
+
+
+
+/* ---------- RESPONSIVE ---------- */
+@media (max-width: 768px) {
+    /* --- Offers Page Mobile Fixes --- */
+    #offers {
+        padding: 50px 15px 30px;
+    }
+    
+    #discount .pct {
+        font-size: 3.5rem;
+    }
+    
+    #discount .word-discount,
+    #discount h1:nth-of-type(2) {
+        font-size: 1.8rem;
+    }
+    
+    .discount-tags {
+        gap: 10px;
+    }
+    
+    .discount-tags h3 img {
+        width: 70px;
+        height: 70px;
+    }
+    
+    .discount-tags h3.senior img {
+        width: 70px;
+        height: 70px;
+    }
+    
+    #logos-container {
+        align-items: center;
+        text-align: center;
+    }
+    
+    #logoLabaratory,
+    #logoMedicalSevices,
+    #logoPharmacy {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    /* --- About / Org Chart Mobile --- */
+    #about .container {
+        padding: 50px 15px 40px;
+    }
+    
+    .bottom-level {
+        transform: translateX(0); 
+    }
+    
+    .owners-photos {
+        gap: 40px;
+    }
+    
+    .node {
+        width: 130px;
+    }
+    
+    .photo-box {
+        width: 120px;
+        height: 120px;
+    }
+
+    /* Carousel Elements */
+    .services-main-title {
+        font-size: 1.6rem;
+    }
+
+    .service-card {
+        width: calc(100vw - 80px); 
+        margin: 0 10px;
+    }
+
+    .card-title-btn {
+        font-size: 1.15rem;
+        padding: 14px 10px;
+    }
+    
+    .inner-card {
+        margin: 0 8px 8px 8px;
+        padding: 15px 18px;
+        height: 220px;
+    }
+
+    /* Arrows Shrink */
+    .carousel-arrow {
+        width: 40px;
+        height: 80px;
+    }
+    .carousel-arrow svg {
+        width: 32px;
+        height: 32px;
+    }
+    .arrow-left {
+        left: 0px;
+    }
+    .arrow-right {
+        right: 0px;
+    }
+    
+    .carousel-dots {
+        margin-top: 35px;
+    }
 }
