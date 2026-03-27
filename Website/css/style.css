@@ -287,6 +287,16 @@ section {
     color: #359D9E;
 }
 
+.services-main-title::after {
+  content: "";
+  display: block;
+  width: 60px;          /* short accent line */
+  height: 3px;
+  background-color: #359D9E;
+  margin: 8px auto 0;   /* center under text */
+  border-radius: 2px;
+}
+
 .services-main-title span {
     background: linear-gradient(100deg, #2F8A8B 30%, #133838 78%);
     -webkit-background-clip: text;
@@ -518,6 +528,17 @@ section {
     text-align: center;
     margin-bottom: 16px;
 }
+
+#title h1::after {
+  content: "";
+  display: block;
+  width: 60px;          /* short accent line */
+  height: 3px;
+  background-color: #009688; /* teal accent */
+  margin: 8px auto 0;   /* center under text */
+  border-radius: 2px;
+}
+
 
 /* Gradient text effect using the brand color stops */
 .offers-page #title h1 {
@@ -849,6 +870,17 @@ section {
     -webkit-text-fill-color: transparent;
     text-align: center;
 }
+
+.about-title::after {
+  content: "";
+  display: block;
+  width: 60px;          /* short accent line */
+  height: 3px;
+  background-color: #009688; /* accent color */
+  margin: 8px auto 0;   /* center under text */
+  border-radius: 2px;
+}
+
 
 /* Logo + divider + description row */
 .header-content {
@@ -2334,6 +2366,17 @@ body {
     background-clip: text;
 }
 
+#contact #title h1::after {
+  content: "";
+  display: block;
+  width: 60px;          /* short accent line */
+  height: 3px;
+  background-color: #009688; /* teal accent */
+  margin: 8px auto 0;   /* center under text */
+  border-radius: 2px;
+}
+
+
 /* ---------- MAIN CONTACT BOX ---------- */
 .contact-box {
     display: grid;
@@ -2521,8 +2564,6 @@ body {
     padding-left: 40px;
     padding-top: 0;
 }
-
-
 
 .contact-info {
     display: flex;
@@ -3052,4 +3093,6 @@ body {
     color: #000;
     font-size: 13px;
 }
+
+
 
