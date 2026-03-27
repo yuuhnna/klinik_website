@@ -1,0 +1,276 @@
+<div class="container">
+  <h1 class="home-title">YOUR HEALTH<br> IS OUR PRIORITY</h1>
+  <p class="home-description">
+    Delivering precise laboratory diagnostics with rapid results and expert care —
+    empowering you to make confident decisions about your health
+  </p>
+  <button class="btn-home" id="openModal">BOOK HOME SERVICE</button>
+
+  <!-- Modal -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+
+      <!-- Fixed header -->
+      <div class="modal-header-fixed">
+        <h4>Request Form</h4>
+        <p class="form-instruction">
+          Please fill up the Request Form to proceed with booking your home service.
+        </p>
+        <div id="errorPopup" class="error-popup" style="display:none;">
+            <span class="close-error">&times;</span>
+            </div>
+      </div>
+    
+      <!-- Scrollable body -->
+      <div class="modal-body-scroll">
+        
+          <label>Name</label>
+            <div class="name-fields">
+            <input type="text" id="lastName" name="lastName" placeholder="Last Name" required>
+            <input type="text" id="firstName" name="firstName" placeholder="First Name" required>
+            <input type="text" id="middleInitial" name="middleInitial" placeholder="M.I." maxlength="1" pattern="[A-Za-z]">
+            <input type="text" id="suffix" name="suffix" placeholder="Suffix" maxlength="5">
+            </div>
+
+          <!-- Other fields row -->
+          <div class="row-fields">
+            <div class="field">
+              <label for="sex">Sex</label>
+              <select id="sex" name="sex" required>
+                <option value="">Select</option>
+                <option value="Male">MALE</option>
+                <option value="Female">FEMALE</option>
+              </select>
+            </div>
+
+            <div class="field">
+              <label for="dob">Date of Birth</label>
+              <input type="date" id="dob" name="dob" required>
+            </div>
+
+            <div class="field small">
+              <label for="age">Age</label>
+              <input type="number" id="age" name="age" min="0" max="120" required>
+            </div>
+
+            <div class="field">
+              <label for="contactNo">Contact No.</label>
+              <input type="tel"
+                     id="contactNo"
+                     name="contactNo"
+                     placeholder="099xx-xxx-xxx"
+                     pattern="^09[0-9]{2}-[0-9]{3}-[0-9]{3}$"
+                     required>
+            </div>
+
+            <div class="field wide">
+              <label for="address">Address</label>
+              <input list="addressOptions" id="address" name="address" placeholder="Select or type address" required>
+              <datalist id="addressOptions">
+                <option value="MCLAIN, BUENAVISTA, GUIMARAS">
+                <option value="SALVACION, BUENAVISTA, GUIMARAS">
+                <option value="NEW POBLACION, BUENAVISTA, GUIMARAS">
+                <option value="MABINI, BUENAVISTA, GUIMARAS">
+                <option value="SUPANG, BUENAVISTA, GUIMARAS">
+                <option value="TASTASAN, BUENAVISTA, GUIMARAS">
+                <option value="TACAY, BUENAVISTA, GUIMARAS">
+                <option value="TINADTARAN, BUENAVISTA, GUIMARAS">
+                <option value="STO. ROSARIO, BUENAVISTA, GUIMARAS">
+                <option value="BANBAN, BUENAVISTA, GUIMARAS">
+                <option value="NAVALAS, BUENAVISTA, GUIMARAS">
+                <option value="NAZARET, BUENAVISTA, GUIMARAS">
+                <option value="GETULIO, BUENAVISTA, GUIMARAS">
+                <option value="SAN MIGUEL, BUENAVISTA, GUIMARAS">
+                <option value="BACJAO, BUENAVISTA, GUIMARAS">
+                <option value="SAN FERNANDO, BUENAVISTA, GUIMARAS">
+                <option value="SAN NICOLAS, BUENAVISTA, GUIMARAS">
+                <option value="SAN ROQUE, BUENAVISTA, GUIMARAS">
+                <option value="SAN ISIDRO, BUENAVISTA, GUIMARAS">
+                <option value="OLD POBLACION, BUENAVISTA, GUIMARAS">
+                <option value="MONTPILLER, BUENAVISTA, GUIMARAS">
+                <option value="RIZAL, BUENAVISTA, GUIMARAS">
+                <option value="MAGSAYSAY, BUENAVISTA, GUIMARAS">
+                <option value="ZALDIVAR, BUENAVISTA, GUIMARAS">
+                <option value="SAWANG, BUENAVISTA, GUIMARAS">
+                <option value="PINA, BUENAVISTA, GUIMARAS">
+                <option value="DARAGAN, BUENAVISTA, GUIMARAS">
+                <option value="TAMINLA, BUENAVISTA, GUIMARAS">
+                <option value="AGSANAYAN, BUENAVISTA, GUIMARAS">
+                <option value="TANAG, BUENAVISTA, GUIMARAS">
+                <option value="CANSILAYAN, BUENAVISTA, GUIMARAS">
+                <option value="UMILIG, BUENAVISTA, GUIMARAS">
+                <option value="AVILA, BUENAVISTA, GUIMARAS">
+                <option value="EAST VALENCIA, BUENAVISTA, GUIMARAS">
+                <option value="SUCLARAN, SAN LORENZO, GUIMARAS">
+                <option value="M. CHAVEZ, SAN LORENZO, GUIMARAS">
+                <option value="SAN ENRIQUE, SAN LORENZO, GUIMARAS">
+                <option value="GABAN, SAN LORENZO, GUIMARAS">
+                <option value="CABANO, SAN LORENZO, GUIMARAS">
+                <option value="CABUNGAHAN, SAN LORENZO, GUIMARAS">
+  </datalist>
+</div>
+    <!-- Preferred Date -->
+    <div class="field">
+                <label for="preferredDate">Preferred Date</label>
+                <input type="date" id="preferredDate" name="preferredDate" required>
+                </div>
+            </div>
+
+            <hr class="form-divider">
+
+            <div class="field">
+                <label for="labTest" class="field-label">
+                Laboratory Test <span class="helper-text">— expand a category below to select tests</span>
+                </label>
+            </div>
+
+            <div class="category-grid">
+
+  <!-- Clinical Microscopy -->
+  <details>
+    <summary class="category-header">CLINICAL MICROSCOPY</summary>
+    <div class="test-container">
+      <div class="test-item"><span class="select-box"></span><span class="test-name">Urinalysis</span><span class="test-price">₱ 60</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">Fecalysis</span><span class="test-price">₱ 100</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">Direct and Concentration</span><span class="test-price">₱ 300</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">Fecal Occult Blood Test</span><span class="test-price">₱ 800</span></div>
+  </details>
+
+  <!-- Clinical Chemistry -->
+  <details>
+    <summary class="category-header">CLINICAL CHEMISTRY</summary>
+    <div class="test-container">
+      <div class="test-item"><span class="select-box"></span><span class="test-name">FBS / RBS</span><span class="test-price">₱ 90</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">Creatinine</span><span class="test-price">₱ 120</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">BUN</span><span class="test-price">₱ 195</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">Uric Acid</span><span class="test-price">₱ 170</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">Lipid Profile</span><span class="test-price">₱ 470</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">Total Cholesterol</span><span class="test-price">₱ 200</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">Triglycerides</span><span class="test-price">₱ 200</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">SGPT / ALT</span><span class="test-price">₱ 195</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">SGOT / AST</span><span class="test-price">₱ 195</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">TPAG</span><span class="test-price">₱ 750</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">Total Protein</span><span class="test-price">₱ 350</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">Albumin</span><span class="test-price">₱ 370</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">Sodium</span><span class="test-price">₱ 270</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">Potassium</span><span class="test-price">₱ 270</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">Calcium</span><span class="test-price">₱ 300</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">Ionized Calcium</span><span class="test-price">₱ 520</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">Chloride</span><span class="test-price">₱ 300</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">OGTT / OGCT</span><span class="test-price">₱ 750</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">2H Post Prandial Glucose</span><span class="test-price">₱ 90</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">HBA1c</span><span class="test-price">₱ 1,100</span></div>
+      
+    </div>
+  </details>
+
+  <!-- Bacteriology -->
+  <details>
+    <summary class="category-header">BACTERIOLOGY</summary>
+    <div class="test-container">
+      <div class="test-item"><span class="select-box"></span><span class="test-name">Urine KOH</span><span class="test-price">₱ 250</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">Sputum KOH</span><span class="test-price">₱ 400</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">Sputum AFB</span><span class="test-price">₱ 300</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">Urine AFB</span><span class="test-price">₱ 300</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">Skin Scrapings</span><span class="test-price">₱ 500</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">Gram Stain</span><span class="test-price">₱ 500</span></div>
+    </div>
+  </details>
+
+  <!-- Immuno & Serology -->
+  <details>
+    <summary class="category-header">IMMUNO & SEROLOGY</summary>
+    <div class="test-container">
+      <div class="test-item"><span class="select-box"></span><span class="test-name">Pregnancy Test</span><span class="test-price">₱ 200</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">HBsAg (Qualitative)</span><span class="test-price">₱ 270</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">Anti-HBs (Qualitative)</span><span class="test-price">₱ 450</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">Anti-HAV IgM</span><span class="test-price">₱ 850</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">Anti TP (Qualitative)</span><span class="test-price">₱ 850</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">HIV Test (Screening)</span><span class="test-price">₱ 1,200</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">Widals Test</span><span class="test-price">₱ 250</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">Typhidot</span><span class="test-price">₱ 900</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">ASOT</span><span class="test-price">₱ 900</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">CRP</span><span class="test-price">₱ 350</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">H. Pylori Ab (Blood)</span><span class="test-price">₱ 700</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">H. Pylori Ag (Stool)</span><span class="test-price">₱ 850</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">Dengue NS1 Ag</span><span class="test-price">₱ 1,100</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">Dengue lgG, lgM</span><span class="test-price">₱ 1,200</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">Dengue Combo</span><span class="test-price">₱ 2,000</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">Troponin - l (Qualitative)</span><span class="test-price">₱ 950</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">T3</span><span class="test-price">₱ 800</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">T4</span><span class="test-price">₱ 800</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">TSH</span><span class="test-price">₱ 1,350</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">fT3</span><span class="test-price">₱ 1,100</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">fT4</span><span class="test-price">₱ 1,100</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">TPSA</span><span class="test-price">₱ 1,500</span></div>
+    </div>
+  </details>
+
+  <!-- Hematology -->
+  <details>
+    <summary class="category-header">HEMATOLOGY</summary>
+    <div class="test-container">
+      <div class="test-item"><span class="select-box"></span><span class="test-name">CBC</span><span class="test-price">₱ 100</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">Platelet</span><span class="test-price">₱ 100</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">ESR</span><span class="test-price">₱ 200</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">Protime</span><span class="test-price">₱ 500</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">APTT</span><span class="test-price">₱ 700</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">Blood Typing</span><span class="test-price">₱ 200</span></div>
+    </div>
+  </details>
+
+  <!-- Others -->
+  <details>
+    <summary class="category-header">OTHERS</summary>
+    <div class="test-container">
+      <div class="test-item"><span class="select-box"></span><span class="test-name">ECG 12 Leads (Adult)</span><span class="test-price">₱ 400</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">ECG 12 Leads (Pedia)</span><span class="test-price">₱ 620</span></div>
+      <div class="test-item"><span class="select-box"></span><span class="test-name">ECG 12 Leads</span><span class="test-price">₱ 600</span></div>
+    </div>
+  </details>
+
+</div>
+
+<hr class="form-divider">
+
+<!-- Discount Eligibility -->
+<label class="discount-label">
+            Discount Eligibility
+            <span class="helper-text">— check if Senior Citizen / PWD or Card Bank Member</span>
+          </label>
+
+          <div class="discount-options">
+            <div class="discount-option" data-discount="senior">
+              <span class="select-box"></span>
+              <span class="option-name">SENIOR CITIZEN / PWD</span>
+            </div>
+            <div class="discount-option" data-discount="card">
+              <span class="select-box"></span>
+              <span class="option-name">CARD BANK MEMBER</span>
+            </div>
+          </div>
+
+          <div class="test-summary-total">
+            <h3>Selected Services</h3>
+            <div class="test-list-total"></div>
+            <div class="discount-info"></div>
+
+            <hr class="form-divider">
+
+            <div class="total-row">
+              <span class="total-label">TOTAL AMOUNT</span>
+              <span class="total-price">₱ 0.00</span>
+            </div>
+          </div>
+        </form>
+      </div> <!-- end scrollable body -->
+
+      <!-- Fixed footer -->
+      <div class="modal-footer-fixed">
+        <button id="cancelBtn" class="cancel-btn">CANCEL</button>
+        <button id="submitBtn" class="submit-btn">SUBMIT</button>
+      </div>
+
+    </div>
+  </div>
+</div>
