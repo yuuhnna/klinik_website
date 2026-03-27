@@ -491,7 +491,7 @@ section {
 /* ---------- OFFERS SECTION WRAPPER ---------- */
 /* Overrides default section styles so it doesn't look like other sections */
 #offers {
-    background: #f0f7f4;
+    background: #BCEED6 ;
     display: block;
     min-height: unset;
     padding: 50px 40px 40px;
