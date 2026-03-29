@@ -66,49 +66,54 @@
 
             <div class="field wide">
               <label for="address">Address</label>
-              <input list="addressOptions" id="address" name="address" placeholder="Select or type address" required>
-              <datalist id="addressOptions">
-                <option value="MCLAIN, BUENAVISTA, GUIMARAS">
-                <option value="SALVACION, BUENAVISTA, GUIMARAS">
-                <option value="NEW POBLACION, BUENAVISTA, GUIMARAS">
-                <option value="MABINI, BUENAVISTA, GUIMARAS">
-                <option value="SUPANG, BUENAVISTA, GUIMARAS">
-                <option value="TASTASAN, BUENAVISTA, GUIMARAS">
-                <option value="TACAY, BUENAVISTA, GUIMARAS">
-                <option value="TINADTARAN, BUENAVISTA, GUIMARAS">
-                <option value="STO. ROSARIO, BUENAVISTA, GUIMARAS">
-                <option value="BANBAN, BUENAVISTA, GUIMARAS">
-                <option value="NAVALAS, BUENAVISTA, GUIMARAS">
-                <option value="NAZARET, BUENAVISTA, GUIMARAS">
-                <option value="GETULIO, BUENAVISTA, GUIMARAS">
-                <option value="SAN MIGUEL, BUENAVISTA, GUIMARAS">
-                <option value="BACJAO, BUENAVISTA, GUIMARAS">
-                <option value="SAN FERNANDO, BUENAVISTA, GUIMARAS">
-                <option value="SAN NICOLAS, BUENAVISTA, GUIMARAS">
-                <option value="SAN ROQUE, BUENAVISTA, GUIMARAS">
-                <option value="SAN ISIDRO, BUENAVISTA, GUIMARAS">
-                <option value="OLD POBLACION, BUENAVISTA, GUIMARAS">
-                <option value="MONTPILLER, BUENAVISTA, GUIMARAS">
-                <option value="RIZAL, BUENAVISTA, GUIMARAS">
-                <option value="MAGSAYSAY, BUENAVISTA, GUIMARAS">
-                <option value="ZALDIVAR, BUENAVISTA, GUIMARAS">
-                <option value="SAWANG, BUENAVISTA, GUIMARAS">
-                <option value="PINA, BUENAVISTA, GUIMARAS">
-                <option value="DARAGAN, BUENAVISTA, GUIMARAS">
-                <option value="TAMINLA, BUENAVISTA, GUIMARAS">
-                <option value="AGSANAYAN, BUENAVISTA, GUIMARAS">
-                <option value="TANAG, BUENAVISTA, GUIMARAS">
-                <option value="CANSILAYAN, BUENAVISTA, GUIMARAS">
-                <option value="UMILIG, BUENAVISTA, GUIMARAS">
-                <option value="AVILA, BUENAVISTA, GUIMARAS">
-                <option value="EAST VALENCIA, BUENAVISTA, GUIMARAS">
-                <option value="SUCLARAN, SAN LORENZO, GUIMARAS">
-                <option value="M. CHAVEZ, SAN LORENZO, GUIMARAS">
-                <option value="SAN ENRIQUE, SAN LORENZO, GUIMARAS">
-                <option value="GABAN, SAN LORENZO, GUIMARAS">
-                <option value="CABANO, SAN LORENZO, GUIMARAS">
-                <option value="CABUNGAHAN, SAN LORENZO, GUIMARAS">
-  </datalist>
+              <div class="custom-combobox">
+                <input type="text" id="address" name="address" placeholder="Select or type address" required autocomplete="off">
+                <svg class="combo-arrow" id="address-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="6 9 12 15 18 9"></polyline>
+                </svg>
+                <ul class="combo-list" id="address-list">
+                  <li>MCLAIN, BUENAVISTA, GUIMARAS</li>
+                  <li>SALVACION, BUENAVISTA, GUIMARAS</li>
+                  <li>NEW POBLACION, BUENAVISTA, GUIMARAS</li>
+                  <li>MABINI, BUENAVISTA, GUIMARAS</li>
+                  <li>SUPANG, BUENAVISTA, GUIMARAS</li>
+                  <li>TASTASAN, BUENAVISTA, GUIMARAS</li>
+                  <li>TACAY, BUENAVISTA, GUIMARAS</li>
+                  <li>TINADTARAN, BUENAVISTA, GUIMARAS</li>
+                  <li>STO. ROSARIO, BUENAVISTA, GUIMARAS</li>
+                  <li>BANBAN, BUENAVISTA, GUIMARAS</li>
+                  <li>NAVALAS, BUENAVISTA, GUIMARAS</li>
+                  <li>NAZARET, BUENAVISTA, GUIMARAS</li>
+                  <li>GETULIO, BUENAVISTA, GUIMARAS</li>
+                  <li>SAN MIGUEL, BUENAVISTA, GUIMARAS</li>
+                  <li>BACJAO, BUENAVISTA, GUIMARAS</li>
+                  <li>SAN FERNANDO, BUENAVISTA, GUIMARAS</li>
+                  <li>SAN NICOLAS, BUENAVISTA, GUIMARAS</li>
+                  <li>SAN ROQUE, BUENAVISTA, GUIMARAS</li>
+                  <li>SAN ISIDRO, BUENAVISTA, GUIMARAS</li>
+                  <li>OLD POBLACION, BUENAVISTA, GUIMARAS</li>
+                  <li>MONTPILLER, BUENAVISTA, GUIMARAS</li>
+                  <li>RIZAL, BUENAVISTA, GUIMARAS</li>
+                  <li>MAGSAYSAY, BUENAVISTA, GUIMARAS</li>
+                  <li>ZALDIVAR, BUENAVISTA, GUIMARAS</li>
+                  <li>SAWANG, BUENAVISTA, GUIMARAS</li>
+                  <li>PINA, BUENAVISTA, GUIMARAS</li>
+                  <li>DARAGAN, BUENAVISTA, GUIMARAS</li>
+                  <li>TAMINLA, BUENAVISTA, GUIMARAS</li>
+                  <li>AGSANAYAN, BUENAVISTA, GUIMARAS</li>
+                  <li>TANAG, BUENAVISTA, GUIMARAS</li>
+                  <li>CANSILAYAN, BUENAVISTA, GUIMARAS</li>
+                  <li>UMILIG, BUENAVISTA, GUIMARAS</li>
+                  <li>AVILA, BUENAVISTA, GUIMARAS</li>
+                  <li>EAST VALENCIA, BUENAVISTA, GUIMARAS</li>
+                  <li>SUCLARAN, SAN LORENZO, GUIMARAS</li>
+                  <li>M. CHAVEZ, SAN LORENZO, GUIMARAS</li>
+                  <li>SAN ENRIQUE, SAN LORENZO, GUIMARAS</li>
+                  <li>GABAN, SAN LORENZO, GUIMARAS</li>
+                  <li>CABANO, SAN LORENZO, GUIMARAS</li>
+                  <li>CABUNGAHAN, SAN LORENZO, GUIMARAS</li>
+                </ul>
+              </div>
 </div>
     <!-- date -->
     <div class="field">
@@ -276,3 +281,31 @@
   </div>
 </div>
 </section>
+
+<!-- exit confirmation -->
+<div id="confirmExitModal" class="confirm-exit" style="display: none;">
+  <div class="confirm-exit-box">
+    <p>Are you sure you want to exit the Request Form?</p>
+    <p style="font-size:0.9em; color:#555; margin-top:8px;">
+      All information you entered will be deleted.
+    </p>
+    <div class="confirm-buttons">
+      <button id="exitYes">Yes</button>
+      <button id="exitNo">No</button>
+    </div>
+  </div>
+</div>
+
+<!-- submit confirmation -->
+<div id="confirmSubmitModal" class="confirm-exit" style="display: none;">
+  <div class="confirm-exit-box">
+    <p>Are you sure you want to submit this request?</p>
+    <p style="font-size:0.9em; color:#555; margin-top:8px;">
+      All information you entered will be sent and cannot be edited.
+    </p>
+    <div class="confirm-buttons">
+      <button id="submitYes">Yes</button>
+      <button id="submitNo">No</button>
+    </div>
+  </div>
+</div>

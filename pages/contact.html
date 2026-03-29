@@ -26,7 +26,10 @@
 
           <!-- Phone + Rating -->
           <div class="form-row">
-            <input type="tel" placeholder="PHONE" class="form-input phone-input" required>
+            <div class="input-container">
+              <input type="tel" placeholder="PHONE" class="form-input phone-input" required>
+              <span class="error-text" id="phone-error"></span>
+            </div>
             <div class="rating-group">
               <label class="rating-label">RATE OUR SERVICE</label>
               <div class="stars" id="star-rating">
@@ -91,9 +94,9 @@
         <div class="company-header">
           <img src="../images/logos/laboratory_logo.png" alt="Lab Logo" class="company-logo">
           <h2 class="company-name">Centrihealth Laboratory Co.</h2>
-      </div>
-      <p class="company-description">
-      Trusted laboratory services for the Buenavista community, delivering accuracy and care.
+        </div>
+        <p class="company-description">
+          Trusted laboratory services for the Buenavista community, delivering accuracy and care.
         </p>
       </div>
 
@@ -101,12 +104,11 @@
       <div class="extra-right">
         <div class="sitemap-section">
           <nav class="sitemap">
-            <a href="https://maps.app.goo.gl/B3b3vfzQohbS6Vxu5" target="_blank">SITEMAP</a>
             <a href="#home">HOME</a>
-            <a href="#services">SERVICES</a>
-            <a href="#offers">OFFERS &amp; SCHEDULES</a>
             <a href="#about">ABOUT US</a>
+            <a href="#services">SERVICES</a>
             <a href="#contact">CONTACT US</a>
+            <a href="#offers">OFFERS &amp; SCHEDULES</a>
           </nav>
         </div>
         <button class="back-to-top">
@@ -119,14 +121,13 @@
         </button>
       </div>
 
-    </div> <!-- closes extra-content -->
+    </div>
 
-  </div> <!-- closes contact-page -->
+  </div>
 
   <!-- ===== CUSTOM MODAL ===== -->
   <div id="contact-modal" class="modal-overlay">
     <div class="modal-card">
-      <div class="modal-icon" id="modal-icon"></div>
       <h3 class="modal-title" id="modal-title"></h3>
       <p class="modal-message" id="modal-message"></p>
       <button class="modal-btn" id="modal-close-btn">OK</button>
