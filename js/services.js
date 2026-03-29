@@ -183,8 +183,7 @@
       startTimer();
 
     } catch (err) {
-      document.querySelector('.services-main-title').innerHTML = err.toString() + " at line " + (err.lineNumber || "unknown");
-      console.error(err);
+      console.error('[services.js]', err);
     }
   }
 

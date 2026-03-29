@@ -176,63 +176,7 @@ nav a.active {
 }
 
 /* ---------- NAV — MOBILE ---------- */
-@media (max-width: 768px) {
 
-    header {
-        padding: 0 18px;
-    }
-
-    #nav-pill {
-        display: none;
-    }
-
-    .hamburger {
-        display: flex;
-    }
-
-    nav {
-        position: fixed;
-        top: var(--header-h);
-        left: 0;
-        right: 0;
-        background: linear-gradient(160deg, #55C595 0%, #359D9E 100%);
-        flex-direction: column;
-        align-items: stretch;
-        gap: 0;
-        padding: 10px 0 16px;
-        box-shadow: 0 8px 24px rgba(14, 46, 36, 0.2);
-        max-height: 0;
-        overflow: hidden;
-        opacity: 0;
-        transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1),
-            opacity 0.25s ease;
-    }
-
-    nav.open {
-        max-height: 400px;
-        opacity: 1;
-    }
-
-    nav a {
-        font-size: 0.78rem;
-        letter-spacing: 1px;
-        padding: 14px 24px;
-        border-radius: 0;
-        text-align: left;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
-        white-space: normal;
-    }
-
-    nav a:last-child {
-        border-bottom: none;
-    }
-
-    nav a:hover,
-    nav a.active {
-        background: rgba(255, 255, 255, 0.15);
-        color: #fff;
-    }
-}
 
 /* ---------- SPACER ---------- */
 .spacer {
@@ -246,10 +190,65 @@ section {
     align-items: center;
     justify-content: center;
     font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    font-size: 2rem;
     color: #1a6050;
-    border-bottom: 1px solid #c8e4dc;
+    scroll-margin-top: 70px;
+}
+
+/* ===============
+    HOME PAGE 
+   ===============*/
+#home {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)), 
+                url('../images/bg/home_bg.jpg') center/cover no-repeat;
+    color: #fff;
+    padding: 0 10%;
+    scroll-margin-top: 70px;
+}
+
+.home-title {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 950;
+    font-size: 4rem;
+    line-height: 1.1;
+    margin-bottom: 22px;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+
+.home-description {
+    font-family: 'Open Sans', sans-serif;
+    font-weight: 400;
+    font-size: 1.1rem;
+    max-width: 650px;
+    line-height: 1.6;
+    margin-bottom: 35px;
+    color: rgba(255,255,255,0.9);
+}
+
+.btn-home {
+    display: inline-block;
+    background: linear-gradient(135deg, #28a745, #34ce57);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 800;
+    font-size: 0.95rem;
+    padding: 16px 36px;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    text-transform: uppercase;
+    letter-spacing: 1.2px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.25);
+    transition: transform 0.3s ease, background 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn-home:hover {
+    transform: translateY(-3px) scale(1.03);
+    background: linear-gradient(135deg, #218838, #2fbf4f);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.3);
 }
 
 /* ===============
@@ -385,10 +384,7 @@ section {
     border-radius: 2px;
 }
 
-/* ---------- HIDDEN OLD PILL LAYOUT ---------- */
-.tests-collapsed {
-    display: none;
-}
+
 
 /* ---------- PRICE LIST (ALWAYS VISIBLE NOW) ---------- */
 .tests-expanded {
@@ -773,53 +769,7 @@ section {
 }
 
 /* ---------- RESPONSIVE — OFFERS PAGE ---------- */
-@media (max-width: 900px) {
-    .offers-page {
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-    }
 
-    #logos-container {
-        grid-column: 1 / -1;
-        height: auto;
-        gap: 20px;
-        padding-left: 0;
-    }
-
-    #discount,
-    #cardbank {
-        height: auto;
-        min-height: 420px;
-    }
-}
-
-@media (max-width: 600px) {
-    .offers-page {
-        grid-template-columns: 1fr 1fr;
-        gap: 12px;
-    }
-
-    .offers-page #title h1 {
-        font-size: 1.6rem;
-    }
-
-    #discount,
-    #cardbank {
-        padding: 15px 10px;
-        min-height: 380px;
-        border-radius: 12px;
-    }
-    
-    #discount .pct { font-size: 2.8rem; }
-    #discount .word-discount, #discount h1:nth-of-type(2) { font-size: 1.15rem; margin-bottom: 12px; padding-bottom: 12px; }
-    .discount-tags { gap: 8px; }
-    .discount-tags h3 { font-size: 0.75rem; }
-    .discount-tags h3 img, .discount-tags h3.senior img { width: 45px; height: 45px; margin-bottom: 2px; }
-    
-    #cardbank h2 { font-size: 1.15rem; }
-    #cardbank h3.req { font-size: 0.75rem; }
-    #cardbank .inside { font-size: 0.65rem; padding-left: 2px; }
-}
 
 
 /* ===============
@@ -1279,10 +1229,7 @@ section {
     position: relative;
 }
 
-.medtech-stub,
-.bottom-stub {
-    display: none;
-}
+
 
 /* Horizontal bar with gaps before photos */
 .medtech-bar {
@@ -1326,166 +1273,7 @@ section {
 }
 
 /* ---------- RESPONSIVE — ABOUT PAGE ---------- */
-@media (max-width: 992px) {
-    .content-grid {
-        grid-template-columns: 1fr;
-    }
 
-    .content-grid .card-wrapper {
-        margin-top: 0 !important;
-    }
-
-    .vmg-section::before {
-        display: none;
-    }
-}
-
-@media (max-width: 768px) {
-    .about-title {
-        font-size: 1.6rem;
-    }
-
-    .header-content {
-        flex-direction: column;
-        gap: 20px;
-    }
-
-    .vertical-divider {
-        width: 80%;
-        height: 4px;
-    }
-
-    .org-level {
-        gap: 30px;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .connector.vertical {
-        height: 50px !important;
-        margin: 20px 0;
-    }
-
-    .bottom-level {
-        flex-direction: column;
-        gap: 40px;
-    }
-
-    .bottom-bar {
-        display: none;
-    }
-}
-
-
-
-/* ---------- RESPONSIVE ---------- */
-@media (max-width: 768px) {
-
-    /* --- Offers Page Mobile Fixes --- */
-    #offers {
-        padding: 50px 15px 30px;
-    }
-
-    #discount .pct {
-        font-size: 3.5rem;
-    }
-
-    #discount .word-discount,
-    #discount h1:nth-of-type(2) {
-        font-size: 1.8rem;
-    }
-    
-    .discount-tags {
-        gap: 10px;
-    }
-    
-    .discount-tags h3 img {
-        width: 70px;
-        height: 70px;
-    }
-
-    .discount-tags h3.senior img {
-        width: 70px;
-        height: 70px;
-    }
-
-    #logos-container {
-        align-items: center;
-        text-align: center;
-    }
-
-    #logoLabaratory,
-    #logoMedicalSevices,
-    #logoPharmacy {
-        flex-direction: column;
-        gap: 10px;
-    }
-
-    /* --- About / Org Chart Mobile --- */
-    #about .container {
-        padding: 50px 15px 40px;
-    }
-    
-    .bottom-level {
-        transform: translateX(0); 
-    }
-    
-    .owners-photos {
-        gap: 40px;
-    }
-    
-    .node {
-        width: 130px;
-    }
-    
-    .photo-box {
-        width: 120px;
-        height: 120px;
-    }
-
-    /* Carousel Elements */
-    .services-main-title {
-        font-size: 1.6rem;
-    }
-
-    .service-card {
-        width: calc(100vw - 80px); 
-        margin: 0 10px;
-    }
-
-    .card-title-btn {
-        font-size: 1.15rem;
-        padding: 14px 10px;
-    }
-    
-    .inner-card {
-        margin: 0 8px 8px 8px;
-        padding: 15px 18px;
-        height: 220px;
-    }
-
-    /* Arrows Shrink */
-    .carousel-arrow {
-        width: 40px;
-        height: 80px;
-    }
-    .carousel-arrow svg {
-        width: 32px;
-        height: 32px;
-    }
-
-    .arrow-left {
-        left: 0px;
-    }
-
-    .arrow-right {
-        right: 0px;
-    }
-
-    .carousel-dots {
-        margin-top: 35px;
-    }
-}
 
 /* ---------- FOOTER ---------- */
 .site-footer {
@@ -1569,6 +1357,7 @@ section {
 
 /* ---------- HOME ---------- */
 #home {
+  font-size: 2rem;
   background: url("../images/logos/Centrihealth.png") no-repeat center center;
   background-size: cover;
   min-height: 100vh;
@@ -1638,82 +1427,7 @@ section {
 }
 
 /* ---------- Responsive Home ---------- */
-@media (max-width: 1024px) {
-  .home-title {
-    font-size: 2em;
-    margin-bottom: 8px;
-    margin-left: 15px;
-  }
-  .home-description {
-    font-size: 0.5em;
-    margin-bottom: 12px;
-    max-width: 50%;
-    margin-left: 15px;
-  }
-  .btn-home {
-    font-size: 0.50em;
-    padding: 8px 14px;
-    margin-top: 5px;
-    margin-left: 15px;
-  }
-}
 
-@media (max-width: 768px) {
-  #home {
-    padding: 20px 16px;   /* tighter padding */
-  }
-  .home-title {
-    font-size: 1.9em;
-    margin-bottom: 8px;
-    margin-left: 15px;
-  }
-  .home-description {
-    font-size: 0.5em;
-    margin-bottom: 10px;
-    margin-left: 15px;
-    line-height: 1.4;
-    max-width: 60%;
-  }
-  .btn-home {
-    font-size: 0.50em;
-    padding: 8px 14px;
-    margin-top: 6px;
-    margin-left: 15px;
-  }
-}
-
-@media (max-width: 480px) {
-  #home {
-    align-items: center;   /* override flex-start */
-    padding: 20px 10px;    /* optional: tighter padding for small screens */
-    text-align: center;    /* ensures children align consistently */
-  }
-
-  .home-content {
-    max-width: 90%;
-    margin: 0 auto;
-    text-align: center;
-  }
-
-  .home-title {
-    font-size: 1.8em;
-    margin-bottom: 6px;
-  }
-
-  .home-description {
-    font-size: 0.5em;
-    line-height: 1.35;
-    margin-bottom: 8px;
-    max-width: 100%;
-  }
-
-  .btn-home {
-    display: block;
-    width: auto;
-    min-width: 70%;
-    margin: 20px auto 0;   /* centers it neatly */
-  }
-}
 
 /* ---------- MODAL / REQUEST FORM ---------- */
 .modal {
@@ -1721,11 +1435,81 @@ section {
   position: fixed;
   inset: 0;
   background: rgba(0,0,0,0.4);
-  backdrop-filter: blur(5px);
+  -web-kit-backdrop-filter: blur(5px);
   z-index: 1000;
 }
 
+/* Exit Confirmation Styles */
+.confirm-exit {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  backdrop-filter: blur(2px);
+}
+
+.confirm-exit-box {
+  background: white;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+  width: 90%;
+  max-width: 400px;
+  font-family: 'Open Sans', sans-serif;
+  color: #333;
+}
+
+.confirm-exit-box p {
+  margin: 0;
+  color: #333;
+  font-weight: 700;
+  font-size: 1.1em;
+}
+
+.confirm-exit-box p.lost-info {
+  font-size: 0.9em;
+  color: #555;
+  margin-top: 8px;
+  font-weight: normal;
+}
+
+.confirm-exit-btns {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+.exit-btn {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 700;
+  text-transform: uppercase;
+  transition: opacity 0.2s;
+}
+
+.exit-btn.yes {
+  background: #ce0000;
+  color: white;
+}
+
+.exit-btn.no {
+  background: #e0e0e0;
+  color: #333;
+}
+
+.exit-btn:hover {
+  opacity: 0.9;
+}
+
 .modal-content {
+  font-size: 1.7rem;
   background: #218669;
   color: #fff;
   border-radius: 10px;
@@ -1734,7 +1518,6 @@ section {
   box-shadow: 0 4px 12px rgba(0,0,0,0.25);
   position: relative;
   animation: fadeIn 0.3s ease;
-  font-size: 0.85em;
   display: flex;
   flex-direction: column;
   height: 80vh; /* fixed height for modal */
@@ -1755,7 +1538,85 @@ section {
   padding: 14px 18px;
 }
 
-/* Fixed footer */
+/* Original Error Popup Style */
+.error-popup {
+  background: #fde2e2;
+  border: 1px solid #cc0000;
+  border-radius: 8px;
+  overflow: hidden;
+  margin-top: 10px;
+}
+
+.error-popup-header {
+  background: #cc0000;
+  color: #fff;
+  padding: 8px 15px;
+  font-weight: 700;
+  font-size: 0.9em;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.error-popup-body {
+  padding: 12px 15px;
+  color: #8b0000;
+  font-size: 0.85em;
+  font-weight: 500;
+  line-height: 1.5;
+}
+
+.close-error {
+  cursor: pointer;
+  font-size: 1.2em;
+  line-height: 1;
+}
+
+.selected-test-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.selected-test-row .name {
+  color: #2183b6; /* Original Blue */
+  font-weight: 600;
+}
+
+.selected-test-row .price {
+  color: #333;
+}
+
+.discount-info {
+  color: #d00000; /* Original Red */
+  text-align: right;
+  font-weight: 600;
+  font-size: 0.9em;
+  margin-top: 5px;
+}
+
+.total-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #218669; /* Original Teal Highlight */
+  color: #fff;
+  padding: 15px 20px;
+  border-radius: 8px;
+  margin-top: 15px;
+  font-weight: 900;
+  font-size: 1.3rem;
+  letter-spacing: 0.5px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.15);
+}
+
+.total-label {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.total-price {
+  font-family: 'Montserrat', sans-serif;
+}
 .modal-footer-fixed {
   flex: 0 0 auto;
   padding: 14px 18px;
@@ -2320,17 +2181,7 @@ details[open] .category-header::after {
    CONTACT PAGE STYLES
    ================================ */
 
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
 
-body {
-    font-family: 'Open Sans', sans-serif;
-    background: #f0f7f4;
-    scroll-behavior: smooth;
-}
 
 /* ---------- CONTACT SECTION ---------- */
 #contact {
@@ -2667,10 +2518,7 @@ body {
     color: #133838;
 }
 
-.divider {
-    display: none;
-    /* Omit the line under logo */
-}
+
 
 .company-description {
     font-size: 0.95rem;
@@ -2750,349 +2598,227 @@ body {
 }
 
 /* ---------- RESPONSIVE DESIGN ---------- */
-@media (max-width: 768px) {
-    #contact {
-        padding: 40px 20px 30px;
-    }
 
-    #title h1 {
-        font-size: 2rem;
-    }
-
-    .contact-box {
-        grid-template-columns: 1fr;
-        gap: 50px;
-        padding: 50px;
-    }
-
-    .form-row {
-        grid-template-columns: 1fr;
-    }
-
-    .telegram-icon-btn {
-        width: 45px;
-        height: 45px;
-    }
-
-    /* ---------- RESPONSIVE FOOTER ---------- */
-    .extra-content {
-        grid-template-columns: 1fr;
-        gap: 30px;
-        padding: 30px 0;
-    }
-
-    .extra-right {
-        flex-direction: column;
-        align-items: flex-start;
-        gap: 20px;
-    }
-
-    .sitemap a {
-        font-size: 0.85rem;
-    }
-
-    .back-to-top {
-        font-size: 0.85rem;
-        padding: 8px 16px;
-    }
-
-    /* ---------- RESPONSIVE TEXT ---------- */
-    .form-header h2,
-    .info-section h2 {
-        font-size: 1.1rem;
-    }
-
-    .company-name {
-        font-size: 1rem;
-    }
-
-    .company-description {
-        font-size: 0.9rem;
-    }
-
-    /* ---------- SMALLER SCREENS ---------- */
-    @media (max-width: 480px) {
-        #contact {
-            padding: 30px 16px 20px;
-        }
-
-        #title h1 {
-            font-size: 1.5rem;
-            letter-spacing: 0.5px;
-        }
-
-        .contact-box {
-            padding: 20px;
-            gap: 20px;
-        }
-
-        .form-input,
-        .form-textarea {
-            font-size: 0.85rem;
-            padding: 10px 12px;
-        }
-
-        .message-row .form-textarea {
-            min-height: 100px;
-        }
-
-        .telegram-icon-btn {
-            width: 40px;
-            height: 40px;
-        }
-
-        /* CONTACT INFO ITEMS */
-        .info-item {
-            display: flex;
-            flex-direction: column;
-            /* stack label + value */
-            gap: 4px;
-            font-size: 0.95rem;
-            color: #133838;
-            font-family: 'Open Sans', sans-serif;
-        }
-
-        .info-item strong {
-            font-weight: 700;
-            color: #2F8A8B;
-            /* highlight labels */
-            text-transform: uppercase;
-            font-size: 0.85rem;
-            letter-spacing: 0.5px;
-        }
-
-        .info-item span {
-            font-weight: 500;
-            color: #133838;
-        }
-
-        .company-logo {
-            width: 60px;
-            height: 60px;
-        }
-
-        .extra-content {
-            gap: 20px;
-        }
-
-        .extra-right {
-            flex-direction: column;
-            align-items: flex-start;
-        }
-
-        .back-to-top {
-            align-self: flex-start;
-            margin-left: 0;
-        }
-
-        .msg-icon {
-            width: 32px;
-            height: 32px;
-            margin-left: 8px;
-        }
-
-        .star {
-            font-size: 1.8rem;
-            color: #ccc;
-            /* outline look */
-        }
-
-        .star.active {
-            color: #359D9E;
-        }
-
-    }
-}
 
 
 /* ================================
    CUSTOM CONTACT MODAL
    ================================ */
 
-.modal-overlay {
-    display: none;
-    position: fixed;
-    inset: 0;
-    background: rgba(10, 40, 35, 0.55);
-    backdrop-filter: blur(4px);
-    -webkit-backdrop-filter: blur(4px);
-    z-index: 9999;
-    align-items: center;
-    justify-content: center;
-    animation: modalFadeIn 0.25s ease forwards;
+
+
+/* ================================
+   RESPONSIVE STYLES
+   (Sorted by Breakpoint)
+   ================================ */
+
+/* --- 1024px (Laptops) --- */
+@media (max-width: 1024px) {
+  .home-title {
+    font-size: 2em;
+    margin-bottom: 8px;
+    margin-left: 15px;
+  }
+  .home-description {
+    font-size: 0.5em;
+    margin-bottom: 12px;
+    max-width: 50%;
+    margin-left: 15px;
+  }
+  .btn-home {
+    font-size: 0.50em;
+    padding: 8px 14px;
+    margin-top: 5px;
+    margin-left: 15px;
+  }
 }
 
-.modal-overlay.show {
-    display: flex;
+/* --- 992px (Large Tablets) --- */
+@media (max-width: 992px) {
+    .content-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .content-grid .card-wrapper {
+        margin-top: 0 !important;
+    }
+
+    .vmg-section::before {
+        display: none;
+    }
 }
 
-@keyframes modalFadeIn {
-    from {
+/* --- 900px (Offers Layout) --- */
+@media (max-width: 900px) {
+    .offers-page {
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+    }
+
+    #logos-container {
+        grid-column: 1 / -1;
+        height: auto;
+        gap: 20px;
+        padding-left: 0;
+    }
+
+    #discount,
+    #cardbank {
+        height: auto;
+        min-height: 420px;
+    }
+}
+
+/* --- 768px (Tablets / Mobile) --- */
+@media (max-width: 768px) {
+    /* Header & Navigation */
+    header { padding: 0 18px; }
+    #nav-pill { display: none; }
+    .hamburger { display: flex; }
+
+    nav {
+        position: fixed;
+        top: var(--header-h);
+        left: 0;
+        right: 0;
+        background: linear-gradient(160deg, #55C595 0%, #359D9E 100%);
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0;
+        padding: 10px 0 16px;
+        box-shadow: 0 8px 24px rgba(14, 46, 36, 0.2);
+        max-height: 0;
+        overflow: hidden;
         opacity: 0;
+        transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.25s ease;
     }
 
-    to {
-        opacity: 1;
+    nav.open { max-height: 400px; opacity: 1; }
+    nav a {
+        font-size: 0.78rem;
+        letter-spacing: 1px;
+        padding: 14px 24px;
+        border-radius: 0;
+        text-align: left;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        white-space: normal;
     }
+    nav a:last-child { border-bottom: none; }
+    nav a:hover, nav a.active { background: rgba(255, 255, 255, 0.15); color: #fff; }
+
+    /* Sections Shared */
+    #offers { padding: 50px 15px 30px; }
+    #about .container { padding: 50px 15px 40px; }
+    #contact { padding: 40px 20px 30px; }
+
+    /* Home Section */
+    #home { padding: 40px 20px; text-align: left; }
+    .home-title { font-size: 2.8rem; margin-bottom: 12px; }
+    .home-description { font-size: 1rem; margin-bottom: 25px; line-height: 1.5; max-width: 85%; }
+    .btn-home { font-size: 0.9rem; padding: 12px 24px; }
+
+    /* Services Carousel */
+    .services-main-title { font-size: 1.6rem; }
+    .service-card { width: calc(100vw - 80px); margin: 0 10px; }
+    .card-title-btn { font-size: 1.15rem; padding: 14px 10px; }
+    .inner-card { margin: 0 8px 8px 8px; padding: 15px 18px; height: 220px; }
+    .carousel-arrow { width: 40px; height: 80px; }
+    .carousel-arrow svg { width: 32px; height: 32px; }
+    .arrow-left { left: 0px; }
+    .arrow-right { right: 0px; }
+    .carousel-dots { margin-top: 35px; }
+
+    /* Offers & Lab Schedules */
+    #discount .pct { font-size: 3.5rem; }
+    #discount .word-discount, #discount h1:nth-of-type(2) { font-size: 1.8rem; }
+    .discount-tags { gap: 10px; }
+    .discount-tags h3 img, .discount-tags h3.senior img { width: 70px; height: 70px; }
+    #logos-container { align-items: center; text-align: center; }
+    #logoLabaratory, #logoMedicalSevices, #logoPharmacy { flex-direction: column; gap: 10px; }
+
+    /* About Us & Org Chart */
+    .about-title { font-size: 1.6rem; }
+    .header-content { flex-direction: column; gap: 20px; }
+    .vertical-divider { width: 80%; height: 4px; }
+    .org-level { gap: 30px; flex-direction: column; align-items: center; }
+    .connector.vertical { height: 50px !important; margin: 20px 0; }
+    .bottom-level { flex-direction: column; gap: 40px; transform: translateX(0); }
+    .bottom-bar { display: none; }
+    .owners-photos { gap: 40px; }
+    .node { width: 130px; }
+    .photo-box { width: 120px; height: 120px; }
+
+    /* Contact Page & Review Form */
+    #title h1 { font-size: 2rem; }
+    .contact-box { grid-template-columns: 1fr; gap: 50px; padding: 50px; }
+    .form-row { grid-template-columns: 1fr; }
+    .telegram-icon-btn { width: 45px; height: 45px; }
+    .form-header h2, .info-section h2 { font-size: 1.1rem; }
+
+    /* Contact Footer / Sitemap */
+    .extra-content { grid-template-columns: 1fr; gap: 30px; padding: 30px 0; }
+    .extra-right { flex-direction: column; align-items: flex-start; gap: 20px; }
+    .sitemap a { font-size: 0.85rem; }
+    .back-to-top { font-size: 0.85rem; padding: 8px 16px; align-self: flex-start; margin-left: 0; }
+    .company-name { font-size: 1rem; }
+    .company-description { font-size: 0.9rem; }
 }
 
-.modal-card {
-    background: linear-gradient(145deg, #ffffff 0%, #eaf7f4 100%);
-    border-radius: 20px;
-    padding: 40px 36px 32px;
-    max-width: 420px;
-    width: 90%;
-    text-align: center;
-    box-shadow: 0 20px 60px rgba(14, 66, 70, 0.35);
-    animation: modalSlideUp 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-    position: relative;
-    overflow: hidden;
-    border: 3px solid #55C595;
-    outline: 2px solid #359D9E;
-    outline-offset: -1px;
-}
-
-
-@keyframes modalSlideUp {
-    from {
-        transform: translateY(30px) scale(0.96);
-        opacity: 0;
+/* --- 600px (Mobile Grid) --- */
+@media (max-width: 600px) {
+    .offers-page {
+        grid-template-columns: 1fr 1fr;
+        gap: 12px;
     }
 
-    to {
-        transform: translateY(0) scale(1);
-        opacity: 1;
+    .offers-page #title h1 {
+        font-size: 1.6rem;
     }
+
+    #discount,
+    #cardbank {
+        padding: 15px 10px;
+        min-height: 380px;
+        border-radius: 12px;
+    }
+    
+    #discount .pct { font-size: 2.8rem; }
+    #discount .word-discount, #discount h1:nth-of-type(2) { font-size: 1.15rem; margin-bottom: 12px; padding-bottom: 12px; }
+    .discount-tags { gap: 8px; }
+    .discount-tags h3 { font-size: 0.75rem; }
+    .discount-tags h3 img, .discount-tags h3.senior img { width: 45px; height: 45px; margin-bottom: 2px; }
+    
+    #cardbank h2 { font-size: 1.15rem; }
+    #cardbank h3.req { font-size: 0.75rem; }
+    #cardbank .inside { font-size: 0.65rem; padding-left: 2px; }
 }
 
-.modal-icon {
-    font-size: 3.2rem;
-    margin-bottom: 14px;
-    line-height: 1;
-}
+/* --- 480px (Small Mobile) --- */
+@media (max-width: 480px) {
+  /* Home Section */
+  #home { align-items: center; padding: 40px 20px; text-align: center; }
+  .home-content { max-width: 95%; margin: 0 auto; }
+  .home-title { font-size: 2.2rem; margin-bottom: 10px; }
+  .home-description { font-size: 0.9rem; line-height: 1.5; margin-bottom: 20px; max-width: 100%; }
+  .btn-home { display: inline-block; width: auto; min-width: 200px; padding: 14px 28px; }
 
-.modal-title {
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 800;
-    font-size: 1.25rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    color: #133838;
-    margin-bottom: 10px;
+  /* Contact Section */
+  #contact { padding: 30px 16px 20px; }
+  #contact #title h1 { font-size: 1.5rem; letter-spacing: 0.5px; }
+  .contact-box { padding: 20px; gap: 20px; }
+  .form-input, .form-textarea { font-size: 0.85rem; padding: 10px 12px; }
+  .message-row .form-textarea { min-height: 100px; }
+  .telegram-icon-btn { width: 40px; height: 40px; }
+  .info-item { display: flex; flex-direction: column; gap: 4px; font-size: 0.95rem; }
+  .info-item strong { font-weight: 700; color: #2F8A8B; text-transform: uppercase; font-size: 0.85rem; letter-spacing: 0.5px; }
+  .info-item span { font-weight: 500; color: #133838; }
+  .company-logo { width: 60px; height: 60px; }
+  .extra-content { gap: 20px; }
+  .extra-right { flex-direction: column; align-items: flex-start; }
+  .back-to-top { align-self: flex-start; margin-left: 0; }
+  .msg-icon { width: 32px; height: 32px; margin-left: 8px; }
+  .star { font-size: 1.8rem; color: #ccc; }
+  .star.active { color: #359D9E; }
 }
-
-.modal-message {
-    font-family: 'Open Sans', sans-serif;
-    font-size: 0.95rem;
-    color: #2d5a5a;
-    line-height: 1.6;
-    margin-bottom: 28px;
-}
-
-.modal-btn {
-    background: linear-gradient(100deg, #55C595 0%, #359D9E 100%);
-    color: #fff;
-    border: none;
-    border-radius: 10px;
-    padding: 12px 48px;
-    font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
-    font-size: 0.95rem;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-    box-shadow: 0 4px 14px rgba(53, 157, 158, 0.4);
-}
-
-.modal-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(53, 157, 158, 0.5);
-}
-
-.modal-btn:active {
-    transform: translateY(0) scale(0.97);
-}
-
-/* ---------- FOOTER ---------- */
-.site-footer {
-    background: linear-gradient(100deg, #55C595 0%, #359D9E 100%);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 10px 20px 12px 20px;
-    box-shadow: 0 -4px 15px rgba(14, 46, 36, 0.1);
-    position: relative;
-    z-index: 1000;
-}
-
-.footer-icons {
-    display: flex;
-    gap: 16px;
-    margin-bottom: 2px;
-}
-
-.footer-icon {
-    color: #000;
-    transition: transform 0.2s ease, opacity 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.footer-icon:hover {
-    transform: translateY(-3px);
-    opacity: 0.75;
-}
-
-.footer-icon img {
-    height: 32px;
-    width: auto;
-    display: block;
-}
-
-.footer-icon svg {
-    width: 28px;
-    height: 28px;
-    display: block;
-}
-
-.footer-text {
-    text-align: center;
-    color: #000;
-    font-family: 'Open Sans', sans-serif;
-    margin-top: 2px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 2px;
-}
-
-.footer-brand {
-    font-weight: 500;
-    font-size: 14px;
-    color: #000;
-}
-
-.footer-copyright {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 4px;
-}
-
-.footer-copyright img {
-    height: 14px;
-    width: auto;
-    display: block;
-}
-
-.footer-copyright span {
-    color: #000;
-    font-size: 13px;
-}
-
 
 
