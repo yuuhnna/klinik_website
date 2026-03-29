@@ -884,6 +884,7 @@ details[open] .category-header::after {
     font-size: 0.5em;
     animation: fadeIn 0.3s ease;
     position: relative;
+    display: none;
 }
 
 .error-popup strong {
@@ -923,6 +924,7 @@ details[open] .category-header::after {
     justify-content: center;
     z-index: 9999;
     -web-kit-backdrop-filter: blur(2px);
+    display: none;
 }
 
 .confirm-exit-box {
