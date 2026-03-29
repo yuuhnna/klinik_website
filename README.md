@@ -18,8 +18,8 @@ This website was built as a single-page application (SPA) using component inject
 - **Architecture**: All main sections are loaded dynamically from the `pages/` directory to keep the codebase organized.
 
 ## Project Timeline
-- **Start Date**: February 2025
-- **End Date**: March 2025
+- **Start Date**: March 14, 2026
+- **End Date**: March 27, 2026
 
 ## 📂 Project Structure
 
