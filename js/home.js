@@ -18,7 +18,6 @@
       const closeBtn = document.getElementById("closeModal");
 
       function resetBookingForm() {
-        // Clear selected services
         const testListTotal = document.querySelector(".test-list-total");
         if (testListTotal) testListTotal.innerHTML = "";
 
@@ -28,24 +27,21 @@
         const discountInfo = document.querySelector(".discount-info");
         if (discountInfo) {
           discountInfo.textContent = "";
-          discountInfo.style.display = "none"; // hide when reset
+          discountInfo.style.display = "none";
         }
 
         document.querySelectorAll(".test-item.selected").forEach(item => {
           item.classList.remove("selected");
         });
 
-        // close dropdowns
         document.querySelectorAll(".category-grid details").forEach(detailsEl => {
           detailsEl.removeAttribute("open");
         });
 
-        // Clear discount selection
         document.querySelectorAll(".discount-option.selected").forEach(opt => {
           opt.classList.remove("selected");
         });
 
-        // reset form
         document.querySelectorAll("#modal input, #modal select, #modal textarea").forEach(field => {
           if (field.type === "checkbox" || field.type === "radio") {
             field.checked = false;
@@ -54,7 +50,6 @@
           }
         });
 
-        // scroll to top
         const modalContent = modal.querySelector(".modal-content");
         if (modalContent) modalContent.scrollTop = 0;
 
@@ -92,26 +87,18 @@
           const confirmExitModal = document.getElementById("confirmExitModal");
           if (confirmExitModal) {
             confirmExitModal.style.display = "flex";
-
-            const exitYesBtn = document.getElementById("exitYes");
-            const exitNoBtn = document.getElementById("exitNo");
-
-            if (exitYesBtn) {
-              exitYesBtn.onclick = () => {
-                modal.style.display = "none";
-                resetBookingForm();
-                confirmExitModal.style.display = "none";
-              };
-            }
-
-            if (exitNoBtn) {
-              exitNoBtn.onclick = () => {
-                confirmExitModal.style.display = "none";
-              };
-            }
+            document.getElementById("exitYes").onclick = () => {
+              modal.style.display = "none";
+              resetBookingForm();
+              confirmExitModal.style.display = "none";
+            };
+            document.getElementById("exitNo").onclick = () => {
+              confirmExitModal.style.display = "none";
+            };
           }
         });
       }
+
       // add dashes to contact number
       const contactNo = document.getElementById("contactNo");
       if (contactNo) {
@@ -160,7 +147,7 @@
               items[i].style.display = "none";
             }
           }
-          if (hasVisible === false && filter !== "") {
+          if (!hasVisible && filter !== "") {
             addressList.classList.remove("show");
           }
         });
@@ -179,14 +166,13 @@
         });
       }
 
-      // names to uppercase
+      // names to uppercase (allow spaces)
       function forceUppercase(field) {
         field.addEventListener("input", (e) => {
-          e.target.value = e.target.value.replace(/[^A-Za-z]/g, "").toUpperCase();
+          e.target.value = e.target.value.replace(/[^A-Za-z\s]/g, "").toUpperCase();
         });
       }
 
-      // name fields
       const lastName = document.getElementById("lastName");
       const firstName = document.getElementById("firstName");
       const middleInitial = document.getElementById("middleInitial");
@@ -197,11 +183,8 @@
       if (middleInitial) forceUppercase(middleInitial);
       if (suffix) forceUppercase(suffix);
 
-
-
       if (submitBtn) {
         submitBtn.addEventListener("click", () => {
-          // validate info
           const lastName = document.getElementById("lastName").value.trim();
           const firstName = document.getElementById("firstName").value.trim();
           const mi = document.getElementById("middleInitial").value.trim();
@@ -211,7 +194,7 @@
           const age = document.getElementById("age").value;
           const contact = document.getElementById("contactNo").value.trim();
           const prefDate = document.getElementById("preferredDate").value;
-
+          const testsChosen = document.querySelectorAll(".test-item-total").length > 0;
 
           let valid = true;
           let errors = [];
@@ -227,11 +210,8 @@
           } else {
             const today = new Date();
             const birthDate = new Date(dob);
-
-            // strip time for accurate comparison
             today.setHours(0, 0, 0, 0);
             birthDate.setHours(0, 0, 0, 0);
-
             if (birthDate >= today) {
               valid = false;
               errors.push("Date of Birth cannot be today or in the future");
@@ -245,30 +225,27 @@
           } else {
             const today = new Date();
             const chosenDate = new Date(prefDate);
-
-            // strip time for accurate comparison
-            today.setHours(0, 0, 0, 0);
+                        today.setHours(0, 0, 0, 0);
             chosenDate.setHours(0, 0, 0, 0);
-
             if (chosenDate < today) {
               valid = false;
               errors.push("Preferred Date cannot be in the past");
             }
           }
+          if (!testsChosen) {
+            valid = false;
+            errors.push("Please choose at least one test");
+          }
 
           if (!valid) {
             const errorPopup = document.getElementById("errorPopup");
             if (errorPopup) {
-              let errorMsg = '<span class="close-error">&times;</span>';
-              errorMsg += "<strong>Please fix the following errors before submitting:</strong><ul>";
-              for (let i = 0; i < errors.length; i++) {
-                errorMsg += "<li>" + errors[i] + "</li>";
-              }
-              errorMsg += "</ul>";
-              errorPopup.innerHTML = errorMsg;
+              errorPopup.innerHTML = '<span class="close-error">&times;</span>' +
+                "<strong>Please fix the following errors before submitting:</strong><ul>" +
+                errors.map(err => `<li>${err}</li>`).join("") +
+                "</ul>";
               errorPopup.style.display = "block";
 
-              // attach dismiss button
               const closeBtn = errorPopup.querySelector(".close-error");
               if (closeBtn) {
                 closeBtn.addEventListener("click", () => {
@@ -276,13 +253,13 @@
                 });
               }
             }
-            return; // stop submission
+            return;
           } else {
             const errorPopup = document.getElementById("errorPopup");
             if (errorPopup) errorPopup.style.display = "none";
           }
 
-          // confirm submission
+          // confirm submission (use static modal)
           const confirmSubmitModal = document.getElementById("confirmSubmitModal");
           if (confirmSubmitModal) {
             confirmSubmitModal.style.display = "flex";
@@ -292,7 +269,6 @@
 
             if (submitYesBtn) {
               submitYesBtn.onclick = () => {
-                // Proceed with submission
                 const selectedServices = [];
                 document.querySelectorAll(".test-item-total").forEach(item => {
                   const name = item.querySelector(".test-name-total").textContent.trim();
@@ -301,15 +277,25 @@
                 });
 
                 const totalAmount = document.querySelector(".total-price").textContent;
-
-                console.log("Submitting booking:", {
-                  services: selectedServices,
-                  total: totalAmount
-                });
+                console.log("Submitting booking:", { services: selectedServices, total: totalAmount });
 
                 modal.style.display = "none";
                 resetBookingForm();
                 confirmSubmitModal.style.display = "none";
+
+                // success popup
+                const successPopup = document.createElement("div");
+                successPopup.classList.add("success-popup");
+                successPopup.innerHTML = `
+                  <div class="success-popup-box">
+                    <strong>Thank you!</strong><br>
+                    Your Request Form was successfully submitted to the Clinic.<br>
+                    Please wait for the clinic’s call to confirm the time of the home service.<br><br>
+                    <em>Thank you for choosing CentriHealth Laboratory Co.</em>
+                  </div>
+                `;
+                document.body.appendChild(successPopup);
+                setTimeout(() => successPopup.remove(), 10000);
               };
             }
 
@@ -326,7 +312,6 @@
       const home = document.querySelector("#home");
       if (home) {
         home.addEventListener("click", (event) => {
-          // toggle categories
           const summary = event.target.closest('summary');
           if (summary) {
             const currentDetails = summary.parentElement;
@@ -337,7 +322,6 @@
             });
           }
 
-          // select test
           const subTest = event.target.closest('.test-item');
           if (subTest && !event.target.classList.contains('remove-btn')) {
             const name = subTest.querySelector('.test-name').textContent.trim();
@@ -361,26 +345,21 @@
               document.querySelector(".test-list-total").appendChild(newRow);
               subTest.classList.add('selected');
             }
-
             recalculateTotal();
           }
 
-          // delete test
           if (event.target.classList.contains("remove-btn")) {
             const removedRow = event.target.closest(".test-item-total");
             const removedName = removedRow.querySelector(".test-name-total").textContent.trim();
-
             document.querySelectorAll(".test-item").forEach(item => {
               if (item.querySelector(".test-name").textContent.trim() === removedName) {
                 item.classList.remove("selected");
               }
             });
-
             removedRow.remove();
             recalculateTotal();
           }
 
-          // toggle discounts
           const discountOption = event.target.closest('.discount-option');
           if (discountOption) {
             if (discountOption.classList.contains('selected')) {
@@ -439,18 +418,20 @@
         if (!discountInfo) {
           discountInfo = document.createElement("div");
           discountInfo.classList.add("discount-info");
-          // Styling handled by CSS (.discount-info)
+          discountInfo.style.fontSize = "0.55em";
+          discountInfo.style.color = "#c00";
+          discountInfo.style.marginTop = "4px";
+          discountInfo.style.textAlign = "right";
           const testListTotalEl = document.querySelector('.test-list-total');
           if (testListTotalEl) testListTotalEl.insertAdjacentElement("afterend", discountInfo);
         }
 
-        // show discount info
         if (discountLabel) {
           discountInfo.textContent = discountLabel;
           discountInfo.style.display = "block";
         } else {
-          discountInfo.textContent = "No discount applied";
-          discountInfo.style.display = "block"; // always visible
+          discountInfo.textContent = "";
+          discountInfo.style.display = "none";
         }
       }
     })
