@@ -116,7 +116,7 @@
       const contactNo = document.getElementById("contactNo");
       if (contactNo) {
         contactNo.addEventListener("input", function (e) {
-          let value = e.target.value.replace(/\D/g, "");
+          let value = e.target.value.replace(/\D/g, "").slice(0, 11);
           if (value.length > 4) value = value.slice(0, 4) + "-" + value.slice(4);
           if (value.length > 8) value = value.slice(0, 8) + "-" + value.slice(8);
           e.target.value = value;
@@ -128,6 +128,48 @@
       if (preferredDate) {
         const today = new Date().toISOString().split("T")[0];
         preferredDate.setAttribute("min", today);
+      }
+
+      // auto-compute age from Date of Birth
+      const dobInput = document.getElementById("dob");
+      const ageInput = document.getElementById("age");
+
+      function computeAgeFromDob(dobValue) {
+        if (!dobValue) {
+          return "";
+        }
+
+        const today = new Date();
+        const birthDate = new Date(dobValue);
+
+        if (Number.isNaN(birthDate.getTime())) {
+          return "";
+        }
+
+        let age = today.getFullYear() - birthDate.getFullYear();
+        const monthDiff = today.getMonth() - birthDate.getMonth();
+
+        if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < birthDate.getDate())) {
+          age -= 1;
+        }
+
+        if (age < 0) {
+          return "";
+        }
+
+        return String(age);
+      }
+
+      if (dobInput && ageInput) {
+        ageInput.readOnly = true;
+
+        const refreshAge = () => {
+          ageInput.value = computeAgeFromDob(dobInput.value);
+        };
+
+        dobInput.addEventListener("change", refreshAge);
+        dobInput.addEventListener("input", refreshAge);
+        refreshAge();
       }
 
       // custom address typed dropdown
@@ -282,6 +324,46 @@
             if (errorPopup) errorPopup.style.display = "none";
           }
 
+          const selectedServices = [];
+          document.querySelectorAll(".test-item-total").forEach(item => {
+            const name = item.querySelector(".test-name-total").textContent.trim();
+            const price = item.querySelector(".test-price-total").textContent.trim();
+            selectedServices.push({ name, price });
+          });
+
+          const activeDiscount = document.querySelector('.discount-option.selected');
+          const bookingPayload = {
+            lastName,
+            firstName,
+            middleInitial: mi,
+            suffix,
+            sex,
+            dob,
+            age,
+            contactNo: contact,
+            address: document.getElementById("address").value.trim(),
+            preferredDate: prefDate,
+            selectedServices,
+            totalAmount: document.querySelector(".total-price").textContent,
+            discountType: activeDiscount ? activeDiscount.dataset.discount : null
+          };
+
+          if (!window.KlinikSubmissions) {
+            const errorPopup = document.getElementById("errorPopup");
+            if (errorPopup) {
+              errorPopup.innerHTML = '<span class="close-error">&times;</span><strong>Supabase is not configured yet.</strong><ul><li>Update js/supabase-config.js with your project URL and anon key.</li></ul>';
+              errorPopup.style.display = "block";
+
+              const closeBtn = errorPopup.querySelector(".close-error");
+              if (closeBtn) {
+                closeBtn.addEventListener("click", () => {
+                  errorPopup.style.display = "none";
+                });
+              }
+            }
+            return;
+          }
+
           // confirm submission
           const confirmSubmitModal = document.getElementById("confirmSubmitModal");
           if (confirmSubmitModal) {
@@ -292,24 +374,36 @@
 
             if (submitYesBtn) {
               submitYesBtn.onclick = () => {
-                // Proceed with submission
-                const selectedServices = [];
-                document.querySelectorAll(".test-item-total").forEach(item => {
-                  const name = item.querySelector(".test-name-total").textContent.trim();
-                  const price = item.querySelector(".test-price-total").textContent.trim();
-                  selectedServices.push({ name, price });
-                });
+                submitYesBtn.disabled = true;
 
-                const totalAmount = document.querySelector(".total-price").textContent;
+                window.KlinikSubmissions.submitBooking(bookingPayload)
+                  .then(() => {
+                    alert("Your request has been saved to the system.");
+                    modal.style.display = "none";
+                    resetBookingForm();
+                    confirmSubmitModal.style.display = "none";
+                  })
+                  .catch((err) => {
+                    console.error("Supabase error:", err);
+                    const message = err && err.message ? err.message : "Please check your Supabase config and try again.";
+                    const errorPopup = document.getElementById("errorPopup");
+                    if (errorPopup) {
+                      errorPopup.innerHTML = '<span class="close-error">&times;</span><strong>Request could not be saved.</strong><ul><li>' + message + '</li></ul>';
+                      errorPopup.style.display = "block";
 
-                console.log("Submitting booking:", {
-                  services: selectedServices,
-                  total: totalAmount
-                });
+                      const closeBtn = errorPopup.querySelector(".close-error");
+                      if (closeBtn) {
+                        closeBtn.addEventListener("click", () => {
+                          errorPopup.style.display = "none";
+                        });
+                      }
+                    }
 
-                modal.style.display = "none";
-                resetBookingForm();
-                confirmSubmitModal.style.display = "none";
+                    confirmSubmitModal.style.display = "none";
+                  })
+                  .finally(() => {
+                    submitYesBtn.disabled = false;
+                  });
               };
             }
 
