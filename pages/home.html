@@ -17,7 +17,7 @@
         <p class="form-instruction">
           Please fill up the Request Form to proceed with booking your home service.
         </p>
-        <div id="errorPopup" class="error-popup";>
+        <div id="errorPopup" class="error-popup">
             <span class="close-error">&times;</span>
         </div>
       </div>
@@ -114,134 +114,135 @@
                   <li>CABUNGAHAN, SAN LORENZO, GUIMARAS</li>
                 </ul>
               </div>
-</div>
-    <!-- date -->
-    <div class="field">
-                <label for="preferredDate">Preferred Date</label>
-                <input type="date" id="preferredDate" name="preferredDate" required>
-                </div>
             </div>
 
-            <hr class="form-divider">
-
+            <!-- date -->
             <div class="field">
-                <label for="labTest" class="field-label">
-                Laboratory Test <span class="helper-text">— expand a category below to select tests</span>
-                </label>
+              <label for="preferredDate">Preferred Date</label>
+              <input type="date" id="preferredDate" name="preferredDate" required>
             </div>
+          </div>
 
-            <div class="category-grid">
+          <hr class="form-divider">
 
-  <!-- Clinical Microscopy -->
-  <details>
-    <summary class="category-header">CLINICAL MICROSCOPY</summary>
-    <div class="test-container">
-      <div class="test-item"><span class="select-box"></span><span class="test-name">Urinalysis</span><span class="test-price">₱ 60</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">Fecalysis</span><span class="test-price">₱ 100</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">Direct and Concentration</span><span class="test-price">₱ 300</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">Fecal Occult Blood Test</span><span class="test-price">₱ 800</span></div>
-    </div>
-  </details>
+          <div class="field">
+            <label for="labTest" class="field-label">
+              Laboratory Test <span class="helper-text">— expand a category below to select tests</span>
+            </label>
+          </div>
 
-  <!-- Clinical Chemistry -->
-  <details>
-    <summary class="category-header">CLINICAL CHEMISTRY</summary>
-    <div class="test-container">
-      <div class="test-item"><span class="select-box"></span><span class="test-name">FBS / RBS</span><span class="test-price">₱ 90</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">Creatinine</span><span class="test-price">₱ 120</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">BUN</span><span class="test-price">₱ 195</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">Uric Acid</span><span class="test-price">₱ 170</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">Lipid Profile</span><span class="test-price">₱ 470</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">Total Cholesterol</span><span class="test-price">₱ 200</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">Triglycerides</span><span class="test-price">₱ 200</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">SGPT / ALT</span><span class="test-price">₱ 195</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">SGOT / AST</span><span class="test-price">₱ 195</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">TPAG</span><span class="test-price">₱ 750</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">Total Protein</span><span class="test-price">₱ 350</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">Albumin</span><span class="test-price">₱ 370</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">Sodium</span><span class="test-price">₱ 270</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">Potassium</span><span class="test-price">₱ 270</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">Calcium</span><span class="test-price">₱ 300</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">Ionized Calcium</span><span class="test-price">₱ 520</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">Chloride</span><span class="test-price">₱ 300</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">OGTT / OGCT</span><span class="test-price">₱ 750</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">2H Post Prandial Glucose</span><span class="test-price">₱ 90</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">HBA1c</span><span class="test-price">₱ 1,100</span></div>
-      
-    </div>
-  </details>
+          <div class="category-grid">
 
-  <!-- Bacteriology -->
-  <details>
-    <summary class="category-header">BACTERIOLOGY</summary>
-    <div class="test-container">
-      <div class="test-item"><span class="select-box"></span><span class="test-name">Urine KOH</span><span class="test-price">₱ 250</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">Sputum KOH</span><span class="test-price">₱ 400</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">Sputum AFB</span><span class="test-price">₱ 300</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">Urine AFB</span><span class="test-price">₱ 300</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">Skin Scrapings</span><span class="test-price">₱ 500</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">Gram Stain</span><span class="test-price">₱ 500</span></div>
-    </div>
-  </details>
+            <!-- Clinical Microscopy -->
+            <details>
+              <summary class="category-header">CLINICAL MICROSCOPY</summary>
+              <div class="test-container">
+                <div class="test-item"><span class="select-box"></span><span class="test-name">URINALYSIS</span><span class="test-price">₱ 60</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">FECALYSIS</span><span class="test-price">₱ 100</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">DIRECT & CONCENTRATION</span><span class="test-price">₱ 300</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">FECAL OCCULT BLOOD TEST</span><span class="test-price">₱ 800</span></div>
+              </div>
+            </details>
 
-  <!-- Immuno & Serology -->
-  <details>
-    <summary class="category-header">IMMUNO & SEROLOGY</summary>
-    <div class="test-container">
-      <div class="test-item"><span class="select-box"></span><span class="test-name">Pregnancy Test</span><span class="test-price">₱ 200</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">HBsAg (Qualitative)</span><span class="test-price">₱ 270</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">Anti-HBs (Qualitative)</span><span class="test-price">₱ 450</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">Anti-HAV IgM</span><span class="test-price">₱ 850</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">Anti TP (Qualitative)</span><span class="test-price">₱ 850</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">HIV Test (Screening)</span><span class="test-price">₱ 1,200</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">Widals Test</span><span class="test-price">₱ 250</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">Typhidot</span><span class="test-price">₱ 900</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">ASOT</span><span class="test-price">₱ 900</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">CRP</span><span class="test-price">₱ 350</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">H. Pylori Ab (Blood)</span><span class="test-price">₱ 700</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">H. Pylori Ag (Stool)</span><span class="test-price">₱ 850</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">Dengue NS1 Ag</span><span class="test-price">₱ 1,100</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">Dengue lgG, lgM</span><span class="test-price">₱ 1,200</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">Dengue Combo</span><span class="test-price">₱ 2,000</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">Troponin - l (Qualitative)</span><span class="test-price">₱ 950</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">T3</span><span class="test-price">₱ 800</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">T4</span><span class="test-price">₱ 800</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">TSH</span><span class="test-price">₱ 1,350</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">fT3</span><span class="test-price">₱ 1,100</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">fT4</span><span class="test-price">₱ 1,100</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">TPSA</span><span class="test-price">₱ 1,500</span></div>
-    </div>
-  </details>
+            <!-- Clinical Chemistry -->
+            <details>
+              <summary class="category-header">CLINICAL CHEMISTRY</summary>
+              <div class="test-container">
+                <div class="test-item"><span class="select-box"></span><span class="test-name">FBS</span><span class="test-price">₱ 90</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">RBS</span><span class="test-price">₱ 90</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">CREATININE</span><span class="test-price">₱ 120</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">BUN</span><span class="test-price">₱ 195</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">URIC ACID</span><span class="test-price">₱ 170</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">LIPID PROFILE</span><span class="test-price">₱ 470</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">TOTAL CHOLESTEROL</span><span class="test-price">₱ 200</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">TRIGLYCERIDES</span><span class="test-price">₱ 200</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">SGPT/ALT</span><span class="test-price">₱ 195</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">SGOT/AST</span><span class="test-price">₱ 195</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">TPAG</span><span class="test-price">₱ 750</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">TOTAL PROTEIN</span><span class="test-price">₱ 350</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">ALBUMIN</span><span class="test-price">₱ 370</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">SODIUM</span><span class="test-price">₱ 270</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">POTASSIUM</span><span class="test-price">₱ 270</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">CALCIUM</span><span class="test-price">₱ 300</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">IONIZED CALCIUM</span><span class="test-price">₱ 520</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">CHLORIDE</span><span class="test-price">₱ 300</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">OGTT/OCTT</span><span class="test-price">₱ 750</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">2H POST PRANDIAL GLUCOSE</span><span class="test-price">₱ 90</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">HBA1c</span><span class="test-price">₱ 1,100</span></div>
+              </div>
+            </details>
 
-  <!-- Hematology -->
-  <details>
-    <summary class="category-header">HEMATOLOGY</summary>
-    <div class="test-container">
-      <div class="test-item"><span class="select-box"></span><span class="test-name">CBC</span><span class="test-price">₱ 100</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">Platelet</span><span class="test-price">₱ 100</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">ESR</span><span class="test-price">₱ 200</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">Protime</span><span class="test-price">₱ 500</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">APTT</span><span class="test-price">₱ 700</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">Blood Typing</span><span class="test-price">₱ 200</span></div>
-    </div>
-  </details>
+            <!-- Bacteriology -->
+            <details>
+              <summary class="category-header">BACTERIOLOGY</summary>
+              <div class="test-container">
+                <div class="test-item"><span class="select-box"></span><span class="test-name">URINE KOH</span><span class="test-price">₱ 250</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">SPUTUM KOH</span><span class="test-price">₱ 400</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">SPUTUM AFB</span><span class="test-price">₱ 300</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">URINE AFB</span><span class="test-price">₱ 300</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">SKIN SCRAPINGS</span><span class="test-price">₱ 500</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">GRAM STAIN</span><span class="test-price">₱ 500</span></div>
+              </div>
+            </details>
 
-  <!-- Others -->
-  <details>
-    <summary class="category-header">OTHERS</summary>
-    <div class="test-container">
-      <div class="test-item"><span class="select-box"></span><span class="test-name">ECG 12 Leads (Adult)</span><span class="test-price">₱ 400</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">ECG 12 Leads (Pedia)</span><span class="test-price">₱ 620</span></div>
-      <div class="test-item"><span class="select-box"></span><span class="test-name">ECG 12 Leads</span><span class="test-price">₱ 600</span></div>
-    </div>
-  </details>
+            <!-- Immuno & Serology -->
+            <details>
+              <summary class="category-header">IMMUNO & SEROLOGY</summary>
+              <div class="test-container">
+                <div class="test-item"><span class="select-box"></span><span class="test-name">PREGNANCY TEST</span><span class="test-price">₱ 200</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">HBsAg(QUALITATIVE)</span><span class="test-price">₱ 270</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">ANTI-HBs(QUALITATIVE)</span><span class="test-price">₱ 450</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">ANTI-HAV IgM(QUALITATIVE)</span><span class="test-price">₱ 850</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">ANTI-TP(QUALITATIVE)</span><span class="test-price">₱ 850</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">HIV TEST (SCREENING)</span><span class="test-price">₱ 1,200</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">WIDALS TEST</span><span class="test-price">₱ 250</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">TYPHIDOT</span><span class="test-price">₱ 900</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">ASOT</span><span class="test-price">₱ 900</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">CRP</span><span class="test-price">₱ 350</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">H. PYLORI Ab (BLOOD)</span><span class="test-price">₱ 700</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">H. PYLORI Ag (STOOL)</span><span class="test-price">₱ 850</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">DENGUE NS1 Ag</span><span class="test-price">₱ 1,100</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">DENGUE IgG, IgM</span><span class="test-price">₱ 1,200</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">DENGUE COMBO (DENGUE NS1 Ag & DENGUE IgG, IgM)</span><span class="test-price">₱ 2,000</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">TROPONIN-I (QUALITATIVE)</span><span class="test-price">₱ 950</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">T3</span><span class="test-price">₱ 800</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">T4</span><span class="test-price">₱ 800</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">TSH</span><span class="test-price">₱ 1,350</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">fT3</span><span class="test-price">₱ 1,100</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">fT4</span><span class="test-price">₱ 1,100</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">TPSA</span><span class="test-price">₱ 1,500</span></div>
+              </div>
+            </details>
 
-</div>
+            <!-- Hematology -->
+            <details>
+              <summary class="category-header">HEMATOLOGY</summary>
+              <div class="test-container">
+                <div class="test-item"><span class="select-box"></span><span class="test-name">CBC</span><span class="test-price">₱ 100</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">PLATELET</span><span class="test-price">₱ 100</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">ESR</span><span class="test-price">₱ 200</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">PROTIME</span><span class="test-price">₱ 500</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">APTT</span><span class="test-price">₱ 700</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">BLOODTYPING</span><span class="test-price">₱ 200</span></div>
+              </div>
+            </details>
 
-<hr class="form-divider">
+            <!-- Others -->
+            <details>
+              <summary class="category-header">OTHERS</summary>
+              <div class="test-container">
+                <div class="test-item"><span class="select-box"></span><span class="test-name">ECG 12 LEADS (ADULT)</span><span class="test-price">₱ 400</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">ECG 12 LEADS (PEDIA)</span><span class="test-price">₱ 620</span></div>
+                <div class="test-item"><span class="select-box"></span><span class="test-name">ECG 15 LEADS</span><span class="test-price">₱ 600</span></div>
+              </div>
+            </details>
 
-<!-- discounts -->
-<label class="discount-label">
+          </div>
+
+          <hr class="form-divider">
+
+          <!-- discounts -->
+          <label class="discount-label">
             Discount Eligibility
             <span class="helper-text">— check if Senior Citizen / PWD or Card Bank Member</span>
           </label>
@@ -297,7 +298,7 @@
 </div>
 
 <!-- submit confirmation -->
-<div id="confirmSubmitModal" class="confirm-exit";>
+<div id="confirmSubmitModal" class="confirm-exit">
   <div class="confirm-exit-box">
     <p>Are you sure you want to submit this request?</p>
     <p style="font-size:0.9em; color:#555; margin-top:8px;">
