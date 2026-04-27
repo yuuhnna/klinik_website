@@ -112,6 +112,7 @@
           }
         });
       }
+
       // add dashes to contact number
       const contactNo = document.getElementById("contactNo");
       if (contactNo) {
@@ -126,8 +127,17 @@
       // disable past dates for booking
       const preferredDate = document.getElementById("preferredDate");
       if (preferredDate) {
-        const today = new Date().toISOString().split("T")[0];
-        preferredDate.setAttribute("min", today);
+        const formatDateForInput = (date) => {
+          const year = date.getFullYear();
+          const month = String(date.getMonth() + 1).padStart(2, "0");
+          const day = String(date.getDate()).padStart(2, "0");
+          return `${year}-${month}-${day}`;
+        };
+
+        const tomorrow = new Date();
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        const minDate = formatDateForInput(tomorrow);
+        preferredDate.setAttribute("min", minDate);
       }
 
       // auto-compute age from Date of Birth
@@ -221,10 +231,10 @@
         });
       }
 
-      // names to uppercase
+      // names to uppercase 
       function forceUppercase(field) {
         field.addEventListener("input", (e) => {
-          e.target.value = e.target.value.replace(/[^A-Za-z]/g, "").toUpperCase();
+          e.target.value = e.target.value.replace(/[^A-Za-z\s]/g, "").toUpperCase();
         });
       }
 
@@ -239,8 +249,6 @@
       if (middleInitial) forceUppercase(middleInitial);
       if (suffix) forceUppercase(suffix);
 
-
-
       if (submitBtn) {
         submitBtn.addEventListener("click", () => {
           // validate info
@@ -253,7 +261,6 @@
           const age = document.getElementById("age").value;
           const contact = document.getElementById("contactNo").value.trim();
           const prefDate = document.getElementById("preferredDate").value;
-
 
           let valid = true;
           let errors = [];
@@ -270,7 +277,6 @@
             const today = new Date();
             const birthDate = new Date(dob);
 
-            // strip time for accurate comparison
             today.setHours(0, 0, 0, 0);
             birthDate.setHours(0, 0, 0, 0);
 
@@ -288,13 +294,12 @@
             const today = new Date();
             const chosenDate = new Date(prefDate);
 
-            // strip time for accurate comparison
             today.setHours(0, 0, 0, 0);
             chosenDate.setHours(0, 0, 0, 0);
 
-            if (chosenDate < today) {
+            if (chosenDate <= today) {
               valid = false;
-              errors.push("Preferred Date cannot be in the past");
+              errors.push("Preferred Date must be at least tomorrow (same-day booking is not allowed)");
             }
           }
 
@@ -310,7 +315,6 @@
               errorPopup.innerHTML = errorMsg;
               errorPopup.style.display = "block";
 
-              // attach dismiss button
               const closeBtn = errorPopup.querySelector(".close-error");
               if (closeBtn) {
                 closeBtn.addEventListener("click", () => {
@@ -318,7 +322,7 @@
                 });
               }
             }
-            return; // stop submission
+            return;
           } else {
             const errorPopup = document.getElementById("errorPopup");
             if (errorPopup) errorPopup.style.display = "none";
@@ -505,21 +509,15 @@
             discount = 0.20;
             discountLabel = "-20% Senior Citizen / PWD Discount";
           } else if (discountType === 'card') {
-            if (['CBC', 'Urinalysis', 'Fecalysis', 'FBS', 'RBS', 'Total Cholesterol', 'Triglycerides'].includes(name)) {
+            if (['CBC', 'URINALYSIS', 'FECALYSIS', 'FBS', 'RBS', 'TOTAL CHOLESTEROL', 'TRIGLYCERIDES'].includes(name)) {
               discount = 0.20;
               discountLabel = "-20% Card Bank Discount (Basic Tests)";
-            } else if (['HBsAG', 'Anti TP', 'Typhidot', 'Dengue NS1 Ag', 'Dengue IgG', 'Dengue IgM',
-              'ASOT', 'Fecal Occult Blood Test', 'CRP', 'H. Pylori Ab Rapid Test',
-              'H. Pylori Ag Rapid Test', 'Troponin-l', 'Pregnancy Test', 'Anti-HAV IgM',
-              'Anti-HBs', 'Widals Test', 'T3', 'T4', 'TSH', 'FT3', 'FT4', 'TPSA', 'HBA1c'].includes(name)) {
-              discount = 0.10;
-              discountLabel = "-10% Card Bank Discount (Special Tests)";
             } else if (name.toLowerCase().includes("ecg")) {
               discount = 0;
               discountLabel = "No discount for ECG tests";
             } else {
               discount = 0.10;
-              discountLabel = "-10% Card Bank Discount";
+              discountLabel = "-10% Card Bank Discount (Special Tests)";
             }
           }
 
@@ -533,18 +531,16 @@
         if (!discountInfo) {
           discountInfo = document.createElement("div");
           discountInfo.classList.add("discount-info");
-          // Styling handled by CSS (.discount-info)
           const testListTotalEl = document.querySelector('.test-list-total');
           if (testListTotalEl) testListTotalEl.insertAdjacentElement("afterend", discountInfo);
         }
 
-        // show discount info
         if (discountLabel) {
           discountInfo.textContent = discountLabel;
           discountInfo.style.display = "block";
         } else {
           discountInfo.textContent = "No discount applied";
-          discountInfo.style.display = "block"; // always visible
+          discountInfo.style.display = "block";
         }
       }
     })
