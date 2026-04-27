@@ -28,6 +28,21 @@
     return `HS-${stamp}-${randomSuffix}`;
   }
 
+  function generateControlNoFromLabTest(labTest) {
+    if (!labTest) {
+      return "";
+    }
+
+    const prefix = String(labTest.control_prefix || "").trim();
+    const start = labTest.control_start;
+    const normalizedStart = String(start ?? "").trim();
+    if (!prefix || !/^\d+$/.test(normalizedStart)) {
+      return "";
+    }
+
+    return `${prefix}${normalizedStart}`;
+  }
+
   function generateUuid() {
     if (window.crypto && typeof window.crypto.randomUUID === "function") {
       return window.crypto.randomUUID();
@@ -103,7 +118,31 @@
       })
     });
 
-    const controlNo = generateControlNo();
+    const selectedTests = Array.isArray(payload.selectedServices) ? payload.selectedServices : [];
+    const resolvedTests = [];
+    for (const selectedTest of selectedTests) {
+      const testName = normalizeTestName(selectedTest.name);
+      if (!testName) {
+        continue;
+      }
+
+      const matchedTests = await fetchJson(`/rest/v1/${encodeURIComponent(labTestsTable)}?select=id,test_name,control_prefix,control_start&test_name=ilike.${encodeURIComponent(testName)}`);
+      const labTest = matchedTests && matchedTests[0];
+
+      if (!labTest) {
+        throw new Error(`No lab test found for "${testName}". Add a matching row in lab_tests.`);
+      }
+
+      resolvedTests.push(labTest);
+    }
+
+    const derivedControlNo = generateControlNoFromLabTest(resolvedTests[0]);
+    if (!derivedControlNo) {
+      throw new Error("Unable to generate control number from lab_tests. Ensure control_prefix and control_start are set (example: C + 574 -> C574).");
+    }
+
+    const controlNo = derivedControlNo;
+
     const appointmentId = generateUuid();
     await apiRequest(`/rest/v1/${encodeURIComponent(appointmentsTable)}`, {
       method: "POST",
@@ -113,7 +152,7 @@
       body: JSON.stringify({
         id: appointmentId,
         patient_id: patientId,
-        type: "Home_Service",
+        type: "Home Service",
         status: "pending",
         preferred_date: payload.preferredDate,
         time: new Date().toTimeString().slice(0, 8),
@@ -121,19 +160,7 @@
       })
     });
 
-    const selectedTests = Array.isArray(payload.selectedServices) ? payload.selectedServices : [];
-    for (const selectedTest of selectedTests) {
-      const testName = normalizeTestName(selectedTest.name);
-      if (!testName) {
-        continue;
-      }
-
-      const matchedTests = await fetchJson(`/rest/v1/${encodeURIComponent(labTestsTable)}?select=id,test_name&test_name=ilike.${encodeURIComponent(testName)}`);
-      const labTest = matchedTests && matchedTests[0];
-
-      if (!labTest) {
-        throw new Error(`No lab test found for "${testName}". Add a matching row in lab_tests.`);
-      }
+    for (const labTest of resolvedTests) {
 
       await apiRequest(`/rest/v1/${encodeURIComponent(patientTestsTable)}`, {
         method: "POST",
