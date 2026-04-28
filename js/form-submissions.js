@@ -6,6 +6,7 @@
   const appointmentsTable = config.appointmentsTable || "appointments";
   const patientTestsTable = config.patientTestsTable || "patient_tests";
   const labTestsTable = config.labTestsTable || "lab_tests";
+  const transactionsTable = config.transactionsTable || "transactions";
 
   function getConfigError() {
     if (!supabaseUrl || supabaseUrl.includes("YOUR_PROJECT_REF") || !anonKey || anonKey.includes("YOUR_SUPABASE_ANON_KEY")) {
@@ -136,12 +137,19 @@
       resolvedTests.push(labTest);
     }
 
-    const derivedControlNo = generateControlNoFromLabTest(resolvedTests[0]);
-    if (!derivedControlNo) {
-      throw new Error("Unable to generate control number from lab_tests. Ensure control_prefix and control_start are set (example: C + 574 -> C574).");
+    let controlNo = "";
+    for (const test of resolvedTests) {
+      const derived = generateControlNoFromLabTest(test);
+      if (derived) {
+        controlNo = derived;
+        break;
+      }
     }
 
-    const controlNo = derivedControlNo;
+    // If no test provides a control prefix (e.g., ECG only), use a fallback HS number
+    if (!controlNo) {
+      controlNo = generateControlNo();
+    }
 
     const appointmentId = generateUuid();
     await apiRequest(`/rest/v1/${encodeURIComponent(appointmentsTable)}`, {
@@ -172,6 +180,23 @@
         })
       });
     }
+
+    // 5. Insert Transaction
+    const amountStr = String(payload.totalAmount || "0").replace(/[^\d.]/g, "");
+    const amountCollected = parseFloat(amountStr) || 0;
+
+    await apiRequest(`/rest/v1/${encodeURIComponent(transactionsTable)}`, {
+      method: "POST",
+      headers: {
+        Prefer: "return=minimal"
+      },
+      body: JSON.stringify({
+        appointment_id: appointmentId,
+        amount_collected: amountCollected,
+        discount_type: payload.discountType || null,
+        date: new Date().toISOString()
+      })
+    });
 
     return {
       patientId,
