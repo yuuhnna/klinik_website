@@ -505,7 +505,7 @@
           const price = parseFloat(item.querySelector('.test-price-total').textContent.replace(/[^\d.]/g, ""));
           let discount = 0;
 
-          if (discountType === 'senior') {
+          if (discountType === 'senior_pwd') {
             discount = 0.20;
             discountLabel = "-20% Senior Citizen / PWD Discount";
           } else if (discountType === 'card') {
