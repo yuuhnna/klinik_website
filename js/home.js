@@ -52,6 +52,14 @@
           } else {
             field.value = "";
           }
+          // Reset styles
+          field.style.border = "";
+          field.style.boxShadow = "";
+        });
+
+        // Hide all error messages and reset field containers
+        document.querySelectorAll(".field").forEach(f => {
+          f.classList.remove("invalid");
         });
 
         // scroll to top
@@ -251,81 +259,76 @@
 
       if (submitBtn) {
         submitBtn.addEventListener("click", () => {
+          // reset previous errors
+          document.querySelectorAll(".field").forEach(f => f.classList.remove("invalid"));
+
           // validate info
-          const lastName = document.getElementById("lastName").value.trim();
-          const firstName = document.getElementById("firstName").value.trim();
-          const mi = document.getElementById("middleInitial").value.trim();
+          const lastNameField = document.getElementById("lastName");
+          const firstNameField = document.getElementById("firstName");
+          const miField = document.getElementById("middleInitial");
+          const sexField = document.getElementById("sex");
+          const dobField = document.getElementById("dob");
+          const ageField = document.getElementById("age");
+          const contactField = document.getElementById("contactNo");
+          const addressField = document.getElementById("address");
+          const prefDateField = document.getElementById("preferredDate");
+
+          const lastName = lastNameField.value.trim();
+          const firstName = firstNameField.value.trim();
+          const mi = miField.value.trim();
           const suffix = document.getElementById("suffix").value.trim();
-          const sex = document.getElementById("sex").value;
-          const dob = document.getElementById("dob").value;
-          const age = document.getElementById("age").value;
-          const contact = document.getElementById("contactNo").value.trim();
-          const prefDate = document.getElementById("preferredDate").value;
+          const sex = sexField.value;
+          const dob = dobField.value;
+          const age = ageField.value;
+          const contact = contactField.value.trim();
+          const address = addressField.value.trim();
+          const prefDate = prefDateField.value;
 
           let valid = true;
-          let errors = [];
 
-          if (!/^[A-Za-z\s]+$/.test(lastName)) { valid = false; errors.push("Last name invalid"); }
-          if (!/^[A-Za-z\s]+$/.test(firstName)) { valid = false; errors.push("First name invalid"); }
-          if (mi && !/^[A-Za-z]$/.test(mi)) { valid = false; errors.push("Middle initial invalid"); }
-          if (suffix && !/^[A-Za-z]+$/.test(suffix)) { valid = false; errors.push("Suffix invalid"); }
-          if (!sex) { valid = false; errors.push("Sex required"); }
-          if (!dob) {
+          const markInvalid = (field, message) => {
             valid = false;
-            errors.push("Date of Birth required");
+            if (field) {
+              const fieldContainer = field.closest(".field");
+              if (fieldContainer) {
+                fieldContainer.classList.add("invalid");
+                const note = fieldContainer.querySelector(".error-note");
+                if (note && message) {
+                  note.textContent = message;
+                }
+              }
+            }
+          };
+
+          if (!/^[A-Za-z\s]+$/.test(lastName)) { markInvalid(lastNameField, lastName === "" ? "Please fill up" : "Invalid"); }
+          if (!/^[A-Za-z\s]+$/.test(firstName)) { markInvalid(firstNameField, firstName === "" ? "Please fill up" : "Invalid"); }
+          if (!/^[A-Za-z]$/.test(mi)) { markInvalid(miField, mi === "" ? "Please fill up" : "Invalid"); }
+          if (suffix && !/^[A-Za-z]+$/.test(suffix)) { markInvalid(document.getElementById("suffix"), "Invalid"); }
+          if (!sex) { markInvalid(sexField, "Please fill up"); }
+          if (!dob) {
+            markInvalid(dobField, "Please fill up");
           } else {
             const today = new Date();
             const birthDate = new Date(dob);
-
             today.setHours(0, 0, 0, 0);
             birthDate.setHours(0, 0, 0, 0);
-
             if (birthDate >= today) {
-              valid = false;
-              errors.push("Date of Birth cannot be today or in the future");
+              markInvalid(dobField, "Invalid Date");
             }
           }
-          if (age < 0 || age > 120) { valid = false; errors.push("Age invalid"); }
-          if (!/^09\d{2}-\d{3}-\d{4}$/.test(contact)) { valid = false; errors.push("Contact number invalid"); }
+          if (age === "" || age < 0 || age > 120) { markInvalid(ageField, "Invalid"); }
+          if (!/^09\d{2}-\d{3}-\d{4}$/.test(contact)) { markInvalid(contactField, contact === "" ? "Please fill up" : "Invalid"); }
+          if (!address) { markInvalid(addressField, "Please fill up"); }
           if (!prefDate) {
-            valid = false;
-            errors.push("Preferred Date required");
+            markInvalid(prefDateField, "Please fill up");
           } else {
             const today = new Date();
             const chosenDate = new Date(prefDate);
-
             today.setHours(0, 0, 0, 0);
             chosenDate.setHours(0, 0, 0, 0);
-
             if (chosenDate <= today) {
-              valid = false;
-              errors.push("Preferred Date must be at least tomorrow (same-day booking is not allowed)");
+              markInvalid(prefDateField, "Invalid Date");
             }
-          }
-
-          if (!valid) {
-            const errorPopup = document.getElementById("errorPopup");
-            if (errorPopup) {
-              let errorMsg = '<span class="close-error">&times;</span>';
-              errorMsg += "<strong>Please fix the following errors before submitting:</strong><ul>";
-              for (let i = 0; i < errors.length; i++) {
-                errorMsg += "<li>" + errors[i] + "</li>";
-              }
-              errorMsg += "</ul>";
-              errorPopup.innerHTML = errorMsg;
-              errorPopup.style.display = "block";
-
-              const closeBtn = errorPopup.querySelector(".close-error");
-              if (closeBtn) {
-                closeBtn.addEventListener("click", () => {
-                  errorPopup.style.display = "none";
-                });
-              }
-            }
-            return;
-          } else {
-            const errorPopup = document.getElementById("errorPopup");
-            if (errorPopup) errorPopup.style.display = "none";
           }
 
           const selectedServices = [];
@@ -334,6 +337,30 @@
             const price = item.querySelector(".test-price-total").textContent.trim();
             selectedServices.push({ name, price });
           });
+
+          if (selectedServices.length === 0) {
+            valid = false;
+            const validationModal = document.getElementById("validationModal");
+            const validationOk = document.getElementById("validationOk");
+            if (validationModal) {
+              validationModal.style.display = "flex";
+              if (validationOk) {
+                validationOk.onclick = () => {
+                  validationModal.style.display = "none";
+                };
+              }
+            }
+          }
+
+          if (!valid) {
+            // scroll to top of modal to see errors
+            const modalBody = document.querySelector(".modal-body-scroll");
+            if (modalBody) modalBody.scrollTop = 0;
+            return;
+          }
+
+          const errorPopup = document.getElementById("errorPopup");
+          if (errorPopup) errorPopup.style.display = "none";
 
           const activeDiscount = document.querySelector('.discount-option.selected');
           const bookingPayload = {
