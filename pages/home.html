@@ -65,7 +65,7 @@
               <label for="address">Address</label>
               <div class="custom-combobox">
                 <input type="text" id="address" name="address" placeholder="Select or type address" required
-                  autocomplete="off">
+                  autocomplete="off" oninput="this.value = this.value.toUpperCase()">
                 <svg class="combo-arrow" id="address-arrow" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                   stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                   <polyline points="6 9 12 15 18 9"></polyline>
