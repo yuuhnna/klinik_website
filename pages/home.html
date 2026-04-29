@@ -321,23 +321,28 @@
           </div>
 
           <hr class="form-divider">
+<!-- discounts -->
+<label class="discount-label">
+  Discount Eligibility
+  <span class="helper-text">— check if Senior Citizen / PWD or Card Bank Member</span>
+</label>
 
-          <!-- discounts -->
-          <label class="discount-label">
-            Discount Eligibility
-            <span class="helper-text">— check if Senior Citizen / PWD or Card Bank Member</span>
-          </label>
+<div class="discount-options">
+  <div class="discount-option" data-discount="senior_pwd">
+    <span class="select-box"></span>
+    <span class="option-name">SENIOR CITIZEN / PWD</span>
+  </div>
+  <div class="discount-option" data-discount="card">
+    <span class="select-box"></span>
+    <span class="option-name">CARD BANK MEMBER</span>
+  </div>
+</div>
 
-          <div class="discount-options">
-            <div class="discount-option" data-discount="senior_pwd">
-              <span class="select-box"></span>
-              <span class="option-name">SENIOR CITIZEN / PWD</span>
-            </div>
-            <div class="discount-option" data-discount="card">
-              <span class="select-box"></span>
-              <span class="option-name">CARD BANK MEMBER</span>
-            </div>
-          </div>
+<!-- 🔹 Yellow reminder box directly under the checkboxes -->
+<div id="discount-note" class="discount-note">
+  REMINDER: Please present your Senior Citizen ID or any valid ID that shows your birthdate, OR a valid PWD ID.  
+  For Card Bank Member, please present your membership card or proof of membership.
+</div>
 
           <div class="test-summary-total">
             <h3>Selected Services</h3>
