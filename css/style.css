@@ -745,23 +745,6 @@ details[open] .category-header::after {
     margin-right: 10px;
     flex-shrink: 0;
 }
-
-/* Selected state */
-.discount-option.selected .select-box {
-    background: white;
-    position: relative;
-}
-
-.discount-option.selected .select-box::after {
-    content: "✔";          
-    position: absolute;
-    top: -2px;
-    left: 2px;
-    font-size: 12px;
-    color: #33a988;      
-    font-weight: bold;
-}
-
 .test-name {
     flex: 1;
     color: white;
@@ -774,21 +757,6 @@ details[open] .category-header::after {
     font-weight: 500;
     color: white;
 }
-.test-item.selected .select-box {
-  background: white;
-  position: relative;
-}
-
-.test-item.selected .select-box::after {
-  content: "✔";
-  position: absolute;
-  top: -2px;
-  left: 2px;
-  font-size: 12px;
-  color: #0F3C2F; /* dark green check */
-  font-weight: bold;
-}
-
 /* Discount Label */
 .discount-label {
     font-weight: 600;
@@ -3514,6 +3482,9 @@ details[open] .category-header::after {
         padding: 8px 12px;
     }
 }
+
+/* NEW ADDED STYLES */
+
 .discount-note {
   margin-top: 10px;
   padding: 10px;
@@ -3523,4 +3494,37 @@ details[open] .category-header::after {
   font-size: 0.48em;
   font-weight: 600;
   color: #333;
+}
+.test-item.selected .select-box {
+  background: white;
+  position: relative;
+}
+
+.test-item.selected .select-box::after {
+  content: "✔";
+  position: absolute;
+  top: -2px;
+  left: 2px;
+  font-size: 12px;
+  color: #0F3C2F; /* dark green check */
+  font-weight: bold;
+}
+
+/* Selected state */
+.discount-option.selected .select-box {
+    background: white;
+    position: relative;
+}
+
+.discount-option.selected .select-box::after {
+    content: "✔";          
+    position: absolute;
+    top: -2px;
+    left: 2px;
+    font-size: 12px;
+    color: #33a988;      
+    font-weight: bold;
+}
+.discount-option {
+  cursor: pointer;
 }
