@@ -1,13 +1,11 @@
 (function () {
 
-  // check if we are in main folder
   let isRoot = window.location.pathname.indexOf('/pages/') === -1;
   let basePath = "";
   if (isRoot === false) {
     basePath = "../";
   }
 
-  // load home html
   fetch(basePath + 'pages/home.html')
     .then(response => response.text())
     .then(data => {
@@ -17,8 +15,22 @@
       const openBtn = document.getElementById("openModal");
       const closeBtn = document.getElementById("closeModal");
 
+      const seniorOption = document.querySelector('.discount-option[data-discount="senior_pwd"]');
+      const cardOption = document.querySelector('.discount-option[data-discount="card"]');
+      const noteBox = document.getElementById("discount-note");
+
+      function updateDiscountNote() {
+        if (!noteBox) return;
+        if (seniorOption && seniorOption.classList.contains("selected")) {
+          noteBox.innerHTML = "Please present your Senior Citizen ID or any valid ID that shows your birthdate, OR a valid PWD ID.";
+        } else if (cardOption && cardOption.classList.contains("selected")) {
+          noteBox.innerHTML = "Please present your membership card or proof of membership.";
+        } else {
+          noteBox.innerHTML = "REMINDER: Please present your Senior Citizen ID or any valid ID that shows your birthdate, OR a valid PWD ID. For Card Bank Member, please present your membership card or proof of membership.";
+        }
+      }
+
       function resetBookingForm() {
-        // Clear selected services
         const testListTotal = document.querySelector(".test-list-total");
         if (testListTotal) testListTotal.innerHTML = "";
 
@@ -28,46 +40,42 @@
         const discountInfo = document.querySelector(".discount-info");
         if (discountInfo) {
           discountInfo.textContent = "";
-          discountInfo.style.display = "none"; // hide when reset
+          discountInfo.style.display = "none";
         }
 
         document.querySelectorAll(".test-item.selected").forEach(item => {
           item.classList.remove("selected");
         });
 
-        // close dropdowns
         document.querySelectorAll(".category-grid details").forEach(detailsEl => {
           detailsEl.removeAttribute("open");
         });
 
-        // Clear discount selection
         document.querySelectorAll(".discount-option.selected").forEach(opt => {
           opt.classList.remove("selected");
         });
 
-        // reset form
         document.querySelectorAll("#modal input, #modal select, #modal textarea").forEach(field => {
           if (field.type === "checkbox" || field.type === "radio") {
             field.checked = false;
           } else {
             field.value = "";
           }
-          // Reset styles
           field.style.border = "";
           field.style.boxShadow = "";
         });
 
-        // Hide all error messages and reset field containers
         document.querySelectorAll(".field").forEach(f => {
           f.classList.remove("invalid");
         });
 
-        // scroll to top
         const modalContent = modal.querySelector(".modal-content");
         if (modalContent) modalContent.scrollTop = 0;
 
         const errorPopup = document.getElementById("errorPopup");
         if (errorPopup) errorPopup.style.display = "none";
+
+        updateDiscountNote();
       }
 
       if (openBtn) {
@@ -91,7 +99,6 @@
         }
       });
 
-      // Cancel and Submit buttons
       const cancelBtn = document.getElementById("cancelBtn");
       const submitBtn = document.getElementById("submitBtn");
 
@@ -121,7 +128,6 @@
         });
       }
 
-      // add dashes to contact number
       const contactNo = document.getElementById("contactNo");
       if (contactNo) {
         contactNo.addEventListener("input", function (e) {
@@ -132,7 +138,6 @@
         });
       }
 
-      // disable past dates for booking
       const preferredDate = document.getElementById("preferredDate");
       if (preferredDate) {
         const formatDateForInput = (date) => {
@@ -148,7 +153,6 @@
         preferredDate.setAttribute("min", minDate);
       }
 
-      // auto-compute age from Date of Birth
       const dobInput = document.getElementById("dob");
       const ageInput = document.getElementById("age");
 
@@ -190,7 +194,6 @@
         refreshAge();
       }
 
-      // custom address typed dropdown
       const addressInput = document.getElementById("address");
       const addressList = document.getElementById("address-list");
       const addressArrow = document.getElementById("address-arrow");
@@ -239,14 +242,12 @@
         });
       }
 
-      // names to uppercase 
       function forceUppercase(field) {
         field.addEventListener("input", (e) => {
           e.target.value = e.target.value.replace(/[^A-Za-z\s]/g, "").toUpperCase();
         });
       }
 
-      // name fields
       const lastName = document.getElementById("lastName");
       const firstName = document.getElementById("firstName");
       const middleInitial = document.getElementById("middleInitial");
@@ -259,10 +260,8 @@
 
       if (submitBtn) {
         submitBtn.addEventListener("click", () => {
-          // reset previous errors
           document.querySelectorAll(".field").forEach(f => f.classList.remove("invalid"));
 
-          // validate info
           const lastNameField = document.getElementById("lastName");
           const firstNameField = document.getElementById("firstName");
           const miField = document.getElementById("middleInitial");
@@ -353,7 +352,6 @@
           }
 
           if (!valid) {
-            // scroll to top of modal to see errors
             const modalBody = document.querySelector(".modal-body-scroll");
             if (modalBody) modalBody.scrollTop = 0;
             return;
@@ -395,7 +393,6 @@
             return;
           }
 
-          // confirm submission
           const confirmSubmitModal = document.getElementById("confirmSubmitModal");
           if (confirmSubmitModal) {
             confirmSubmitModal.style.display = "flex";
@@ -409,10 +406,35 @@
 
                 window.KlinikSubmissions.submitBooking(bookingPayload)
                   .then(() => {
-                    alert("Your request has been saved to the system.");
                     modal.style.display = "none";
                     resetBookingForm();
                     confirmSubmitModal.style.display = "none";
+
+                    const successModal = document.getElementById("successModal");
+                    if (successModal) {
+                      successModal.style.display = "flex";
+
+                      const successOk = document.getElementById("successOk");
+                      let secondsLeft = 60;
+
+                      if (successOk) successOk.textContent = `OK, Got It! (${secondsLeft}s)`;
+
+                      const countdown = setInterval(() => {
+                        secondsLeft--;
+                        if (successOk) successOk.textContent = `OK, Got It! (${secondsLeft}s)`;
+                        if (secondsLeft <= 0) {
+                          clearInterval(countdown);
+                          successModal.style.display = "none";
+                        }
+                      }, 1000);
+
+                      if (successOk) {
+                        successOk.onclick = () => {
+                          clearInterval(countdown);
+                          successModal.style.display = "none";
+                        };
+                      }
+                    }
                   })
                   .catch((err) => {
                     console.error("Supabase error:", err);
@@ -447,11 +469,9 @@
         });
       }
 
-      // click events
       const home = document.querySelector("#home");
       if (home) {
         home.addEventListener("click", (event) => {
-          // toggle categories
           const summary = event.target.closest('summary');
           if (summary) {
             const currentDetails = summary.parentElement;
@@ -462,7 +482,6 @@
             });
           }
 
-          // select test
           const subTest = event.target.closest('.test-item');
           if (subTest && !event.target.classList.contains('remove-btn')) {
             const name = subTest.querySelector('.test-name').textContent.trim();
@@ -490,7 +509,6 @@
             recalculateTotal();
           }
 
-          // delete test
           if (event.target.classList.contains("remove-btn")) {
             const removedRow = event.target.closest(".test-item-total");
             const removedName = removedRow.querySelector(".test-name-total").textContent.trim();
@@ -505,7 +523,6 @@
             recalculateTotal();
           }
 
-          // toggle discounts
           const discountOption = event.target.closest('.discount-option');
           if (discountOption) {
             if (discountOption.classList.contains('selected')) {
@@ -517,6 +534,7 @@
               discountOption.classList.add('selected');
             }
             recalculateTotal();
+            updateDiscountNote();
           }
         });
       }
