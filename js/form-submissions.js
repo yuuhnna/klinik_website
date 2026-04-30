@@ -226,4 +226,40 @@
       return insertSubmission("booking", data);
     }
   };
+document.addEventListener("DOMContentLoaded", () => {
+  const seniorOption = document.querySelector('.discount-option[data-discount="senior_pwd"]');
+  const cardOption = document.querySelector('.discount-option[data-discount="card"]');
+  const noteBox = document.getElementById("discount-note");
+
+  function updateNote() {
+    let messages = [];
+    if (seniorOption.classList.contains("selected")) {
+      messages.push("Please present your Senior Citizen ID or any valid ID that shows your birthdate, OR a valid PWD ID.");
+    }
+    if (cardOption.classList.contains("selected")) {
+      messages.push("Please present your membership card or proof of membership.");
+    }
+    noteBox.innerHTML = messages.length ? messages.join("<br>") : "No discount applied";
+  }
+
+  seniorOption.addEventListener("click", () => {
+    seniorOption.classList.toggle("selected");
+    updateNote();
+  });
+
+  cardOption.addEventListener("click", () => {
+    cardOption.classList.toggle("selected");
+    updateNote();
+  });
+});
+document.addEventListener("DOMContentLoaded", () => {
+  const testItems = document.querySelectorAll(".test-item");
+
+  testItems.forEach(item => {
+    item.addEventListener("click", () => {
+      item.classList.toggle("selected");
+    });
+  });
+});
+
 })();
