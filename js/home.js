@@ -525,56 +525,51 @@ function recalculateTotal() {
   let total = 0;
   const activeDiscount = document.querySelector('.discount-option.selected');
   const discountType = activeDiscount ? activeDiscount.dataset.discount : null;
-  let discountLabel = "";
   let ecgInList = false;
 
   document.querySelectorAll('.test-item-total').forEach(item => {
     const name = item.querySelector('.test-name-total').textContent.trim();
-    const priceText = item.querySelector('.test-price-total').textContent;
-    const price = parseFloat(priceText.replace(/[^\d.]/g, ""));
+    const price = parseFloat(item.querySelector('.test-price-total').textContent.replace(/[^\d.]/g, ""));
     let discount = 0;
+    const isEcg = name.toLowerCase().includes("ecg");
 
-    // 1. STRICT ECG RULE: If it's an ECG, 0% discount always.
-    if (name.toLowerCase().includes("ecg")) {
-      discount = 0;
-      ecgInList = true;
-    } 
-    // 2. Apply Senior/PWD discount ONLY to non-ECG tests
-    else if (discountType === 'senior_pwd') {
+    if (isEcg) ecgInList = true;
+
+    // 1. SENIOR/PWD Rule: 20% off everything, no exceptions
+    if (discountType === 'senior_pwd') {
       discount = 0.20;
-      discountLabel = "-20% Senior Citizen / PWD Discount";
     } 
-    // 3. Apply Card Bank rules to non-ECG tests
+    // 2. CARD BANK Rule: Strict restrictions
     else if (discountType === 'card') {
-      if (['CBC', 'URINALYSIS', 'FECALYSIS', 'FBS', 'RBS', 'TOTAL CHOLESTEROL', 'TRIGLYCERIDES'].includes(name)) {
-        discount = 0.20;
-        discountLabel = "-20% Card Bank Discount (Basic Tests)";
+      if (isEcg) {
+        discount = 0; // CARD BANK members pay full price for ECG
       } else {
-        discount = 0.10;
-        discountLabel = "-10% Card Bank Discount (Special Tests)";
+        const basicTests = ['CBC', 'URINALYSIS', 'FECALYSIS', 'FBS', 'RBS', 'TOTAL CHOLESTEROL', 'TRIGLYCERIDES'];
+        discount = basicTests.includes(name.toUpperCase()) ? 0.20 : 0.10;
       }
     }
 
     total += price - (price * discount);
   });
 
-  // Update Total Amount Display
+  // UI Updates
   const totalPriceEl = document.querySelector('.total-price');
   if (totalPriceEl) totalPriceEl.textContent = "₱ " + total.toFixed(2);
 
-  // Update Discount Information Note
   let discountInfo = document.querySelector('.discount-info');
-  if (discountType) {
-    if (ecgInList) {
-      // Show discount label for other items + the red warning for ECG
-      discountInfo.innerHTML = (discountLabel ? `${discountLabel}<br>` : "") + 
-                               `<span style="color:#ff4d4d; font-weight:bold;">No discount for ECG tests</span>`;
-    } else {
-      discountInfo.textContent = discountLabel;
+  if (discountInfo) {
+    let finalLabel = "";
+    if (discountType === 'senior_pwd') {
+      finalLabel = "-20% Senior Citizen / PWD Discount Applied";
+    } else if (discountType === 'card') {
+      finalLabel = "-20% / -10% Card Bank Member Discount";
+      if (ecgInList) {
+        finalLabel += "<br><span style='color: #ff4d4d; font-weight: bold;'>No discount for ECG (Card Bank Member)</span>";
+      }
     }
-    discountInfo.style.display = "block";
-  } else {
-    discountInfo.style.display = "none";
+    
+    discountInfo.innerHTML = finalLabel;
+    discountInfo.style.display = finalLabel ? "block" : "none";
   }
 }
     })
