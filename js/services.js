@@ -1,27 +1,24 @@
 (function () {
+  // Determine base path based on folder structure
+  const isRoot = window.location.pathname.indexOf('/pages/') === -1;
+  const basePath = isRoot ? "" : "../";
 
-  // check if we are in main folder
-  let isRoot = window.location.pathname.indexOf('/pages/') === -1;
-  let basePath = "";
-  if (isRoot === false) {
-    basePath = "../";
-  }
-
-  // load services html
+  // Load and initialize services
   fetch(basePath + 'pages/services.html')
     .then(res => {
-      if (!res.ok) throw new Error('HTTP ' + res.status + ' — could not load services component');
+      if (!res.ok) throw new Error('HTTP ' + res.status + ' — could not load services');
       return res.text();
     })
     .then(html => {
       const placeholder = document.getElementById('services-placeholder');
       if (!placeholder) return;
+
       placeholder.innerHTML = html;
 
-      // wait for cards
-      const firstCard = placeholder.querySelector('.service-card');
-      if (!firstCard) return;
+      // Perform Alphabetical Sorting (Categories and Tests)
+      sortServicesAlphabetically(placeholder);
 
+      // Wait for layout rendering before initializing carousel
       let attempts = 0;
       function attemptInit() {
         const firstCard = placeholder.querySelector('.service-card');
@@ -40,8 +37,45 @@
     })
     .catch(err => console.error('[services.js]', err));
 
+  /**
+   * Helper: Sorts Categories and their internal test lists A-Z
+   */
+  function sortServicesAlphabetically(container) {
+    const track = container.querySelector('#carouselTrack') || container.querySelector('.carousel-track');
+    if (!track) return;
 
-  // start carousel
+    const cards = Array.from(track.querySelectorAll('.service-card'));
+
+    cards.forEach(card => {
+      // Sort the <li> tests inside the card
+      const list = card.querySelector('ul');
+      if (list) {
+        const items = Array.from(list.querySelectorAll('li'));
+        items.sort((a, b) => {
+          const nameA = a.querySelector('span')?.innerText.trim().toLowerCase() || "";
+          const nameB = b.querySelector('span')?.innerText.trim().toLowerCase() || "";
+          return nameA.localeCompare(nameB);
+        });
+        list.innerHTML = '';
+        items.forEach(item => list.appendChild(item));
+      }
+    });
+
+    // Sort the main service cards
+    cards.sort((a, b) => {
+      const titleA = a.querySelector('.card-title-btn')?.innerText.trim().toUpperCase() || "";
+      const titleB = b.querySelector('.card-title-btn')?.innerText.trim().toUpperCase() || "";
+      return titleA.localeCompare(titleB);
+    });
+
+    // Re-insert sorted cards
+    track.innerHTML = '';
+    cards.forEach(card => track.appendChild(card));
+  }
+
+  /**
+   * Carousel Logic
+   */
   function initCarousel() {
     const track = document.querySelector('#carouselTrack') || document.querySelector('.carousel-track');
     if (!track) return;
@@ -51,30 +85,26 @@
     const arrowL = wrapper.querySelector('.arrow-left') || document.querySelector('#arrowLeft');
     const arrowR = wrapper.querySelector('.arrow-right') || document.querySelector('#arrowRight');
 
-    // original cards
     const originals = Array.from(track.querySelectorAll('.service-card'));
     const TOTAL = originals.length;
 
-    // make dots
-    let dots = [];
-    let activeDotsWrap = dotsWrap;
-
-    if (!activeDotsWrap) {
-      activeDotsWrap = document.createElement('div');
+    // Build Dots
+    let activeDotsWrap = dotsWrap || document.createElement('div');
+    if (!dotsWrap) {
       activeDotsWrap.className = 'carousel-dots';
       activeDotsWrap.id = 'carouselDots';
       wrapper.parentElement.appendChild(activeDotsWrap);
     }
 
     activeDotsWrap.innerHTML = '';
-    dots = originals.map(() => {
+    const dots = originals.map(() => {
       const b = document.createElement('button');
       b.className = 'dot';
       activeDotsWrap.appendChild(b);
       return b;
     });
 
-    // clone for infinite scroll
+    // Create Infinite Clones
     originals.forEach(card => {
       const clone = card.cloneNode(true);
       clone.classList.add('clone');
@@ -87,96 +117,51 @@
     }
 
     const all = Array.from(track.querySelectorAll('.service-card'));
-
     let cur = TOTAL;
     let animating = false;
     let timer = null;
 
-    // get card width
-    function step() {
+    const getStep = () => {
       const c = all[TOTAL];
-      const ml = parseFloat(getComputedStyle(c).marginLeft) || 20;
-      const mr = parseFloat(getComputedStyle(c).marginRight) || 20;
-      return c.offsetWidth + ml + mr;
-    }
+      const style = getComputedStyle(c);
+      return c.offsetWidth + parseFloat(style.marginLeft) + parseFloat(style.marginRight);
+    };
 
-    // center card
-    function offsetFor(i) {
-      const ml = parseFloat(getComputedStyle(all[i]).marginLeft) || 20;
-      return i * step() + ml - (wrapper.offsetWidth / 2 - all[i].offsetWidth / 2);
-    }
+    const offsetFor = (i) => {
+      const ml = parseFloat(getComputedStyle(all[i]).marginLeft) || 0;
+      return i * getStep() + ml - (wrapper.offsetWidth / 2 - all[i].offsetWidth / 2);
+    };
 
-    // update dots
     function syncUI() {
-      all.forEach((c, i) => {
-        const isMirrorActive = (i % TOTAL) === (cur % TOTAL);
-        c.classList.toggle('active', isMirrorActive);
-      });
-      const ri = cur % TOTAL;
-      if (dots && dots.length > 0) {
-        dots.forEach((d, i) => d.classList.toggle('active', i === ri));
-      }
+      all.forEach((c, i) => c.classList.toggle('active', (i % TOTAL) === (cur % TOTAL)));
+      dots.forEach((d, i) => d.classList.toggle('active', i === (cur % TOTAL)));
     }
 
-    // slide
     function slideTo(i, animate) {
-      track.style.transition = animate
-        ? 'transform 0.5s ease-in-out'
-        : 'none';
+      track.style.transition = animate ? 'transform 0.5s ease-in-out' : 'none';
       track.style.transform = `translateX(-${offsetFor(i)}px)`;
       cur = i;
       syncUI();
       if (animate) animating = true;
     }
 
-    // jump back when needed
     track.addEventListener('transitionend', () => {
       animating = false;
-      if (cur < TOTAL) {
-        slideTo(cur + TOTAL, false);
-      }
-      if (cur >= TOTAL * 2) {
-        slideTo(cur - TOTAL, false);
-      }
+      if (cur < TOTAL) slideTo(cur + TOTAL, false);
+      if (cur >= TOTAL * 2) slideTo(cur - TOTAL, false);
     });
 
-    // auto play
     function startTimer() {
       clearInterval(timer);
-      timer = setInterval(() => {
-        if (!animating) { slideTo(cur + 1, true); }
-      }, 12000);
+      timer = setInterval(() => { if (!animating) slideTo(cur + 1, true); }, 12000);
     }
 
-    // arrows
-    if (arrowL) {
-      arrowL.addEventListener('click', () => {
-        if (animating) return;
-        startTimer(); slideTo(cur - 1, true);
-      });
-    }
-    if (arrowR) {
-      arrowR.addEventListener('click', () => {
-        if (animating) return;
-        startTimer(); slideTo(cur + 1, true);
-      });
-    }
+    arrowL?.addEventListener('click', () => { if (!animating) { startTimer(); slideTo(cur - 1, true); } });
+    arrowR?.addEventListener('click', () => { if (!animating) { startTimer(); slideTo(cur + 1, true); } });
+    dots.forEach((d, i) => d.addEventListener('click', () => { if (!animating) { startTimer(); slideTo(TOTAL + i, true); } }));
 
-    // dots
-    dots.forEach((d, i) => {
-      d.addEventListener('click', () => {
-        if (animating) return;
-        startTimer(); slideTo(TOTAL + i, true);
-      });
-    });
-
-    // on resize
     window.addEventListener('resize', () => slideTo(cur, false));
-
-    // start
     slideTo(TOTAL, false);
     startTimer();
-
   }
-
 })();

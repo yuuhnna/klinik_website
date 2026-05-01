@@ -12,7 +12,6 @@
     if (!supabaseUrl || supabaseUrl.includes("YOUR_PROJECT_REF") || !anonKey || anonKey.includes("YOUR_SUPABASE_ANON_KEY")) {
       return "Supabase is not configured yet. Update js/supabase-config.js with your project URL and anon key.";
     }
-
     return "";
   }
 
@@ -33,14 +32,12 @@
     if (!labTest) {
       return "";
     }
-
     const prefix = String(labTest.control_prefix || "").trim();
     const start = labTest.control_start;
     const normalizedStart = String(start ?? "").trim();
     if (!prefix || !/^\d+$/.test(normalizedStart)) {
       return "";
     }
-
     return `${prefix}${normalizedStart}`;
   }
 
@@ -48,7 +45,6 @@
     if (window.crypto && typeof window.crypto.randomUUID === "function") {
       return window.crypto.randomUUID();
     }
-
     const template = "10000000-1000-4000-8000-100000000000";
     return template.replace(/[018]/g, (char) => {
       const value = Number(char);
@@ -66,17 +62,14 @@
         ...(options.headers || {})
       }
     });
-
     if (!response.ok) {
       const message = await response.text();
       throw new Error(message || `Supabase request failed with status ${response.status}`);
     }
-
     const contentType = response.headers.get("content-type") || "";
     if (contentType.includes("application/json")) {
       return response.json();
     }
-
     return null;
   }
 
@@ -88,12 +81,10 @@
         Accept: "application/json"
       }
     });
-
     if (!response.ok) {
       const message = await response.text();
       throw new Error(message || `Supabase request failed with status ${response.status}`);
     }
-
     return response.json();
   }
 
@@ -126,14 +117,11 @@
       if (!testName) {
         continue;
       }
-
       const matchedTests = await fetchJson(`/rest/v1/${encodeURIComponent(labTestsTable)}?select=id,test_name,control_prefix,control_start&test_name=ilike.${encodeURIComponent(testName)}`);
       const labTest = matchedTests && matchedTests[0];
-
       if (!labTest) {
         throw new Error(`No lab test found for "${testName}". Add a matching row in lab_tests.`);
       }
-
       resolvedTests.push(labTest);
     }
 
@@ -169,7 +157,6 @@
     });
 
     for (const labTest of resolvedTests) {
-
       await apiRequest(`/rest/v1/${encodeURIComponent(patientTestsTable)}`, {
         method: "POST",
         body: JSON.stringify({
@@ -181,7 +168,7 @@
       });
     }
 
-    // 5. Insert Transaction
+    // Insert Transaction
     const amountStr = String(payload.totalAmount || "0").replace(/[^\d.]/g, "");
     const amountCollected = parseFloat(amountStr) || 0;
 
@@ -210,11 +197,9 @@
     if (configError) {
       throw new Error(configError);
     }
-
     if (formType === "booking") {
       return insertBooking(payload);
     }
-
     throw new Error(`Unsupported form type: ${formType}`);
   }
 
@@ -226,40 +211,66 @@
       return insertSubmission("booking", data);
     }
   };
-document.addEventListener("DOMContentLoaded", () => {
-  const seniorOption = document.querySelector('.discount-option[data-discount="senior_pwd"]');
-  const cardOption = document.querySelector('.discount-option[data-discount="card"]');
-  const noteBox = document.getElementById("discount-note");
 
-  function updateNote() {
-    let messages = [];
-    if (seniorOption.classList.contains("selected")) {
-      messages.push("Please present your Senior Citizen ID or any valid ID that shows your birthdate, OR a valid PWD ID.");
+  document.addEventListener("DOMContentLoaded", () => {
+    // --- Discount Options ---
+    const seniorOption = document.querySelector('.discount-option[data-discount="senior_pwd"]');
+    const cardOption = document.querySelector('.discount-option[data-discount="card"]');
+    const noteBox = document.getElementById("discount-note");
+
+    const DEFAULT_NOTE =
+      "REMINDER: Please present your Senior Citizen ID or any valid ID that shows your birthdate, " +
+      "OR a valid PWD ID. For Card Bank Member, please present your membership card or proof of membership.";
+
+    function updateNote() {
+      const seniorSelected = seniorOption.classList.contains("selected");
+      const cardSelected = cardOption.classList.contains("selected");
+
+      if (!seniorSelected && !cardSelected) {
+        // Neither selected — show the full default reminder
+        noteBox.innerHTML = DEFAULT_NOTE;
+      } else {
+        // Build message based on which options are selected
+        const messages = [];
+        if (seniorSelected) {
+          messages.push(
+            "Please present your Senior Citizen ID or any valid ID that shows your birthdate, OR a valid PWD ID."
+          );
+        }
+        if (cardSelected) {
+          messages.push(
+            "Please present your membership card or proof of membership for verification."
+          );
+        }
+        noteBox.innerHTML = messages.join("<br>");
+      }
     }
-    if (cardOption.classList.contains("selected")) {
-      messages.push("Please present your membership card or proof of membership.");
-    }
-    noteBox.innerHTML = messages.length ? messages.join("<br>") : "No discount applied";
-  }
 
-  seniorOption.addEventListener("click", () => {
-    seniorOption.classList.toggle("selected");
-    updateNote();
-  });
-
-  cardOption.addEventListener("click", () => {
-    cardOption.classList.toggle("selected");
-    updateNote();
-  });
+seniorOption.addEventListener("click", (e) => {
+  e.stopPropagation();
+  seniorOption.classList.toggle("selected");
+  updateNote();
 });
-document.addEventListener("DOMContentLoaded", () => {
-  const testItems = document.querySelectorAll(".test-item");
 
-  testItems.forEach(item => {
-    item.addEventListener("click", () => {
-      item.classList.toggle("selected");
+cardOption.addEventListener("click", (e) => {
+  e.stopPropagation();
+  cardOption.classList.toggle("selected");
+  updateNote();
+});
+    // --- Test Items ---
+    const testItems = document.querySelectorAll(".test-item");
+    testItems.forEach(item => {
+      item.addEventListener("click", () => {
+        item.classList.toggle("selected");
+        const checkbox = item.querySelector('input[type="checkbox"]');
+        if (checkbox) {
+          checkbox.checked = item.classList.contains("selected");
+        }
+      });
     });
-  });
-});
 
+    // Initialize reminder box on load
+    updateNote();
+  });
+  window._klinikUpdateNote = updateNote; // ADD this line
 })();

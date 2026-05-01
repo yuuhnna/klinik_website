@@ -745,23 +745,6 @@ details[open] .category-header::after {
     margin-right: 10px;
     flex-shrink: 0;
 }
-
-/* Selected state */
-.discount-option.selected .select-box {
-    background: white;
-    position: relative;
-}
-
-.discount-option.selected .select-box::after {
-    content: "✔";          
-    position: absolute;
-    top: -2px;
-    left: 2px;
-    font-size: 12px;
-    color: #33a988;      
-    font-weight: bold;
-}
-
 .test-name {
     flex: 1;
     color: white;
@@ -774,21 +757,6 @@ details[open] .category-header::after {
     font-weight: 500;
     color: white;
 }
-.test-item.selected .select-box {
-  background: white;
-  position: relative;
-}
-
-.test-item.selected .select-box::after {
-  content: "✔";
-  position: absolute;
-  top: -2px;
-  left: 2px;
-  font-size: 12px;
-  color: #0F3C2F; /* dark green check */
-  font-weight: bold;
-}
-
 /* Discount Label */
 .discount-label {
     font-weight: 600;
@@ -1213,29 +1181,38 @@ details[open] .category-header::after {
     flex-shrink: 0;
     box-sizing: border-box;
 }
-
-/* card body */
+/*NEW EDIT- SCROLLBAR VISIBILITY FIX*/
 .inner-card {
     background: #e6fdf2;
     border-radius: 12px;
     padding: 20px 16px;
     margin: 0 20px 10px 20px;
-    overflow-y: auto;
+    overflow-y: scroll;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     flex-grow: 1;
+    max-height: 400px;
 }
 
 .inner-card::-webkit-scrollbar {
-    width: 4px;
+    width: 6px; 
+    display: block; 
+}
+
+.inner-card::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.03); 
+    border-radius: 10px;
 }
 
 .inner-card::-webkit-scrollbar-thumb {
-    background: rgba(53, 157, 158, 0.45);
-    border-radius: 2px;
+    background: rgb(28, 55, 45);
+    border-radius: 10px;
 }
 
+.inner-card::-webkit-scrollbar-thumb:hover {
+    background: rgb(45, 170, 128);
+}
 /* price list */
 .tests-expanded {
     display: block;
@@ -3514,6 +3491,9 @@ details[open] .category-header::after {
         padding: 8px 12px;
     }
 }
+
+/* NEW ADDED STYLES */
+
 .discount-note {
   margin-top: 10px;
   padding: 10px;
@@ -3523,4 +3503,37 @@ details[open] .category-header::after {
   font-size: 0.48em;
   font-weight: 600;
   color: #333;
+}
+.test-item.selected .select-box {
+  background: white;
+  position: relative;
+}
+
+.test-item.selected .select-box::after {
+  content: "✔";
+  position: absolute;
+  top: -2px;
+  left: 2px;
+  font-size: 12px;
+  color: #0F3C2F; /* dark green check */
+  font-weight: bold;
+}
+
+/* Selected state */
+.discount-option.selected .select-box {
+    background: white;
+    position: relative;
+}
+
+.discount-option.selected .select-box::after {
+    content: "✔";          
+    position: absolute;
+    top: -2px;
+    left: 2px;
+    font-size: 12px;
+    color: #33a988;      
+    font-weight: bold;
+}
+.discount-option {
+  cursor: pointer;
 }

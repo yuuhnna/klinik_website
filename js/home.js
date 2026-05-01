@@ -521,55 +521,57 @@
         });
       }
 
-      function recalculateTotal() {
-        let total = 0;
-        const activeDiscount = document.querySelector('.discount-option.selected');
-        const discountType = activeDiscount ? activeDiscount.dataset.discount : null;
-        let discountLabel = "";
+function recalculateTotal() {
+  let total = 0;
+  const activeDiscount = document.querySelector('.discount-option.selected');
+  const discountType = activeDiscount ? activeDiscount.dataset.discount : null;
+  let ecgInList = false;
 
-        document.querySelectorAll('.test-item-total').forEach(item => {
-          const name = item.querySelector('.test-name-total').textContent.trim();
-          const price = parseFloat(item.querySelector('.test-price-total').textContent.replace(/[^\d.]/g, ""));
-          let discount = 0;
+  document.querySelectorAll('.test-item-total').forEach(item => {
+    const name = item.querySelector('.test-name-total').textContent.trim();
+    const price = parseFloat(item.querySelector('.test-price-total').textContent.replace(/[^\d.]/g, ""));
+    let discount = 0;
+    const isEcg = name.toLowerCase().includes("ecg");
 
-          if (discountType === 'senior_pwd') {
-            discount = 0.20;
-            discountLabel = "-20% Senior Citizen / PWD Discount";
-          } else if (discountType === 'card') {
-            if (['CBC', 'URINALYSIS', 'FECALYSIS', 'FBS', 'RBS', 'TOTAL CHOLESTEROL', 'TRIGLYCERIDES'].includes(name)) {
-              discount = 0.20;
-              discountLabel = "-20% Card Bank Discount (Basic Tests)";
-            } else if (name.toLowerCase().includes("ecg")) {
-              discount = 0;
-              discountLabel = "No discount for ECG tests";
-            } else {
-              discount = 0.10;
-              discountLabel = "-10% Card Bank Discount (Special Tests)";
-            }
-          }
+    if (isEcg) ecgInList = true;
 
-          total += price - (price * discount);
-        });
-
-        const totalPriceEl = document.querySelector('.total-price');
-        if (totalPriceEl) totalPriceEl.textContent = "₱ " + total.toFixed(2);
-
-        let discountInfo = document.querySelector('.discount-info');
-        if (!discountInfo) {
-          discountInfo = document.createElement("div");
-          discountInfo.classList.add("discount-info");
-          const testListTotalEl = document.querySelector('.test-list-total');
-          if (testListTotalEl) testListTotalEl.insertAdjacentElement("afterend", discountInfo);
-        }
-
-        if (discountLabel) {
-          discountInfo.textContent = discountLabel;
-          discountInfo.style.display = "block";
-        } else {
-          discountInfo.textContent = "No discount applied";
-          discountInfo.style.display = "block";
-        }
+    // 1. SENIOR/PWD Rule: 20% off everything, no exceptions
+    if (discountType === 'senior_pwd') {
+      discount = 0.20;
+    } 
+    // 2. CARD BANK Rule: Strict restrictions
+    else if (discountType === 'card') {
+      if (isEcg) {
+        discount = 0; // CARD BANK members pay full price for ECG
+      } else {
+        const basicTests = ['CBC', 'URINALYSIS', 'FECALYSIS', 'FBS', 'RBS', 'TOTAL CHOLESTEROL', 'TRIGLYCERIDES'];
+        discount = basicTests.includes(name.toUpperCase()) ? 0.20 : 0.10;
       }
+    }
+
+    total += price - (price * discount);
+  });
+
+  // UI Updates
+  const totalPriceEl = document.querySelector('.total-price');
+  if (totalPriceEl) totalPriceEl.textContent = "₱ " + total.toFixed(2);
+
+  let discountInfo = document.querySelector('.discount-info');
+  if (discountInfo) {
+    let finalLabel = "";
+    if (discountType === 'senior_pwd') {
+      finalLabel = "-20% Senior Citizen / PWD Discount Applied";
+    } else if (discountType === 'card') {
+      finalLabel = "-20% / -10% Card Bank Member Discount";
+      if (ecgInList) {
+        finalLabel += "<br><span style='color: #ff4d4d; font-weight: bold;'>No discount for ECG (Card Bank Member)</span>";
+      }
+    }
+    
+    discountInfo.innerHTML = finalLabel;
+    discountInfo.style.display = finalLabel ? "block" : "none";
+  }
+}
     })
     .catch(error => console.error("Error loading home section:", error));
 
