@@ -521,55 +521,62 @@
         });
       }
 
-      function recalculateTotal() {
-        let total = 0;
-        const activeDiscount = document.querySelector('.discount-option.selected');
-        const discountType = activeDiscount ? activeDiscount.dataset.discount : null;
-        let discountLabel = "";
+function recalculateTotal() {
+  let total = 0;
+  const activeDiscount = document.querySelector('.discount-option.selected');
+  const discountType = activeDiscount ? activeDiscount.dataset.discount : null;
+  let discountLabel = "";
+  let ecgInList = false;
 
-        document.querySelectorAll('.test-item-total').forEach(item => {
-          const name = item.querySelector('.test-name-total').textContent.trim();
-          const price = parseFloat(item.querySelector('.test-price-total').textContent.replace(/[^\d.]/g, ""));
-          let discount = 0;
+  document.querySelectorAll('.test-item-total').forEach(item => {
+    const name = item.querySelector('.test-name-total').textContent.trim();
+    const priceText = item.querySelector('.test-price-total').textContent;
+    const price = parseFloat(priceText.replace(/[^\d.]/g, ""));
+    let discount = 0;
 
-          if (discountType === 'senior_pwd') {
-            discount = 0.20;
-            discountLabel = "-20% Senior Citizen / PWD Discount";
-          } else if (discountType === 'card') {
-            if (['CBC', 'URINALYSIS', 'FECALYSIS', 'FBS', 'RBS', 'TOTAL CHOLESTEROL', 'TRIGLYCERIDES'].includes(name)) {
-              discount = 0.20;
-              discountLabel = "-20% Card Bank Discount (Basic Tests)";
-            } else if (name.toLowerCase().includes("ecg")) {
-              discount = 0;
-              discountLabel = "No discount for ECG tests";
-            } else {
-              discount = 0.10;
-              discountLabel = "-10% Card Bank Discount (Special Tests)";
-            }
-          }
-
-          total += price - (price * discount);
-        });
-
-        const totalPriceEl = document.querySelector('.total-price');
-        if (totalPriceEl) totalPriceEl.textContent = "₱ " + total.toFixed(2);
-
-        let discountInfo = document.querySelector('.discount-info');
-        if (!discountInfo) {
-          discountInfo = document.createElement("div");
-          discountInfo.classList.add("discount-info");
-          const testListTotalEl = document.querySelector('.test-list-total');
-          if (testListTotalEl) testListTotalEl.insertAdjacentElement("afterend", discountInfo);
-        }
-
-        if (discountLabel) {
-          discountInfo.textContent = discountLabel;
-          discountInfo.style.display = "block";
-        } else {
-          discountInfo.textContent = "No discount applied";
-          discountInfo.style.display = "block";
-        }
+    // 1. STRICT ECG RULE: If it's an ECG, 0% discount always.
+    if (name.toLowerCase().includes("ecg")) {
+      discount = 0;
+      ecgInList = true;
+    } 
+    // 2. Apply Senior/PWD discount ONLY to non-ECG tests
+    else if (discountType === 'senior_pwd') {
+      discount = 0.20;
+      discountLabel = "-20% Senior Citizen / PWD Discount";
+    } 
+    // 3. Apply Card Bank rules to non-ECG tests
+    else if (discountType === 'card') {
+      if (['CBC', 'URINALYSIS', 'FECALYSIS', 'FBS', 'RBS', 'TOTAL CHOLESTEROL', 'TRIGLYCERIDES'].includes(name)) {
+        discount = 0.20;
+        discountLabel = "-20% Card Bank Discount (Basic Tests)";
+      } else {
+        discount = 0.10;
+        discountLabel = "-10% Card Bank Discount (Special Tests)";
       }
+    }
+
+    total += price - (price * discount);
+  });
+
+  // Update Total Amount Display
+  const totalPriceEl = document.querySelector('.total-price');
+  if (totalPriceEl) totalPriceEl.textContent = "₱ " + total.toFixed(2);
+
+  // Update Discount Information Note
+  let discountInfo = document.querySelector('.discount-info');
+  if (discountType) {
+    if (ecgInList) {
+      // Show discount label for other items + the red warning for ECG
+      discountInfo.innerHTML = (discountLabel ? `${discountLabel}<br>` : "") + 
+                               `<span style="color:#ff4d4d; font-weight:bold;">No discount for ECG tests</span>`;
+    } else {
+      discountInfo.textContent = discountLabel;
+    }
+    discountInfo.style.display = "block";
+  } else {
+    discountInfo.style.display = "none";
+  }
+}
     })
     .catch(error => console.error("Error loading home section:", error));
 
