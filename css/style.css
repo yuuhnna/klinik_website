@@ -1181,29 +1181,38 @@ details[open] .category-header::after {
     flex-shrink: 0;
     box-sizing: border-box;
 }
-
-/* card body */
+/*NEW EDIT- SCROLLBAR VISIBILITY FIX*/
 .inner-card {
     background: #e6fdf2;
     border-radius: 12px;
     padding: 20px 16px;
     margin: 0 20px 10px 20px;
-    overflow-y: auto;
+    overflow-y: scroll;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     flex-grow: 1;
+    max-height: 400px;
 }
 
 .inner-card::-webkit-scrollbar {
-    width: 4px;
+    width: 6px; 
+    display: block; 
+}
+
+.inner-card::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.03); 
+    border-radius: 10px;
 }
 
 .inner-card::-webkit-scrollbar-thumb {
-    background: rgba(53, 157, 158, 0.45);
-    border-radius: 2px;
+    background: rgb(28, 55, 45);
+    border-radius: 10px;
 }
 
+.inner-card::-webkit-scrollbar-thumb:hover {
+    background: rgb(45, 170, 128);
+}
 /* price list */
 .tests-expanded {
     display: block;
