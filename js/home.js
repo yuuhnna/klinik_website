@@ -179,15 +179,43 @@
       }
 
       if (dobInput && ageInput) {
-        ageInput.readOnly = true;
+        //edit here making age typable but auto-computed from dob, user can only edit if they want to correct the computed age
+        ageInput.readOnly = false;
 
         const refreshAge = () => {
           ageInput.value = computeAgeFromDob(dobInput.value);
         };
+        // Prevent letters from being typed into the age field
+        ageInput.addEventListener("keydown", (e) => {
+       // List of allowed keys: Numbers, Backspace, Tab, Arrows
+       const allowedKeys = ['Backspace', 'Tab', 'ArrowLeft', 'ArrowRight', 'Delete', 'Enter'];
+    
 
+       const plusBtn = document.getElementById('plus-age');
+       const minusBtn = document.getElementById('minus-age');
+
+       // Plus Button Logic
+        plusBtn.addEventListener('click', () => {
+       let currentAge = parseInt(ageInput.value) || 0;
+        ageInput.value = currentAge + 1;
+      });
+
+// Minus Button Logic
+minusBtn.addEventListener('click', () => {
+    let currentAge = parseInt(ageInput.value) || 0;
+    if (currentAge > 0) {
+        ageInput.value = currentAge - 1;
+    }
+});
+       // If it's not a number and not an allowed key, block it
+      if (!/[0-9]/.test(e.key) && !allowedKeys.includes(e.key)) {
+        e.preventDefault();
+       }
+      });
         dobInput.addEventListener("change", refreshAge);
         dobInput.addEventListener("input", refreshAge);
         refreshAge();
+
       }
 
       // custom address typed dropdown
