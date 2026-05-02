@@ -395,55 +395,67 @@
             return;
           }
 
-          // confirm submission
-          const confirmSubmitModal = document.getElementById("confirmSubmitModal");
-          if (confirmSubmitModal) {
-            confirmSubmitModal.style.display = "flex";
+// confirm submission
+const confirmSubmitModal = document.getElementById("confirmSubmitModal");
+if (confirmSubmitModal) {
+  confirmSubmitModal.style.display = "flex";
 
-            const submitYesBtn = document.getElementById("submitYes");
-            const submitNoBtn = document.getElementById("submitNo");
+  const submitYesBtn = document.getElementById("submitYes");
+  const submitNoBtn = document.getElementById("submitNo");
 
-            if (submitYesBtn) {
-              submitYesBtn.onclick = () => {
-                submitYesBtn.disabled = true;
+  if (submitYesBtn) {
+    submitYesBtn.onclick = () => {
+      submitYesBtn.disabled = true;
 
-                window.KlinikSubmissions.submitBooking(bookingPayload)
-                  .then(() => {
-                    alert("Your request has been saved to the system.");
-                    modal.style.display = "none";
-                    resetBookingForm();
-                    confirmSubmitModal.style.display = "none";
-                  })
-                  .catch((err) => {
-                    console.error("Supabase error:", err);
-                    const message = err && err.message ? err.message : "Please check your Supabase config and try again.";
-                    const errorPopup = document.getElementById("errorPopup");
-                    if (errorPopup) {
-                      errorPopup.innerHTML = '<span class="close-error">&times;</span><strong>Request could not be saved.</strong><ul><li>' + message + '</li></ul>';
-                      errorPopup.style.display = "block";
+      window.KlinikSubmissions.submitBooking(bookingPayload)
+        .then(() => {
+    // Hide the confirmation modal
+    confirmSubmitModal.style.display = "none";
+    
+    // Show the NEW beautified Success Modal
+    const successModal = document.getElementById("bookingSuccessModal");
+    if (successModal) {
+        successModal.style.display = "flex"; // Must be flex to center everything
 
-                      const closeBtn = errorPopup.querySelector(".close-error");
-                      if (closeBtn) {
-                        closeBtn.addEventListener("click", () => {
-                          errorPopup.style.display = "none";
-                        });
-                      }
-                    }
+        const successOk = document.getElementById("successOk");
+        successOk.onclick = () => {
+            successModal.style.display = "none";
+            modal.style.display = "none"; // Close request form
+            resetBookingForm(); // Clear inputs
+            window.scrollTo({ top: 0, behavior: 'smooth' }); // Back to top
+        };
+    }
+})
+        .catch((err) => {
+          console.error("Supabase error:", err);
+          const message = err && err.message ? err.message : "Please check your Supabase config and try again.";
+          const errorPopup = document.getElementById("errorPopup");
+          if (errorPopup) {
+            // NOTE: We use a template that preserves the close button or re-attaches the listener
+            errorPopup.innerHTML = '<span class="close-error">&times;</span><strong>Request could not be saved.</strong><ul><li>' + message + '</li></ul>';
+            errorPopup.style.display = "block";
 
-                    confirmSubmitModal.style.display = "none";
-                  })
-                  .finally(() => {
-                    submitYesBtn.disabled = false;
-                  });
-              };
-            }
-
-            if (submitNoBtn) {
-              submitNoBtn.onclick = () => {
-                confirmSubmitModal.style.display = "none";
-              };
+            const closeBtn = errorPopup.querySelector(".close-error");
+            if (closeBtn) {
+              closeBtn.addEventListener("click", () => {
+                errorPopup.style.display = "none";
+              });
             }
           }
+          confirmSubmitModal.style.display = "none";
+        })
+        .finally(() => {
+          submitYesBtn.disabled = false;
+        });
+    };
+  }
+
+  if (submitNoBtn) {
+    submitNoBtn.onclick = () => {
+      confirmSubmitModal.style.display = "none";
+    };
+  }
+}
         });
       }
 
