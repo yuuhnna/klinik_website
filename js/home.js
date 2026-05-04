@@ -490,6 +490,22 @@ if (confirmSubmitModal) {
       // click events
       const home = document.querySelector("#home");
       if (home) {
+        const discountNote = document.getElementById("discount-note");
+
+        function updateDiscountNote(discountType) {
+          if (!discountNote) {
+            return;
+          }
+
+          if (discountType === 'senior_pwd') {
+            discountNote.textContent = 'NOTE: Please present your Senior Citizen ID or any valid ID that shows your birthdate, OR a valid PWD ID.';
+          } else if (discountType === 'card') {
+            discountNote.textContent = 'NOTE: Please present your membership card or proof of membership for verification.';
+          } else {
+            discountNote.textContent = 'NOTE: Please select a discount eligibility option.';
+          }
+        }
+
         home.addEventListener("click", (event) => {
           // toggle categories
           const summary = event.target.closest('summary');
@@ -559,24 +575,33 @@ if (confirmSubmitModal) {
               selectedOption.classList.add('selected');
             }
 
+            updateDiscountNote(discountRadio.value);
             recalculateTotal();
           }
         });
+
+        updateDiscountNote(document.querySelector('input[name="discount-eligibility"]:checked')?.value || null);
       }
 
 function recalculateTotal() {
   let total = 0;
   const activeDiscount = document.querySelector('input[name="discount-eligibility"]:checked');
   const discountType = activeDiscount ? activeDiscount.value : null;
-  let ecgInList = false;
+  const basicTests = ['CBC', 'URINALYSIS', 'FECALYSIS', 'FBS', 'RBS', 'TOTAL CHOLESTEROL', 'TRIGLYCERIDES'];
+  const testListTotal = document.querySelector('.test-list-total');
+
+  if (testListTotal) {
+    testListTotal.querySelectorAll('.discount-info-inline').forEach(note => {
+      note.remove();
+    });
+  }
 
   document.querySelectorAll('.test-item-total').forEach(item => {
     const name = item.querySelector('.test-name-total').textContent.trim();
     const price = parseFloat(item.querySelector('.test-price-total').textContent.replace(/[^\d.]/g, ""));
     let discount = 0;
     const isEcg = name.toLowerCase().includes("ecg");
-
-    if (isEcg) ecgInList = true;
+    let cardMessage = "";
 
     // 1. SENIOR/PWD Rule: 20% off everything, no exceptions
     if (discountType === 'senior_pwd') {
@@ -586,10 +611,24 @@ function recalculateTotal() {
     else if (discountType === 'card') {
       if (isEcg) {
         discount = 0; // CARD BANK members pay full price for ECG
+        cardMessage = "Card Bank discount is not applicable to tests above";
       } else {
-        const basicTests = ['CBC', 'URINALYSIS', 'FECALYSIS', 'FBS', 'RBS', 'TOTAL CHOLESTEROL', 'TRIGLYCERIDES'];
-        discount = basicTests.includes(name.toUpperCase()) ? 0.20 : 0.10;
+        if (basicTests.includes(name.toUpperCase())) {
+          discount = 0.20;
+          cardMessage = "-20% Card Bank discount applied to tests above";
+        } else {
+          discount = 0.10;
+          cardMessage = "-10% Card Bank discount applied to tests above";
+        }
       }
+
+      const noteRow = document.createElement('div');
+      noteRow.classList.add('discount-info-inline');
+      if (isEcg) {
+        noteRow.classList.add('not-applicable');
+      }
+      noteRow.textContent = cardMessage;
+      item.insertAdjacentElement('afterend', noteRow);
     }
 
     total += price - (price * discount);
@@ -603,12 +642,7 @@ function recalculateTotal() {
   if (discountInfo) {
     let finalLabel = "";
     if (discountType === 'senior_pwd') {
-      finalLabel = "-20% Senior Citizen / PWD Discount Applied";
-    } else if (discountType === 'card') {
-      finalLabel = "-20% / -10% Card Bank Member Discount";
-      if (ecgInList) {
-        finalLabel += "<br><span style='color: #ff4d4d; font-weight: bold;'>No discount for ECG (Card Bank Member)</span>";
-      }
+      finalLabel = "20% Senior Citizen / PWD Discount Applied";
     }
     
     discountInfo.innerHTML = finalLabel;
