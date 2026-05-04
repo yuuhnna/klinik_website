@@ -234,7 +234,7 @@
         const messages = [];
         if (seniorSelected) {
           messages.push(
-            "Please present your Senior Citizen ID or any valid ID that shows your birthdate, OR a valid PWD ID."
+            "Please present your Senior Citizen ID or any valid ID that shows your birthdate for senior, OR a valid PWD ID for PWD."
           );
         }
         if (cardSelected) {

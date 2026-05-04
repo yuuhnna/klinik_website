@@ -497,12 +497,21 @@ if (confirmSubmitModal) {
             return;
           }
 
+          // Check if any test is selected
+          const hasSelectedTests = document.querySelectorAll('.test-item-total').length > 0;
+
+          if (!hasSelectedTests) {
+            // No tests selected - hide the note
+            discountNote.textContent = '';
+            return;
+          }
+
           if (discountType === 'senior_pwd') {
-            discountNote.textContent = 'NOTE: Please present your Senior Citizen ID or any valid ID that shows your birthdate, OR a valid PWD ID.';
+            discountNote.textContent = 'NOTE: Please present your Senior Citizen ID or any valid ID that shows your birthdate for senior, OR a valid PWD ID for PWD.';
           } else if (discountType === 'card') {
             discountNote.textContent = 'NOTE: Please present your membership card or proof of membership for verification.';
           } else {
-            discountNote.textContent = 'NOTE: Please select a discount eligibility option.';
+            discountNote.textContent = '';
           }
         }
 
@@ -544,6 +553,10 @@ if (confirmSubmitModal) {
             }
 
             recalculateTotal();
+            const activeDiscount = document.querySelector('input[name="discount-eligibility"]:checked');
+            if (activeDiscount) {
+              updateDiscountNote(activeDiscount.value);
+            }
           }
 
           // delete test
@@ -559,6 +572,10 @@ if (confirmSubmitModal) {
 
             removedRow.remove();
             recalculateTotal();
+            const activeDiscount = document.querySelector('input[name="discount-eligibility"]:checked');
+            if (activeDiscount) {
+              updateDiscountNote(activeDiscount.value);
+            }
           }
 
         });
@@ -641,8 +658,10 @@ function recalculateTotal() {
   let discountInfo = document.querySelector('.discount-info');
   if (discountInfo) {
     let finalLabel = "";
-    if (discountType === 'senior_pwd') {
-      finalLabel = "20% Senior Citizen / PWD Discount Applied";
+    // Only show discount info if there are selected tests
+    const hasSelectedTests = document.querySelectorAll('.test-item-total').length > 0;
+    if (hasSelectedTests && discountType === 'senior_pwd') {
+      finalLabel = "-20% Senior Citizen / PWD Discount";
     }
     
     discountInfo.innerHTML = finalLabel;
