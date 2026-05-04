@@ -785,12 +785,23 @@ details[open] .category-header::after {
     flex: 1;
     display: flex;
     align-items: center;
+    position: relative;
     padding: 10px 12px;
     border: 1px solid #0F3C2F;
     border-radius: 6px;
     cursor: pointer;
     background: #0F3C2F;
     transition: background 0.2s ease;
+}
+
+.discount-radio {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.discount-option .select-box {
+    border-radius: 50%;
 }
 
 /* Hover effect */
@@ -3526,13 +3537,15 @@ details[open] .category-header::after {
 }
 
 .discount-option.selected .select-box::after {
-    content: "✔";          
+    content: "";
     position: absolute;
-    top: -2px;
-    left: 2px;
-    font-size: 12px;
-    color: #33a988;      
-    font-weight: bold;
+    top: 50%;
+    left: 50%;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #33a988;
+    transform: translate(-50%, -50%);
 }
 .discount-option {
   cursor: pointer;

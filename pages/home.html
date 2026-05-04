@@ -327,15 +327,17 @@
   <span class="helper-text">— check if Senior Citizen / PWD or Card Bank Member</span>
 </label>
 
-<div class="discount-options">
-  <div class="discount-option" data-discount="senior_pwd">
+<div class="discount-options" role="radiogroup" aria-label="Discount Eligibility">
+  <label class="discount-option" data-discount="senior_pwd">
+    <input class="discount-radio" type="radio" name="discount-eligibility" value="senior_pwd">
     <span class="select-box"></span>
     <span class="option-name">SENIOR CITIZEN / PWD</span>
-  </div>
-  <div class="discount-option" data-discount="card">
+  </label>
+  <label class="discount-option" data-discount="card">
+    <input class="discount-radio" type="radio" name="discount-eligibility" value="card">
     <span class="select-box"></span>
     <span class="option-name">CARD BANK MEMBER</span>
-  </div>
+  </label>
 </div>
 <!-- 🔹 Yellow reminder box -->
 <div id="discount-note" class="discount-note">

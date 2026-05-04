@@ -390,7 +390,7 @@ minusBtn.addEventListener('click', () => {
           const errorPopup = document.getElementById("errorPopup");
           if (errorPopup) errorPopup.style.display = "none";
 
-          const activeDiscount = document.querySelector('.discount-option.selected');
+          const activeDiscount = document.querySelector('input[name="discount-eligibility"]:checked');
           const bookingPayload = {
             lastName,
             firstName,
@@ -404,7 +404,7 @@ minusBtn.addEventListener('click', () => {
             preferredDate: prefDate,
             selectedServices,
             totalAmount: document.querySelector(".total-price").textContent,
-            discountType: activeDiscount ? activeDiscount.dataset.discount : null
+            discountType: activeDiscount ? activeDiscount.value : null
           };
 
           if (!window.KlinikSubmissions) {
@@ -545,17 +545,20 @@ if (confirmSubmitModal) {
             recalculateTotal();
           }
 
-          // toggle discounts
-          const discountOption = event.target.closest('.discount-option');
-          if (discountOption) {
-            if (discountOption.classList.contains('selected')) {
-              discountOption.classList.remove('selected');
-            } else {
-              document.querySelectorAll('.discount-option').forEach(opt => {
-                opt.classList.remove('selected');
-              });
-              discountOption.classList.add('selected');
+        });
+
+        home.addEventListener("change", (event) => {
+          const discountRadio = event.target.closest('input[name="discount-eligibility"]');
+          if (discountRadio) {
+            document.querySelectorAll('.discount-option').forEach(opt => {
+              opt.classList.remove('selected');
+            });
+
+            const selectedOption = discountRadio.closest('.discount-option');
+            if (selectedOption) {
+              selectedOption.classList.add('selected');
             }
+
             recalculateTotal();
           }
         });
@@ -563,8 +566,8 @@ if (confirmSubmitModal) {
 
 function recalculateTotal() {
   let total = 0;
-  const activeDiscount = document.querySelector('.discount-option.selected');
-  const discountType = activeDiscount ? activeDiscount.dataset.discount : null;
+  const activeDiscount = document.querySelector('input[name="discount-eligibility"]:checked');
+  const discountType = activeDiscount ? activeDiscount.value : null;
   let ecgInList = false;
 
   document.querySelectorAll('.test-item-total').forEach(item => {
