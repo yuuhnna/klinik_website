@@ -68,6 +68,12 @@
 
         const errorPopup = document.getElementById("errorPopup");
         if (errorPopup) errorPopup.style.display = "none";
+
+        const policyCheckbox = document.getElementById("policyCheckbox");
+        if (policyCheckbox) {
+          policyCheckbox.disabled = true;
+          policyCheckbox.checked = false;
+        }
       }
 
       if (openBtn) {
@@ -117,6 +123,33 @@
                 confirmExitModal.style.display = "none";
               };
             }
+          }
+        });
+      }
+
+      // Policy modal logic
+      const policyLink = document.getElementById("policyLink");
+      const policyImageModal = document.getElementById("policyImageModal");
+      const closePolicyModal = document.getElementById("closePolicyModal");
+      const policyCheckboxEl = document.getElementById("policyCheckbox");
+
+      if (policyLink && policyImageModal && closePolicyModal && policyCheckboxEl) {
+        policyLink.addEventListener("click", (event) => {
+          event.preventDefault(); 
+          event.stopPropagation(); 
+          policyImageModal.style.display = "flex";
+          policyCheckboxEl.disabled = false;
+          policyCheckboxEl.checked = true;
+        });
+
+        closePolicyModal.addEventListener("click", () => {
+          policyImageModal.style.display = "none";
+        });
+        
+        // Hide modal if clicked outside of image
+        window.addEventListener("click", (event) => {
+          if (event.target === policyImageModal) {
+            policyImageModal.style.display = "none";
           }
         });
       }
@@ -330,7 +363,7 @@ minusBtn.addEventListener('click', () => {
 
           if (!/^[A-Za-z\s]+$/.test(lastName)) { markInvalid(lastNameField, lastName === "" ? "Please fill up" : "Invalid"); }
           if (!/^[A-Za-z\s]+$/.test(firstName)) { markInvalid(firstNameField, firstName === "" ? "Please fill up" : "Invalid"); }
-          if (!/^[A-Za-z]$/.test(mi)) { markInvalid(miField, mi === "" ? "Please fill up" : "Invalid"); }
+          if (mi && !/^[A-Za-z]$/.test(mi)) { markInvalid(miField, "Invalid"); }
           if (suffix && !/^[A-Za-z]+$/.test(suffix)) { markInvalid(document.getElementById("suffix"), "Invalid"); }
           if (!sex) { markInvalid(sexField, "Please fill up"); }
           if (!dob) {
@@ -368,16 +401,17 @@ minusBtn.addEventListener('click', () => {
 
           if (selectedServices.length === 0) {
             valid = false;
-            const validationModal = document.getElementById("validationModal");
-            const validationOk = document.getElementById("validationOk");
-            if (validationModal) {
-              validationModal.style.display = "flex";
-              if (validationOk) {
-                validationOk.onclick = () => {
-                  validationModal.style.display = "none";
-                };
-              }
+            const labTestField = document.getElementById("labTestField");
+            if (labTestField) {
+              labTestField.classList.add("invalid");
             }
+          }
+
+          const policyCheckboxSubmit = document.getElementById("policyCheckbox");
+          if (policyCheckboxSubmit && !policyCheckboxSubmit.checked) {
+            valid = false;
+            const policyContainer = document.getElementById("policyContainer");
+            if (policyContainer) policyContainer.classList.add("invalid");
           }
 
           if (!valid) {
